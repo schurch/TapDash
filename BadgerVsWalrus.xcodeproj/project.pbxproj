@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD61F25F14549D8300516F4D /* BWGameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* BWGameOverLayer.m */; };
+		FDCB86B714552BA500072B78 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B214552BA400072B78 /* cow.png */; };
+		FDCB86B814552BA500072B78 /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B314552BA400072B78 /* game_background.png */; };
+		FDCB86B914552BA500072B78 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B414552BA400072B78 /* penguin.png */; };
+		FDCB86BA14552BA500072B78 /* tap_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B514552BA500072B78 /* tap_button_selected.png */; };
+		FDCB86BB14552BA500072B78 /* tap_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B614552BA500072B78 /* tap_button.png */; };
+		FDCB86BE14553B2100072B78 /* play_again_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86BC14553B2000072B78 /* play_again_button_selected.png */; };
+		FDCB86BF14553B2100072B78 /* play_again_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86BD14553B2000072B78 /* play_again_button.png */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
 		FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */; };
 		FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFE14532A1800F1F6DE /* OpenAL.framework */; };
@@ -121,10 +129,20 @@
 		FDDCAE5B14532A1D00F1F6DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE5A14532A1D00F1F6DE /* main.m */; };
 		FDDCAE5E14532A1D00F1F6DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */; };
 		FDDCAE6114532A1D00F1F6DE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6014532A1D00F1F6DE /* RootViewController.m */; };
-		FDDCAE6414532A1D00F1F6DE /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6314532A1D00F1F6DE /* HelloWorldLayer.m */; };
+		FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6314532A1D00F1F6DE /* GameLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD61F25D14549D8200516F4D /* BWGameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGameOverLayer.h; sourceTree = "<group>"; };
+		FD61F25E14549D8200516F4D /* BWGameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGameOverLayer.m; sourceTree = "<group>"; };
+		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		FDCB86B214552BA400072B78 /* cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cow.png; sourceTree = SOURCE_ROOT; };
+		FDCB86B314552BA400072B78 /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_background.png; sourceTree = SOURCE_ROOT; };
+		FDCB86B414552BA400072B78 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = penguin.png; sourceTree = SOURCE_ROOT; };
+		FDCB86B514552BA500072B78 /* tap_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_button_selected.png; sourceTree = SOURCE_ROOT; };
+		FDCB86B614552BA500072B78 /* tap_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_button.png; sourceTree = SOURCE_ROOT; };
+		FDCB86BC14553B2000072B78 /* play_again_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_again_button_selected.png; sourceTree = SOURCE_ROOT; };
+		FDCB86BD14553B2000072B78 /* play_again_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_again_button.png; sourceTree = SOURCE_ROOT; };
 		FDDCACF614532A1800F1F6DE /* BadgerVsWalrus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadgerVsWalrus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -357,8 +375,8 @@
 		FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FDDCAE5F14532A1D00F1F6DE /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		FDDCAE6014532A1D00F1F6DE /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		FDDCAE6214532A1D00F1F6DE /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		FDDCAE6314532A1D00F1F6DE /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		FDDCAE6214532A1D00F1F6DE /* GameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		FDDCAE6314532A1D00F1F6DE /* GameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		FDDCAE6514532A1D00F1F6DE /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -416,12 +434,15 @@
 		FDDCAD0A14532A1800F1F6DE /* BadgerVsWalrus */ = {
 			isa = PBXGroup;
 			children = (
+				FD61F2681454E75F00516F4D /* Game.h */,
+				FD61F25D14549D8200516F4D /* BWGameOverLayer.h */,
+				FD61F25E14549D8200516F4D /* BWGameOverLayer.m */,
 				FDDCAE5C14532A1D00F1F6DE /* AppDelegate.h */,
 				FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */,
 				FDDCAE5F14532A1D00F1F6DE /* RootViewController.h */,
 				FDDCAE6014532A1D00F1F6DE /* RootViewController.m */,
-				FDDCAE6214532A1D00F1F6DE /* HelloWorldLayer.h */,
-				FDDCAE6314532A1D00F1F6DE /* HelloWorldLayer.m */,
+				FDDCAE6214532A1D00F1F6DE /* GameLayer.h */,
+				FDDCAE6314532A1D00F1F6DE /* GameLayer.m */,
 				FDDCAE6514532A1D00F1F6DE /* GameConfig.h */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
@@ -433,6 +454,13 @@
 		FDDCAD0B14532A1800F1F6DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FDCB86BC14553B2000072B78 /* play_again_button_selected.png */,
+				FDCB86BD14553B2000072B78 /* play_again_button.png */,
+				FDCB86B214552BA400072B78 /* cow.png */,
+				FDCB86B314552BA400072B78 /* game_background.png */,
+				FDCB86B414552BA400072B78 /* penguin.png */,
+				FDCB86B514552BA500072B78 /* tap_button_selected.png */,
+				FDCB86B614552BA500072B78 /* tap_button.png */,
 				FDDCAD0C14532A1800F1F6DE /* Default.png */,
 				FDDCAD0E14532A1800F1F6DE /* fps_images.png */,
 				FDDCAD1014532A1800F1F6DE /* Icon-72.png */,
@@ -783,6 +811,9 @@
 /* Begin PBXProject section */
 		FDDCACED14532A1700F1F6DE /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = FDDCACF014532A1700F1F6DE /* Build configuration list for PBXProject "BadgerVsWalrus" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -814,6 +845,13 @@
 				FDDCAD1914532A1800F1F6DE /* Icon.png in Resources */,
 				FDDCAD1B14532A1800F1F6DE /* Icon@2x.png in Resources */,
 				FDDCAD1E14532A1800F1F6DE /* iTunesArtwork in Resources */,
+				FDCB86B714552BA500072B78 /* cow.png in Resources */,
+				FDCB86B814552BA500072B78 /* game_background.png in Resources */,
+				FDCB86B914552BA500072B78 /* penguin.png in Resources */,
+				FDCB86BA14552BA500072B78 /* tap_button_selected.png in Resources */,
+				FDCB86BB14552BA500072B78 /* tap_button.png in Resources */,
+				FDCB86BE14553B2100072B78 /* play_again_button_selected.png in Resources */,
+				FDCB86BF14553B2100072B78 /* play_again_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +959,8 @@
 				FDDCAE5B14532A1D00F1F6DE /* main.m in Sources */,
 				FDDCAE5E14532A1D00F1F6DE /* AppDelegate.m in Sources */,
 				FDDCAE6114532A1D00F1F6DE /* RootViewController.m in Sources */,
-				FDDCAE6414532A1D00F1F6DE /* HelloWorldLayer.m in Sources */,
+				FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */,
+				FD61F25F14549D8300516F4D /* BWGameOverLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +1012,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BadgerVsWalrus/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = BadgerVsWalrus/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -988,6 +1028,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BadgerVsWalrus/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = BadgerVsWalrus/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1015,6 +1056,7 @@
 				FDDCAE6A14532A1D00F1F6DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
