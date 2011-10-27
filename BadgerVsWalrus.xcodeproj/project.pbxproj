@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD61F25F14549D8300516F4D /* BWGameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* BWGameOverLayer.m */; };
-		FDCB86B714552BA500072B78 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B214552BA400072B78 /* cow.png */; };
-		FDCB86B814552BA500072B78 /* game_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B314552BA400072B78 /* game_background.png */; };
-		FDCB86B914552BA500072B78 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B414552BA400072B78 /* penguin.png */; };
-		FDCB86BA14552BA500072B78 /* tap_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B514552BA500072B78 /* tap_button_selected.png */; };
-		FDCB86BB14552BA500072B78 /* tap_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86B614552BA500072B78 /* tap_button.png */; };
-		FDCB86BE14553B2100072B78 /* play_again_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86BC14553B2000072B78 /* play_again_button_selected.png */; };
-		FDCB86BF14553B2100072B78 /* play_again_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCB86BD14553B2000072B78 /* play_again_button.png */; };
+		FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D114590EB400F51698 /* game_backdrop.png */; };
+		FD11E9D714590EB400F51698 /* boost_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D214590EB400F51698 /* boost_button.png */; };
+		FD11E9D814590EB400F51698 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D314590EB400F51698 /* cow.png */; };
+		FD11E9D914590EB400F51698 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D414590EB400F51698 /* penguin.png */; };
+		FD11E9DA14590EB400F51698 /* tap_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D514590EB400F51698 /* tap_button.png */; };
+		FD11E9DD14590EBF00F51698 /* hi_score_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9DB14590EBF00F51698 /* hi_score_backdrop.png */; };
+		FD11E9E314590EC900F51698 /* game_over_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9DF14590EC900F51698 /* game_over_backdrop.png */; };
+		FD11E9E514590EC900F51698 /* new_high_score.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9E114590EC900F51698 /* new_high_score.png */; };
+		FD11E9E614590EC900F51698 /* play_again_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9E214590EC900F51698 /* play_again_button.png */; };
+		FD11E9EC14590ED700F51698 /* main_menu_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9E714590ED700F51698 /* main_menu_backdrop.png */; };
+		FD11E9ED14590ED700F51698 /* hi_scores_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9E814590ED700F51698 /* hi_scores_button.png */; };
+		FD11E9EE14590ED700F51698 /* multiplayer_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9E914590ED700F51698 /* multiplayer_button.png */; };
+		FD11E9EF14590ED700F51698 /* options_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9EA14590ED700F51698 /* options_button.png */; };
+		FD11E9F014590ED700F51698 /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9EB14590ED700F51698 /* play_button.png */; };
+		FD11E9F214590F8D00F51698 /* main_menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9F114590F8D00F51698 /* main_menu_button.png */; };
+		FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F41459155A00F51698 /* MainMenuLayer.m */; };
+		FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HiScoreLayer.m */; };
+		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
 		FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */; };
 		FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFE14532A1800F1F6DE /* OpenAL.framework */; };
@@ -133,16 +143,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD61F25D14549D8200516F4D /* BWGameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGameOverLayer.h; sourceTree = "<group>"; };
-		FD61F25E14549D8200516F4D /* BWGameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGameOverLayer.m; sourceTree = "<group>"; };
+		FD11E9D114590EB400F51698 /* game_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_backdrop.png; path = Resources/Game/game_backdrop.png; sourceTree = "<group>"; };
+		FD11E9D214590EB400F51698 /* boost_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boost_button.png; path = Resources/Game/boost_button.png; sourceTree = "<group>"; };
+		FD11E9D314590EB400F51698 /* cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cow.png; path = Resources/Game/cow.png; sourceTree = "<group>"; };
+		FD11E9D414590EB400F51698 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penguin.png; path = Resources/Game/penguin.png; sourceTree = "<group>"; };
+		FD11E9D514590EB400F51698 /* tap_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tap_button.png; path = Resources/Game/tap_button.png; sourceTree = "<group>"; };
+		FD11E9DB14590EBF00F51698 /* hi_score_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hi_score_backdrop.png; path = Resources/HiScore/hi_score_backdrop.png; sourceTree = "<group>"; };
+		FD11E9DF14590EC900F51698 /* game_over_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_over_backdrop.png; path = Resources/GameOver/game_over_backdrop.png; sourceTree = "<group>"; };
+		FD11E9E114590EC900F51698 /* new_high_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = new_high_score.png; path = Resources/GameOver/new_high_score.png; sourceTree = "<group>"; };
+		FD11E9E214590EC900F51698 /* play_again_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play_again_button.png; path = Resources/GameOver/play_again_button.png; sourceTree = "<group>"; };
+		FD11E9E714590ED700F51698 /* main_menu_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_menu_backdrop.png; path = Resources/MainMenu/main_menu_backdrop.png; sourceTree = "<group>"; };
+		FD11E9E814590ED700F51698 /* hi_scores_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hi_scores_button.png; path = Resources/MainMenu/hi_scores_button.png; sourceTree = "<group>"; };
+		FD11E9E914590ED700F51698 /* multiplayer_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = multiplayer_button.png; path = Resources/MainMenu/multiplayer_button.png; sourceTree = "<group>"; };
+		FD11E9EA14590ED700F51698 /* options_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_button.png; path = Resources/MainMenu/options_button.png; sourceTree = "<group>"; };
+		FD11E9EB14590ED700F51698 /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play_button.png; path = Resources/MainMenu/play_button.png; sourceTree = "<group>"; };
+		FD11E9F114590F8D00F51698 /* main_menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_menu_button.png; path = Resources/main_menu_button.png; sourceTree = "<group>"; };
+		FD11E9F31459155900F51698 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		FD11E9F41459155A00F51698 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		FD11E9F61459156C00F51698 /* HiScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreLayer.h; sourceTree = "<group>"; };
+		FD11E9F71459156C00F51698 /* HiScoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreLayer.m; sourceTree = "<group>"; };
+		FD61F25D14549D8200516F4D /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
+		FD61F25E14549D8200516F4D /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		FDCB86B214552BA400072B78 /* cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cow.png; sourceTree = SOURCE_ROOT; };
-		FDCB86B314552BA400072B78 /* game_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_background.png; sourceTree = SOURCE_ROOT; };
-		FDCB86B414552BA400072B78 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = penguin.png; sourceTree = SOURCE_ROOT; };
-		FDCB86B514552BA500072B78 /* tap_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_button_selected.png; sourceTree = SOURCE_ROOT; };
-		FDCB86B614552BA500072B78 /* tap_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tap_button.png; sourceTree = SOURCE_ROOT; };
-		FDCB86BC14553B2000072B78 /* play_again_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_again_button_selected.png; sourceTree = SOURCE_ROOT; };
-		FDCB86BD14553B2000072B78 /* play_again_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_again_button.png; sourceTree = SOURCE_ROOT; };
 		FDDCACF614532A1800F1F6DE /* BadgerVsWalrus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadgerVsWalrus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -399,6 +421,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD11E9C91459043F00F51698 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FD11E9D114590EB400F51698 /* game_backdrop.png */,
+				FD11E9D214590EB400F51698 /* boost_button.png */,
+				FD11E9D314590EB400F51698 /* cow.png */,
+				FD11E9D414590EB400F51698 /* penguin.png */,
+				FD11E9D514590EB400F51698 /* tap_button.png */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		FD11E9CA1459044300F51698 /* HiScore */ = {
+			isa = PBXGroup;
+			children = (
+				FD11E9DB14590EBF00F51698 /* hi_score_backdrop.png */,
+			);
+			name = HiScore;
+			sourceTree = "<group>";
+		};
+		FD11E9CB1459044600F51698 /* GameOver */ = {
+			isa = PBXGroup;
+			children = (
+				FD11E9DF14590EC900F51698 /* game_over_backdrop.png */,
+				FD11E9E114590EC900F51698 /* new_high_score.png */,
+				FD11E9E214590EC900F51698 /* play_again_button.png */,
+			);
+			name = GameOver;
+			sourceTree = "<group>";
+		};
+		FD11E9CC1459044B00F51698 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				FD11E9E714590ED700F51698 /* main_menu_backdrop.png */,
+				FD11E9E814590ED700F51698 /* hi_scores_button.png */,
+				FD11E9E914590ED700F51698 /* multiplayer_button.png */,
+				FD11E9EA14590ED700F51698 /* options_button.png */,
+				FD11E9EB14590ED700F51698 /* play_button.png */,
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
 		FDDCACEB14532A1700F1F6DE = {
 			isa = PBXGroup;
 			children = (
@@ -434,9 +498,13 @@
 		FDDCAD0A14532A1800F1F6DE /* BadgerVsWalrus */ = {
 			isa = PBXGroup;
 			children = (
+				FD11E9F31459155900F51698 /* MainMenuLayer.h */,
+				FD11E9F41459155A00F51698 /* MainMenuLayer.m */,
 				FD61F2681454E75F00516F4D /* Game.h */,
-				FD61F25D14549D8200516F4D /* BWGameOverLayer.h */,
-				FD61F25E14549D8200516F4D /* BWGameOverLayer.m */,
+				FD11E9F61459156C00F51698 /* HiScoreLayer.h */,
+				FD11E9F71459156C00F51698 /* HiScoreLayer.m */,
+				FD61F25D14549D8200516F4D /* GameOverLayer.h */,
+				FD61F25E14549D8200516F4D /* GameOverLayer.m */,
 				FDDCAE5C14532A1D00F1F6DE /* AppDelegate.h */,
 				FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */,
 				FDDCAE5F14532A1D00F1F6DE /* RootViewController.h */,
@@ -454,13 +522,11 @@
 		FDDCAD0B14532A1800F1F6DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FDCB86BC14553B2000072B78 /* play_again_button_selected.png */,
-				FDCB86BD14553B2000072B78 /* play_again_button.png */,
-				FDCB86B214552BA400072B78 /* cow.png */,
-				FDCB86B314552BA400072B78 /* game_background.png */,
-				FDCB86B414552BA400072B78 /* penguin.png */,
-				FDCB86B514552BA500072B78 /* tap_button_selected.png */,
-				FDCB86B614552BA500072B78 /* tap_button.png */,
+				FD11E9F114590F8D00F51698 /* main_menu_button.png */,
+				FD11E9CC1459044B00F51698 /* MainMenu */,
+				FD11E9C91459043F00F51698 /* Game */,
+				FD11E9CB1459044600F51698 /* GameOver */,
+				FD11E9CA1459044300F51698 /* HiScore */,
 				FDDCAD0C14532A1800F1F6DE /* Default.png */,
 				FDDCAD0E14532A1800F1F6DE /* fps_images.png */,
 				FDDCAD1014532A1800F1F6DE /* Icon-72.png */,
@@ -845,13 +911,21 @@
 				FDDCAD1914532A1800F1F6DE /* Icon.png in Resources */,
 				FDDCAD1B14532A1800F1F6DE /* Icon@2x.png in Resources */,
 				FDDCAD1E14532A1800F1F6DE /* iTunesArtwork in Resources */,
-				FDCB86B714552BA500072B78 /* cow.png in Resources */,
-				FDCB86B814552BA500072B78 /* game_background.png in Resources */,
-				FDCB86B914552BA500072B78 /* penguin.png in Resources */,
-				FDCB86BA14552BA500072B78 /* tap_button_selected.png in Resources */,
-				FDCB86BB14552BA500072B78 /* tap_button.png in Resources */,
-				FDCB86BE14553B2100072B78 /* play_again_button_selected.png in Resources */,
-				FDCB86BF14553B2100072B78 /* play_again_button.png in Resources */,
+				FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */,
+				FD11E9D714590EB400F51698 /* boost_button.png in Resources */,
+				FD11E9D814590EB400F51698 /* cow.png in Resources */,
+				FD11E9D914590EB400F51698 /* penguin.png in Resources */,
+				FD11E9DA14590EB400F51698 /* tap_button.png in Resources */,
+				FD11E9DD14590EBF00F51698 /* hi_score_backdrop.png in Resources */,
+				FD11E9E314590EC900F51698 /* game_over_backdrop.png in Resources */,
+				FD11E9E514590EC900F51698 /* new_high_score.png in Resources */,
+				FD11E9E614590EC900F51698 /* play_again_button.png in Resources */,
+				FD11E9EC14590ED700F51698 /* main_menu_backdrop.png in Resources */,
+				FD11E9ED14590ED700F51698 /* hi_scores_button.png in Resources */,
+				FD11E9EE14590ED700F51698 /* multiplayer_button.png in Resources */,
+				FD11E9EF14590ED700F51698 /* options_button.png in Resources */,
+				FD11E9F014590ED700F51698 /* play_button.png in Resources */,
+				FD11E9F214590F8D00F51698 /* main_menu_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,7 +1034,9 @@
 				FDDCAE5E14532A1D00F1F6DE /* AppDelegate.m in Sources */,
 				FDDCAE6114532A1D00F1F6DE /* RootViewController.m in Sources */,
 				FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */,
-				FD61F25F14549D8300516F4D /* BWGameOverLayer.m in Sources */,
+				FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */,
+				FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */,
+				FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

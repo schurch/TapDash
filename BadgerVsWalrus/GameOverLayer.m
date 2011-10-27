@@ -6,13 +6,26 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "BWGameOverLayer.h"
+#import "GameOverLayer.h"
 
 CGSize winSize;
 
-@implementation BWGameOverLayer
+@implementation GameOverLayer
 
 @synthesize delegate = _delegate;
+
++(CCScene *) scene
+{
+	static CCScene *scene;
+    
+    if(!scene){
+        scene = [CCScene node];
+        GameOverLayer *layer = [GameOverLayer node];
+        [scene addChild: layer];
+    }
+    
+	return scene;
+}
 
 -(id) init
 {
@@ -23,7 +36,7 @@ CGSize winSize;
         [self addChild:colorLayer z:-1];
         
         CCMenuItemImage *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"play_again_button.png"
-                                                             selectedImage: @"play_again_button_selected.png"
+                                                             selectedImage: @"play_again_button.png"
                                                                     target:self
                                                                   selector:@selector(playAgain:)];
         
@@ -42,7 +55,7 @@ CGSize winSize;
 	return self;
 }
 
-- (void)setupLayerWithGameOutcome:(BWGameOutcome)gameOutcome {
+- (void)setupLayerWithGameOutcome:(GameOutcome)gameOutcome {
     switch (gameOutcome) {
         case kBWGameOutcomeDraw:
             _gameOverLabel.string = @"It was a draw.";

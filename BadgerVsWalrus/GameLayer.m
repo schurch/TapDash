@@ -13,26 +13,12 @@
 #define GAME_OVER_LAYER 999
 #define INITIAL_TIME_LABEL "0:00"
 
-CCTexture2D *_tapButtonTexture;
-CCTexture2D *_tapButtonTextureSelected;
-
-CCSprite *_background;
-CCSprite *_player1;
-CCSprite *_player2;
-CCSprite *_button;
-
-BWGameState _gameState;
-BWGameOverLayer *gameOverLayer;
-
-CCLabelTTF *_timeLabel;
-
 float _player1StartY = 210;
 float _player2StartY = 130;
-
 float _startX = 66;
 float _endX = 359;
-
 float _currentTime;
+bool _boostUsed;
 
 @implementation GameLayer
 
@@ -55,6 +41,7 @@ float _currentTime;
     _timeLabel.string = @INITIAL_TIME_LABEL;
     _player1.position = ccp( _startX, _player1StartY );
     _player2.position = ccp( _startX, _player2StartY );
+    _boostUsed = false;
 }
 
 - (void)pause {
@@ -71,13 +58,17 @@ float _currentTime;
 {
 	if( (self=[super init])) {         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        _background = [CCSprite spriteWithFile:@"game_background.png"];
-        _background.position = ccp(winSize.width/2, winSize.height/2);
-        [self addChild:_background];
+        _backdrop = [CCSprite spriteWithFile:@"game_backdrop.png"];
+        _backdrop.position = ccp(winSize.width/2, winSize.height/2);
+        [self addChild:_backdrop];
         
-        _button = [CCSprite spriteWithFile: @"tap_button.png"];
-        _button.position = ccp( 430, 50 );  
-        [self addChild:_button];
+        _tapButton = [CCSprite spriteWithFile: @"tap_button.png"];
+        _tapButton.position = ccp( 440, 40 );  
+        [self addChild:_tapButton];
+        
+//        _boostButton = [CCSprite spriteWithFile: @"boost_button.png"];
+//        _boostButton.position = ccp( 40, 40 );  
+//        [self addChild:_boostButton];
         
         _player1 = [CCSprite spriteWithFile: @"cow.png"];
         _player1.position = ccp( _startX, _player1StartY );
@@ -87,12 +78,11 @@ float _currentTime;
         _player2.position = ccp( _startX, _player2StartY );
         [self addChild:_player2];
         
-        _tapButtonTexture = [[CCTextureCache sharedTextureCache] addImage:@"tap_button.png"];
-        _tapButtonTextureSelected = [[CCTextureCache sharedTextureCache] addImage:@"tap_button_selected.png"];
-        
-        _timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:30];
-        _timeLabel.position = ccp(270,48);
+        _timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
+        _timeLabel.position = ccp(278,40);
         [self addChild: _timeLabel];
+        
+        _boostUsed = false;
         
         [self scheduleUpdate];
         [self schedule:@selector(timerUpdate:) interval:0.01];
@@ -118,19 +108,27 @@ float _currentTime;
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if(_gameState == kBWGameStatePaused) {
+        return NO;
+    }
+    
     CGPoint location = [self convertTouchToNodeSpace: touch];
     
-    if (CGRectContainsPoint(_button.boundingBox, location)) {
-        _button.texture = _tapButtonTextureSelected;
-        
-        if(_gameState == kBWGameStatePaused) {
-            return NO;
-        }else if(_gameState == kBWGameStateStart) {
+    if (CGRectContainsPoint(_tapButton.boundingBox, location)) {        
+        if(_gameState == kBWGameStateStart) {
             [self play];
         }
         
         id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(_player1.position.x + 5, _player1.position.y)];
         [_player1 runAction:actionTo];
+    }
+    
+    if (CGRectContainsPoint(_boostButton.boundingBox, location)) {                
+        if(!_boostUsed) {
+            id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(_player1.position.x + 30, _player1.position.y)];
+            [_player1 runAction:actionTo];
+            _boostUsed = true;
+        }
     }
     
     return YES;
@@ -139,16 +137,16 @@ float _currentTime;
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {    
     CGPoint location = [self convertTouchToNodeSpace: touch];
     
-    if (CGRectContainsPoint(_button.boundingBox, location)) {
-        _button.texture = _tapButtonTexture;
+    if (CGRectContainsPoint(_tapButton.boundingBox, location)) {
+
     }
 }
 
-- (void)gameOverWithOutcome:(BWGameOutcome)outcome {
+- (void)gameOverWithOutcome:(GameOutcome)outcome {
     [self pause];
     
     if (!gameOverLayer) {
-        gameOverLayer = [BWGameOverLayer node];
+        gameOverLayer = [GameOverLayer node];
         [self addChild:gameOverLayer z:999999 tag:GAME_OVER_LAYER];
         gameOverLayer.delegate = self;
     }

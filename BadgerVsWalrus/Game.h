@@ -13,13 +13,13 @@ typedef enum {
     kBWGameOutcomeDraw = 0,
     kBWGameOutcomePlayer1Won = 1,
     KBWGameOutcomePlayer2won = 2
-} BWGameOutcome;
+} GameOutcome;
 
 typedef enum {
     kBWGameStateStart = 0,
     kBWGameStatePaused = 1,
     kBWGameStateRunning = 2
-} BWGameState;
+} GameState;
 
 
 #endif

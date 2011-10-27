@@ -10,14 +10,16 @@
 #import "cocos2d.h"
 #import "Game.h"
 
-@interface BWGameOverLayer : CCLayer {
+@interface GameOverLayer : CCLayer {
     id _delegate;
     CCLabelTTF *_gameOverLabel;
 }
 
 @property (assign, nonatomic) id delegate;
 
-- (void)setupLayerWithGameOutcome:(BWGameOutcome)gameOutcome;
++(CCScene *) scene;
+
+- (void)setupLayerWithGameOutcome:(GameOutcome)gameOutcome;
 
 @end
 

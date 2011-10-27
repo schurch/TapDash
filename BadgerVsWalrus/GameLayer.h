@@ -7,11 +7,19 @@
 //
 
 #import "cocos2d.h"
-#import "BWGameOverLayer.h"
+#import "GameOverLayer.h"
 #import "Game.h"
 
 @interface GameLayer : CCLayer<GameOverDelegate>
 {
+    CCSprite *_backdrop;
+    CCSprite *_player1;
+    CCSprite *_player2;
+    CCSprite *_tapButton;
+    CCSprite *_boostButton;
+    GameState _gameState;
+    GameOverLayer *gameOverLayer;
+    CCLabelTTF *_timeLabel;
 }
 
 +(CCScene *) scene;
