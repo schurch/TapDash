@@ -10,15 +10,15 @@
 #define BadgerVsWalrus_Game_h
 
 typedef enum {
-    kBWGameOutcomeDraw = 0,
-    kBWGameOutcomePlayer1Won = 1,
-    KBWGameOutcomePlayer2won = 2
+    kGameOutcomeDraw = 0,
+    kGameOutcomePlayer1Won = 1,
+    kGameOutcomePlayer2won = 2
 } GameOutcome;
 
 typedef enum {
-    kBWGameStateStart = 0,
-    kBWGameStatePaused = 1,
-    kBWGameStateRunning = 2
+    kGameStateStart = 0,
+    kGameStatePaused = 1,
+    kGameStateRunning = 2
 } GameState;
 
 

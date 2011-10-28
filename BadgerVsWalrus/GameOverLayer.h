@@ -11,18 +11,18 @@
 #import "Game.h"
 
 @interface GameOverLayer : CCLayer {
-    id _delegate;
     CCLabelTTF *_gameOverLabel;
+    GameOutcome _gameOutcome;
+    float _finalTime;
+    NSString *_winningSpriteFile;
 }
 
-@property (assign, nonatomic) id delegate;
+@property (assign, nonatomic) GameOutcome gameOutcome;
+@property (assign, nonatomic) float finalTime;
+@property (retain, nonatomic) NSString* winningSpriteFile;
 
-+(CCScene *) scene;
-
-- (void)setupLayerWithGameOutcome:(GameOutcome)gameOutcome;
++ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome time:(float)time 
+                    winningSpriteFile:(NSString *)winningSpriteFile;
 
 @end
 
-@protocol GameOverDelegate <NSObject>
-- (void)playAgain;
-@end

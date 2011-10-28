@@ -13,20 +13,16 @@
 
 CCSprite *_backdrop;
 
-+(CCScene *) scene
++ (CCScene *)scene
 {
-	static CCScene *scene;
-    
-    if(!scene){
-        scene = [CCScene node];
-        MainMenuLayer *layer = [MainMenuLayer node];
-        [scene addChild: layer];
-    }
+    CCScene *scene = [CCScene node];
+    MainMenuLayer *layer = [MainMenuLayer node];
+    [scene addChild: layer];
     
 	return scene;
 }
 
--(id) init
+- (id)init
 {
 	if( (self=[super init])) {     
         CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -49,8 +45,13 @@ CCSprite *_backdrop;
                                                                       target:self
                                                                     selector:@selector(hiScores:)];
         
-        CCMenu *menu = [CCMenu menuWithItems:playMenuItem, hiScoresMenuItem, nil];
-        menu.position = ccp(winSize.width/2,170);
+        CCMenuItemImage *optionsMenuItem = [CCMenuItemImage itemFromNormalImage:@"options_button.png"
+                                                                   selectedImage: @"options_button.png"
+                                                                          target:self
+                                                                        selector:@selector(options:)];
+        
+        CCMenu *menu = [CCMenu menuWithItems:playMenuItem, hiScoresMenuItem, optionsMenuItem, nil];
+        menu.position = ccp(winSize.width/2,150);
         [menu alignItemsVerticallyWithPadding:5];
         
         [self addChild:menu];
@@ -67,6 +68,10 @@ CCSprite *_backdrop;
 
 - (void)hiScores:(CCMenuItem  *)menuItem {
 
+}
+
+- (void)options:(CCMenuItem  *)menuItem {
+    
 }
 
 @end

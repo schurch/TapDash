@@ -11,15 +11,11 @@
 
 @implementation HiScoreLayer
 
-+(CCScene *) scene
++ (CCScene *)scene
 {
-	static CCScene *scene;
-    
-    if(!scene){
-        scene = [CCScene node];
-        HiScoreLayer *layer = [HiScoreLayer node];
-        [scene addChild: layer];
-    }
+	CCScene *scene = [CCScene node];
+    HiScoreLayer *layer = [HiScoreLayer node];
+    [scene addChild: layer];
     
 	return scene;
 }

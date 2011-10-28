@@ -10,15 +10,12 @@
 #import "GameOverLayer.h"
 #import "Game.h"
 
-@interface GameLayer : CCLayer<GameOverDelegate>
+@interface GameLayer : CCLayer
 {
-    CCSprite *_backdrop;
     CCSprite *_player1;
     CCSprite *_player2;
     CCSprite *_tapButton;
-    CCSprite *_boostButton;
     GameState _gameState;
-    GameOverLayer *gameOverLayer;
     CCLabelTTF *_timeLabel;
 }
 

@@ -7,47 +7,58 @@
 //
 
 #import "GameOverLayer.h"
+#import "GameLayer.h"
+#import "MainMenuLayer.h"
 
-CGSize winSize;
+#define ALL_ITEMS_Y_OFFSET 65
 
 @implementation GameOverLayer
 
-@synthesize delegate = _delegate;
+@synthesize gameOutcome = _gameOutcome;
+@synthesize finalTime = _finalTime;
+@synthesize winningSpriteFile = _winningSpriteFile;
 
-+(CCScene *) scene
++ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome time:(float)time 
+                winningSpriteFile:(NSString *)winningSpriteFile
 {
-	static CCScene *scene;
+    CCScene *scene = [CCScene node];
+    GameOverLayer *layer = [GameOverLayer node];
+    layer.gameOutcome = gameOutcome;
+    layer.finalTime = time;
+    layer.winningSpriteFile = winningSpriteFile;
+    [scene addChild: layer];
     
-    if(!scene){
-        scene = [CCScene node];
-        GameOverLayer *layer = [GameOverLayer node];
-        [scene addChild: layer];
-    }
-    
-	return scene;
+    return scene;
 }
 
 -(id) init
 {
-	if( (self=[super init])) {      
+	if((self=[super init])) {      
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        CCLayerColor *colorLayer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 200)];
-        [self addChild:colorLayer z:-1];
+        CCSprite *backdrop = [CCSprite spriteWithFile:@"game_over_backdrop.png"];
+        backdrop.position = ccp(winSize.width/2, winSize.height/2);
+        [self addChild:backdrop];
         
-        CCMenuItemImage *menuItem1 = [CCMenuItemImage itemFromNormalImage:@"play_again_button.png"
-                                                             selectedImage: @"play_again_button.png"
-                                                                    target:self
-                                                                  selector:@selector(playAgain:)];
+        CCMenuItemImage *mainMenuMenuItem = [CCMenuItemImage itemFromNormalImage:@"main_menu_button.png"
+                                                               selectedImage: @"main_menu_button.png"
+                                                                      target:self
+                                                                    selector:@selector(showMainMenu:)];
         
-        CCMenu * myMenu = [CCMenu menuWithItems:menuItem1, nil];
-        myMenu.position = ccp(winSize.width/2,100);
-    
-        [self addChild:myMenu];
+        CCMenuItemImage *playAgainMenuItem = [CCMenuItemImage itemFromNormalImage:@"play_again_button.png"
+                                                                   selectedImage: @"play_again_button.png"
+                                                                          target:self
+                                                                        selector:@selector(playAgain:)];
         
-        _gameOverLabel = [CCLabelTTF labelWithString:@"Game Over, sucka. You LOST!" fontName:@"Marker Felt" fontSize:30];
-        _gameOverLabel.position = ccp(winSize.width/2, winSize.height/2);
-        [self addChild: _gameOverLabel];
+        CCMenu *menu = [CCMenu menuWithItems:mainMenuMenuItem, playAgainMenuItem, nil];
+        menu.position = ccp(winSize.width/2,ALL_ITEMS_Y_OFFSET);
+        [menu alignItemsHorizontallyWithPadding:5];
+        [self addChild:menu];
+        
+        CCSprite *winsLabel = [CCLabelTTF labelWithString:@"WINS" fontName:@"MarkerFelt-Wide" fontSize:55];
+        winsLabel.position = ccp(280,190 + ALL_ITEMS_Y_OFFSET);
+        winsLabel.color = ccc3(64,64,64);
+        [self addChild: winsLabel];
         
         self.isTouchEnabled = YES;
 	}
@@ -55,26 +66,47 @@ CGSize winSize;
 	return self;
 }
 
-- (void)setupLayerWithGameOutcome:(GameOutcome)gameOutcome {
-    switch (gameOutcome) {
-        case kBWGameOutcomeDraw:
-            _gameOverLabel.string = @"It was a draw.";
-            break;
-        case kBWGameOutcomePlayer1Won:
-            _gameOverLabel.string = @"You WON! Nice work man.";
-            break;
-        case KBWGameOutcomePlayer2won:
-            _gameOverLabel.string = @"You LOST fool!";
-            break;
-        default:
-            break;
-    }
+- (void)setFinalTime:(float)finalTime {
+    NSString *timeString = [NSString stringWithFormat:@"Time: %.2f", finalTime];
+    
+    CCSprite *newHighScore = [CCSprite spriteWithFile:@"new_high_score.png"];
+    newHighScore.position = ccp(345,132 + ALL_ITEMS_Y_OFFSET);
+    [self addChild:newHighScore];
+    
+    CCSprite *timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"MarkerFelt-Wide" fontSize:50];
+    timeLabel.position = ccp(230,110 + ALL_ITEMS_Y_OFFSET);
+    timeLabel.color = ccc3(0,0,0);
+    [self addChild: timeLabel];
+    
+    CCSprite *topScoreLabel = [CCLabelTTF labelWithString:@"Top Score: 7.43" fontName:@"MarkerFelt-Wide" fontSize:25];
+    topScoreLabel.position = ccp(264,60 + ALL_ITEMS_Y_OFFSET);
+    topScoreLabel.color = ccc3(0,0,0);
+    [self addChild: topScoreLabel];
+}
+
+- (void)setWinningSpriteFile:(NSString *)winningSpriteFile {
+    NSString *oldValue = _winningSpriteFile;
+    _winningSpriteFile = [winningSpriteFile retain];
+    [oldValue release];
+    
+    CCSprite *winningSprite = [CCSprite spriteWithFile:self.winningSpriteFile];
+    winningSprite.position = ccp(170,190 + ALL_ITEMS_Y_OFFSET);
+    [self addChild:winningSprite];
 }
 
 - (void)playAgain:(CCMenuItem  *)menuItem {
-    if([[self delegate] respondsToSelector:@selector(playAgain)]) {
-        [self.delegate playAgain];
-	}
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+}
+
+- (void)showMainMenu:(CCMenuItem  *)menuItem {
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
+}
+
+- (void)dealloc {
+    [_winningSpriteFile release];
+    _winningSpriteFile = nil;
+    
+    [super dealloc];
 }
 
 @end
