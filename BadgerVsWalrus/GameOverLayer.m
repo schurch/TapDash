@@ -39,7 +39,7 @@
 
 -(id) init
 {
-	if((self=[super init])) {      
+	if(self=[super init]) {      
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         CCSprite *backdrop = [CCSprite spriteWithFile:@"game_over_backdrop.png"];

@@ -8,6 +8,7 @@
 
 #import "MainMenuLayer.h"
 #import "GameLayer.h"
+#import "HiScoreLayer.h"
 
 @implementation MainMenuLayer
 
@@ -66,7 +67,7 @@
 }
 
 - (void)hiScores:(CCMenuItem  *)menuItem {
-
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HiScoreLayer scene]]];
 }
 
 - (void)options:(CCMenuItem  *)menuItem {
