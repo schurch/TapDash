@@ -25,6 +25,8 @@
 		FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F41459155A00F51698 /* MainMenuLayer.m */; };
 		FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HiScoreLayer.m */; };
 		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
+		FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* HiScoreDataStore.m */; };
+		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
 		FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */; };
 		FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFE14532A1800F1F6DE /* OpenAL.framework */; };
@@ -165,6 +167,9 @@
 		FD61F25D14549D8200516F4D /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		FD61F25E14549D8200516F4D /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		FD696786145B882C002BB501 /* HiScoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreDataStore.h; sourceTree = "<group>"; };
+		FD696787145B882C002BB501 /* HiScoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreDataStore.m; sourceTree = "<group>"; };
+		FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FDDCACF614532A1800F1F6DE /* BadgerVsWalrus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadgerVsWalrus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -407,6 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */,
 				FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */,
 				FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */,
 				FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */,
@@ -483,6 +489,7 @@
 		FDDCACF914532A1800F1F6DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */,
 				FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */,
 				FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */,
 				FDDCACFE14532A1800F1F6DE /* OpenAL.framework */,
@@ -501,6 +508,8 @@
 				FD11E9F31459155900F51698 /* MainMenuLayer.h */,
 				FD11E9F41459155A00F51698 /* MainMenuLayer.m */,
 				FD61F2681454E75F00516F4D /* Game.h */,
+				FD696786145B882C002BB501 /* HiScoreDataStore.h */,
+				FD696787145B882C002BB501 /* HiScoreDataStore.m */,
 				FD11E9F61459156C00F51698 /* HiScoreLayer.h */,
 				FD11E9F71459156C00F51698 /* HiScoreLayer.m */,
 				FD61F25D14549D8200516F4D /* GameOverLayer.h */,
@@ -1037,6 +1046,7 @@
 				FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */,
 				FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */,
 				FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */,
+				FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

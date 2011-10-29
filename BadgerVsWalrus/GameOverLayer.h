@@ -24,5 +24,7 @@
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome time:(float)time 
                     winningSpriteFile:(NSString *)winningSpriteFile;
 
+- (void)setHighScore:(float)finalTime;
+
 @end
 

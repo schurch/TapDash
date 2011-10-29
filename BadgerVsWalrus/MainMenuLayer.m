@@ -11,8 +11,6 @@
 
 @implementation MainMenuLayer
 
-CCSprite *_backdrop;
-
 + (CCScene *)scene
 {
     CCScene *scene = [CCScene node];
@@ -26,9 +24,10 @@ CCSprite *_backdrop;
 {
 	if( (self=[super init])) {     
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        _backdrop = [CCSprite spriteWithFile:@"main_menu_backdrop.png"];
-        _backdrop.position = ccp(winSize.width/2, winSize.height/2);
-        [self addChild:_backdrop];
+        
+        CCSprite *backdrop = [CCSprite spriteWithFile:@"main_menu_backdrop.png"];
+        backdrop.position = ccp(winSize.width/2, winSize.height/2);
+        [self addChild:backdrop];
         
         CCSprite *versionLabel = [CCLabelTTF labelWithString:@"v0.1" fontName:@"Marker Felt" fontSize:15];
         versionLabel.position = ccp(18,310);

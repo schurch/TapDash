@@ -6,9 +6,6 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef BadgerVsWalrus_Game_h
-#define BadgerVsWalrus_Game_h
-
 typedef enum {
     kGameOutcomeDraw = 0,
     kGameOutcomePlayer1Won = 1,
@@ -20,6 +17,3 @@ typedef enum {
     kGameStatePaused = 1,
     kGameStateRunning = 2
 } GameState;
-
-
-#endif

@@ -14,6 +14,8 @@
 #import "RootViewController.h"
 #import "GameLayer.h"
 
+#import "HiScoreDataStore.h"
+
 @implementation AppDelegate
 
 @synthesize window;
@@ -40,7 +42,7 @@
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController	
 }
 - (void) applicationDidFinishLaunching:(UIApplication*)application
-{
+{    
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	

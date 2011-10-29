@@ -8,25 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BadgerVsWalrus/HelloWorldLayer.m"
-         timestampString = "341036607.063679"
+         filePath = "BadgerVsWalrus/HiScoreDataStore.m"
+         timestampString = "341552549.140631"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "12"
-         endingLineNumber = "12">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BadgerVsWalrus/HelloWorldLayer.m"
-         timestampString = "341084008.174968"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "-ccTouchBegan:withEvent:"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "-getHighScores"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -34,13 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BadgerVsWalrus/GameLayer.m"
-         timestampString = "341468505.90444"
+         filePath = "BadgerVsWalrus/HiScoreDataStore.m"
+         timestampString = "341552549.140631"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
-         landmarkName = "-init"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-getHighScores"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -48,13 +36,83 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BadgerVsWalrus/MainMenuLayer.m"
-         timestampString = "341465066.620381"
+         filePath = "BadgerVsWalrus/HiScoreDataStore.m"
+         timestampString = "341552549.140631"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "18"
-         endingLineNumber = "18"
-         landmarkName = "+scene"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-getHighScores"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/HiScoreDataStore.m"
+         timestampString = "341552549.140631"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
+         landmarkName = "-isTimeHighScore:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/HiScoreDataStore.m"
+         timestampString = "341552549.140631"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-currentHighScoreCount"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/GameOverLayer.m"
+         timestampString = "341553539.090594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
+         landmarkName = "+sceneWithGameOutcome:time:winningSpriteFile:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/GameOverLayer.m"
+         timestampString = "341553587.565812"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-setFinalTime:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/GameOverLayer.m"
+         timestampString = "341553894.910931"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
+         landmarkName = "-setFinalTime:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
