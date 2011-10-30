@@ -15,6 +15,7 @@
     GameOutcome _gameOutcome;
     float _finalTime;
     NSString *_winningSpriteFile;
+    CGSize _winSize;
 }
 
 @property (assign, nonatomic) GameOutcome gameOutcome;

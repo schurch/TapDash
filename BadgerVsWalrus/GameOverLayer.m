@@ -39,11 +39,11 @@
 
 -(id) init
 {
-	if(self=[super init]) {      
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
+	if(self=[super init]) {    
+        _winSize = [[CCDirector sharedDirector] winSize];
         
         CCSprite *backdrop = [CCSprite spriteWithFile:@"game_over_backdrop.png"];
-        backdrop.position = ccp(winSize.width/2, winSize.height/2);
+        backdrop.position = ccp(_winSize.width/2, _winSize.height/2);
         [self addChild:backdrop];
         
         CCMenuItemImage *mainMenuMenuItem = [CCMenuItemImage itemFromNormalImage:@"main_menu_button.png"
@@ -57,12 +57,12 @@
                                                                         selector:@selector(playAgain:)];
         
         CCMenu *menu = [CCMenu menuWithItems:mainMenuMenuItem, playAgainMenuItem, nil];
-        menu.position = ccp(winSize.width/2,ALL_ITEMS_Y_OFFSET);
+        menu.position = ccp(_winSize.width/2,ALL_ITEMS_Y_OFFSET);
         [menu alignItemsHorizontallyWithPadding:5];
         [self addChild:menu];
         
         CCSprite *winsLabel = [CCLabelTTF labelWithString:@"WINS" fontName:@"MarkerFelt-Wide" fontSize:55];
-        winsLabel.position = ccp(280,190 + ALL_ITEMS_Y_OFFSET);
+        winsLabel.position = ccp((_winSize.width/2) + 30,190 + ALL_ITEMS_Y_OFFSET);
         winsLabel.color = ccc3(64,64,64);
         [self addChild: winsLabel];
         
@@ -75,7 +75,7 @@
 - (void)setHighScore:(float)finalTime {
     if ([[HiScoreDataStore dataStore] isTimeHighScore:finalTime]) {
         CCSprite *newHighScore = [CCSprite spriteWithFile:@"new_high_score.png"];
-        newHighScore.position = ccp(345,132 + ALL_ITEMS_Y_OFFSET);
+        newHighScore.position = ccp(349,135 + ALL_ITEMS_Y_OFFSET);
         [self addChild:newHighScore];   
         
         [[HiScoreDataStore dataStore] saveHighScoreTime:finalTime];
@@ -86,7 +86,7 @@
     NSString *timeString = [NSString stringWithFormat:@"Time: %.2f", finalTime];
     
     CCSprite *timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"MarkerFelt-Wide" fontSize:50];
-    timeLabel.position = ccp(230,110 + ALL_ITEMS_Y_OFFSET);
+    timeLabel.position = ccp((_winSize.width/2),110 + ALL_ITEMS_Y_OFFSET);
     timeLabel.color = ccc3(0,0,0);
     [self addChild: timeLabel];
     
@@ -96,7 +96,11 @@
         double topScore = [[highScores objectAtIndex:0] doubleValue];
         NSString *topScoreString = [NSString stringWithFormat: @"Top Score: %.2f", topScore];
         CCSprite *topScoreLabel = [CCLabelTTF labelWithString:topScoreString fontName:@"MarkerFelt-Wide" fontSize:25];
-        topScoreLabel.position = ccp(264,60 + ALL_ITEMS_Y_OFFSET);
+        
+        //right align with time lable
+        int xPostion = (timeLabel.boundingBox.origin.x + timeLabel.boundingBox.size.width) - (topScoreLabel.boundingBox.size.width/2);
+        
+        topScoreLabel.position = ccp(xPostion,60 + ALL_ITEMS_Y_OFFSET);
         topScoreLabel.color = ccc3(0,0,0);
         [self addChild: topScoreLabel];
     }
@@ -108,7 +112,7 @@
     [oldValue release];
     
     CCSprite *winningSprite = [CCSprite spriteWithFile:self.winningSpriteFile];
-    winningSprite.position = ccp(170,190 + ALL_ITEMS_Y_OFFSET);
+    winningSprite.position = ccp((_winSize.width/2) - 70,190 + ALL_ITEMS_Y_OFFSET);
     [self addChild:winningSprite];
 }
 

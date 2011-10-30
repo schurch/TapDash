@@ -9,6 +9,7 @@
 #import "MainMenuLayer.h"
 #import "GameLayer.h"
 #import "HiScoreLayer.h"
+#import "OptionsLayer.h"
 
 @implementation MainMenuLayer
 
@@ -71,7 +72,7 @@
 }
 
 - (void)options:(CCMenuItem  *)menuItem {
-    
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[OptionsLayer scene]]];    
 }
 
 @end

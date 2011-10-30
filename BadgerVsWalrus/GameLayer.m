@@ -7,7 +7,6 @@
 //
 
 
-// Import the interfaces
 #import "GameLayer.h"
 
 #define INITIAL_TIME_LABEL "0:00"

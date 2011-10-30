@@ -40,7 +40,6 @@ static const int MAX_HI_SCORE_COUNT = 4;
                 {
                     NSLog(@"Failed to create table");
                 }
-                
             } else {
                 NSLog(@"Failed to open/create database");
             }

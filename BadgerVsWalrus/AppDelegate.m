@@ -13,6 +13,7 @@
 #import "MainMenuLayer.h"
 #import "RootViewController.h"
 #import "GameLayer.h"
+#import "SimpleAudioEngine.h"
 
 #import "HiScoreDataStore.h"
 
@@ -112,6 +113,9 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
+    [CDAudioManager sharedManager].backgroundMusic.volume = 0.5f;
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Shrimp.mp3"];
+    
 	// Run the intro Scene
 	[[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
 }
