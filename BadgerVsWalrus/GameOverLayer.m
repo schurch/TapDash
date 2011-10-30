@@ -10,6 +10,7 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "HiScoreDataStore.h"
+#import "ChooserLayer.h"
 
 #define ALL_ITEMS_Y_OFFSET 65
 
@@ -19,19 +20,30 @@
 @synthesize finalTime = _finalTime;
 @synthesize winningSpriteFile = _winningSpriteFile;
 
-+ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome time:(float)time 
-                winningSpriteFile:(NSString *)winningSpriteFile
-{
++ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time {
     CCScene *scene = [CCScene node];
     GameOverLayer *layer = [GameOverLayer node];
     
-    if (gameOutcome == kGameOutcomePlayer1Won) {
+    if (didPlayerWin) {
         [layer setHighScore:time];
     }
     
     layer.gameOutcome = gameOutcome;
     layer.finalTime = time;
+    
+    NSString *winningSpriteFile = nil;
+    
+    switch (gameOutcome) {
+        case kGameOutcomeCowWon:
+            winningSpriteFile = @"cow.png";
+            break;
+        case kGameOutcomePenguinWon:
+            winningSpriteFile = @"penguin.png";
+        default:
+            break;
+    }
     layer.winningSpriteFile = winningSpriteFile;
+    
     [scene addChild: layer];
     
     return scene;
@@ -117,7 +129,7 @@
 }
 
 - (void)playAgain:(CCMenuItem  *)menuItem {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];
 }
 
 - (void)showMainMenu:(CCMenuItem  *)menuItem {

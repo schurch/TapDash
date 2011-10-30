@@ -22,8 +22,7 @@
 @property (assign, nonatomic) float finalTime;
 @property (retain, nonatomic) NSString* winningSpriteFile;
 
-+ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome time:(float)time 
-                    winningSpriteFile:(NSString *)winningSpriteFile;
++ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time;
 
 - (void)setHighScore:(float)finalTime;
 

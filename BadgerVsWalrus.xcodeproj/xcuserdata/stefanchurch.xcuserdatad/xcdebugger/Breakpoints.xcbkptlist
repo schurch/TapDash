@@ -79,12 +79,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BadgerVsWalrus/GameOverLayer.m"
-         timestampString = "341553539.090594"
+         timestampString = "341703367.021649"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "28"
-         endingLineNumber = "28"
-         landmarkName = "+sceneWithGameOutcome:time:winningSpriteFile:"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "+sceneWithGameOutcome:didPlayerWin:time:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -93,11 +93,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BadgerVsWalrus/GameOverLayer.m"
-         timestampString = "341553587.565812"
+         timestampString = "341703367.021649"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
          landmarkName = "-setFinalTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -107,11 +107,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BadgerVsWalrus/GameOverLayer.m"
-         timestampString = "341553894.910931"
+         timestampString = "341703367.021649"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
          landmarkName = "-setFinalTime:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,12 +121,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BadgerVsWalrus/GameOverLayer.m"
-         timestampString = "341615454.948492"
+         timestampString = "341703367.021649"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "101"
-         endingLineNumber = "101"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "-setFinalTime:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BadgerVsWalrus/GameLayer.m"
+         timestampString = "341703691.862023"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
+         landmarkName = "-gameOverWithOutcome:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

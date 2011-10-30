@@ -7,7 +7,7 @@
 //
 
 #import "MainMenuLayer.h"
-#import "GameLayer.h"
+#import "ChooserLayer.h"
 #import "HiScoreLayer.h"
 #import "OptionsLayer.h"
 
@@ -64,7 +64,7 @@
 }
 
 - (void)play:(CCMenuItem  *)menuItem {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer scene]]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];
 }
 
 - (void)hiScores:(CCMenuItem  *)menuItem {

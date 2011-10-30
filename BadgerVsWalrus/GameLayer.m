@@ -19,10 +19,13 @@ float _gameTime;
 
 @implementation GameLayer
 
-+ (CCScene *)scene
+@synthesize choosenAnimal = _choosenAnimal;
+
++ (CCScene *)sceneWithChosenAnimal:(Animal)animal
 {
     CCScene *scene = [CCScene node];
     GameLayer *layer = [GameLayer node];
+    layer.choosenAnimal = animal;
     [scene addChild: layer];
     
     return scene;
@@ -32,8 +35,8 @@ float _gameTime;
     _gameState = kGameStateStart;
     _gameTime = 0;
     _timeLabel.string = @INITIAL_TIME_LABEL;
-    _player1.position = ccp( _startX, _player1StartY );
-    _player2.position = ccp( _startX, _player2StartY );
+    _cow.position = ccp( _startX, _player1StartY );
+    _penguin.position = ccp( _startX, _player2StartY );
 }
 
 - (void)pause {
@@ -44,6 +47,14 @@ float _gameTime;
 - (void)play {
     [self resumeSchedulerAndActions];
     _gameState = kGameStateRunning;
+}
+
+- (CCSprite *)humanPlayer {
+    return _choosenAnimal == kCow ? _cow : _penguin;    
+}
+
+- (CCSprite *)computerPlayer {
+    return _choosenAnimal == kCow ? _penguin : _cow;
 }
 
 -(id) init
@@ -59,13 +70,13 @@ float _gameTime;
         _tapButton.position = ccp( 440, 40 );  
         [self addChild:_tapButton];
         
-        _player1 = [CCSprite spriteWithFile: @"cow.png"];
-        _player1.position = ccp( _startX, _player1StartY );
-        [self addChild:_player1];
+        _cow = [CCSprite spriteWithFile: @"cow.png"];
+        _cow.position = ccp( _startX, _player1StartY );
+        [self addChild:_cow];
         
-        _player2 = [CCSprite spriteWithFile: @"penguin.png"];
-        _player2.position = ccp( _startX, _player2StartY );
-        [self addChild:_player2];
+        _penguin = [CCSprite spriteWithFile: @"penguin.png"];
+        _penguin.position = ccp( _startX, _player2StartY );
+        [self addChild:_penguin];
         
         _timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
         _timeLabel.position = ccp(278,40);
@@ -106,37 +117,27 @@ float _gameTime;
             [self play];
         }
         
-        id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(_player1.position.x + 5, _player1.position.y)];
-        [_player1 runAction:actionTo];
+        id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(self.humanPlayer.position.x + 5, self.humanPlayer.position.y)];
+        [self.humanPlayer runAction:actionTo];
     }
     
     return YES;
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {    
-    CGPoint location = [self convertTouchToNodeSpace: touch];
-    
-    if (CGRectContainsPoint(_tapButton.boundingBox, location)) {
-
-    }
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
 }
 
 - (void)gameOverWithOutcome:(GameOutcome)outcome {
     [self pause];
     
-    NSString *winningSpriteFile = nil;
-    
-    switch (outcome) {
-        case kGameOutcomePlayer1Won:
-            winningSpriteFile = @"cow.png";
-            break;
-        case kGameOutcomePlayer2won:
-            winningSpriteFile = @"penguin.png";
-        default:
-            break;
+    BOOL didWin = NO;
+    if (outcome == kGameOutcomeCowWon && self.humanPlayer == _cow) {
+        didWin = YES;
+    }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _penguin) {
+        didWin = YES;
     }
     
-    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome time:_gameTime winningSpriteFile:winningSpriteFile];
+    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:_gameTime];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:gameOverScene]];
 }
 
@@ -145,25 +146,26 @@ float _gameTime;
         return;
     }
     
-    _player2.position = ccp( _player2.position.x + 30 * dt, _player2.position.y );
+    self.computerPlayer.position = ccp( self.computerPlayer.position.x + 30 * dt, self.computerPlayer.position.y );
 
-    if(_player1.position.x >= _endX && _player2.position.x >= _endX){
+    if(_cow.position.x >= _endX && _penguin.position.x >= _endX){
         [self gameOverWithOutcome:kGameOutcomeDraw];
-    }else if(_player1.position.x >= _endX){
-        [self gameOverWithOutcome:kGameOutcomePlayer1Won];
-    }else if(_player2.position.x >= _endX){
-        [self gameOverWithOutcome:kGameOutcomePlayer2won];
+    }else if(_cow.position.x >= _endX){
+        [self gameOverWithOutcome:kGameOutcomeCowWon];
+    }else if(_penguin.position.x >= _endX){
+        [self gameOverWithOutcome:kGameOutcomePenguinWon];
     }
 }
 
 - (void)playAgain {
-    
     [self setStart];
 }
 
-// on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	[super dealloc];
+    [_cow release];
+    [_penguin release];
+    [_tapButton release];
+    [_timeLabel release];
 }
 @end

@@ -29,6 +29,9 @@
 		FD11E9F214590F8D00F51698 /* main_menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9F114590F8D00F51698 /* main_menu_button.png */; };
 		FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F41459155A00F51698 /* MainMenuLayer.m */; };
 		FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HiScoreLayer.m */; };
+		FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */; };
+		FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE8145DE8D100BA5126 /* choose_button.png */; };
+		FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */; };
 		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
 		FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* HiScoreDataStore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
@@ -176,6 +179,10 @@
 		FD11E9F41459155A00F51698 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		FD11E9F61459156C00F51698 /* HiScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreLayer.h; sourceTree = "<group>"; };
 		FD11E9F71459156C00F51698 /* HiScoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreLayer.m; sourceTree = "<group>"; };
+		FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_backdrop.png; path = Resources/Chooser/choose_backdrop.png; sourceTree = "<group>"; };
+		FD3ACAE8145DE8D100BA5126 /* choose_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_button.png; path = Resources/Chooser/choose_button.png; sourceTree = "<group>"; };
+		FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserLayer.h; sourceTree = "<group>"; };
+		FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooserLayer.m; sourceTree = "<group>"; };
 		FD61F25D14549D8200516F4D /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		FD61F25E14549D8200516F4D /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -455,8 +462,6 @@
 			children = (
 				FD11E9D114590EB400F51698 /* game_backdrop.png */,
 				FD11E9D214590EB400F51698 /* boost_button.png */,
-				FD11E9D314590EB400F51698 /* cow.png */,
-				FD11E9D414590EB400F51698 /* penguin.png */,
 				FD11E9D514590EB400F51698 /* tap_button.png */,
 			);
 			name = Game;
@@ -491,6 +496,15 @@
 				FD11E9EB14590ED700F51698 /* play_button.png */,
 			);
 			name = MainMenu;
+			sourceTree = "<group>";
+		};
+		FD3ACAE5145DE8B600BA5126 /* Chooser */ = {
+			isa = PBXGroup;
+			children = (
+				FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */,
+				FD3ACAE8145DE8D100BA5126 /* choose_button.png */,
+			);
+			name = Chooser;
 			sourceTree = "<group>";
 		};
 		FDDCACEB14532A1700F1F6DE = {
@@ -547,6 +561,8 @@
 				FDDCAE6214532A1D00F1F6DE /* GameLayer.h */,
 				FDDCAE6314532A1D00F1F6DE /* GameLayer.m */,
 				FDDCAE6514532A1D00F1F6DE /* GameConfig.h */,
+				FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */,
+				FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -558,8 +574,11 @@
 			isa = PBXGroup;
 			children = (
 				FD8E6009145CCC090078AA47 /* Shrimp.mp3 */,
+				FD11E9D314590EB400F51698 /* cow.png */,
+				FD11E9D414590EB400F51698 /* penguin.png */,
 				FD11E9F114590F8D00F51698 /* main_menu_button.png */,
 				FD11E9CC1459044B00F51698 /* MainMenu */,
+				FD3ACAE5145DE8B600BA5126 /* Chooser */,
 				FD11E9C91459043F00F51698 /* Game */,
 				FD11E9CB1459044600F51698 /* GameOver */,
 				FD11E9CA1459044300F51698 /* HiScore */,
@@ -968,6 +987,8 @@
 				FD065EB8145CB5B30034A3AE /* slider_marker.png in Resources */,
 				FD065EBA145CB72D0034A3AE /* penguin_small.png in Resources */,
 				FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */,
+				FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */,
+				FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1081,6 +1102,7 @@
 				FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */,
 				FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */,
 				FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */,
+				FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

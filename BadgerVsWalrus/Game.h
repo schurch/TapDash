@@ -8,9 +8,14 @@
 
 typedef enum {
     kGameOutcomeDraw = 0,
-    kGameOutcomePlayer1Won = 1,
-    kGameOutcomePlayer2won = 2
+    kGameOutcomeCowWon = 1,
+    kGameOutcomePenguinWon = 2
 } GameOutcome;
+
+typedef enum {
+    kCow = 0,
+    kPenguin = 1
+} Animal;
 
 typedef enum {
     kGameStateStart = 0,
