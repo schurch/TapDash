@@ -9,6 +9,7 @@
 #import "OptionsLayer.h"
 #import "MainMenuLayer.h"
 #import "SimpleAudioEngine.h"
+#import "HiScoreDataStore.h"
 
 @implementation OptionsLayer
 
@@ -38,9 +39,21 @@ int musicMaxX;
                                                                         selector:@selector(showMainMenu:)];
         
         CCMenu *menu = [CCMenu menuWithItems:mainMenuMenuItem, nil];
-        menu.position = ccp(winSize.width/2,70);
+        menu.position = ccp(winSize.width/2,50);
         [menu alignItemsHorizontallyWithPadding:5];
         [self addChild:menu];
+        
+        
+        CCMenuItemImage *clearHiScoresMenuItem = [CCMenuItemImage itemFromNormalImage:@"clear_hi_scores_button.png"
+                                                                   selectedImage: @"clear_hi_scores_button.png"
+                                                                          target:self
+                                                                        selector:@selector(clearHiScores:)];
+        
+        CCMenu *clearHiScoresMenu = [CCMenu menuWithItems:clearHiScoresMenuItem, nil];
+        clearHiScoresMenu.position = ccp(winSize.width/2,125);
+        [menu alignItemsHorizontallyWithPadding:5];
+        [self addChild:clearHiScoresMenu];
+        
         
         CCSprite *optionsLabel = [CCLabelTTF labelWithString:@"OPTIONS" fontName:@"MarkerFelt-Wide" fontSize:55];
         optionsLabel.position = ccp(winSize.width/2,280);
@@ -107,6 +120,24 @@ int musicMaxX;
 
 - (void)showMainMenu:(CCMenuItem *)menuItem {
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
+}
+
+- (void)clearHiScores:(CCMenuItem *)menuItem {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Clear Highscores?" message:nil delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+	[alertView show];
+	[alertView release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	if (buttonIndex == 0) {
+		NSLog(@"Clear highscores.");
+        [[HiScoreDataStore dataStore] deleteHiScores];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Highscores cleared." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+	} else {
+        NSLog(@"Don't clear highscores.");
+	}
 }
 
 @end

@@ -36,6 +36,7 @@
 		FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* HiScoreDataStore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
 		FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FD8E6009145CCC090078AA47 /* Shrimp.mp3 */; };
+		FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
 		FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */; };
 		FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFE14532A1800F1F6DE /* OpenAL.framework */; };
@@ -190,6 +191,7 @@
 		FD696787145B882C002BB501 /* HiScoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreDataStore.m; sourceTree = "<group>"; };
 		FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FD8E6009145CCC090078AA47 /* Shrimp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shrimp.mp3; path = Resources/Shrimp.mp3; sourceTree = "<group>"; };
+		FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear_hi_scores_button.png; path = Resources/Options/clear_hi_scores_button.png; sourceTree = "<group>"; };
 		FDDCACF614532A1800F1F6DE /* BadgerVsWalrus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadgerVsWalrus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -450,6 +452,7 @@
 		FD065EAE145CA8630034A3AE /* Options */ = {
 			isa = PBXGroup;
 			children = (
+				FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */,
 				FD065EB9145CB72D0034A3AE /* penguin_small.png */,
 				FD065EB7145CB5B30034A3AE /* slider_marker.png */,
 				FD065EAF145CAA960034A3AE /* options_backdrop.png */,
@@ -989,6 +992,7 @@
 				FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */,
 				FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */,
 				FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */,
+				FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,7 +43,7 @@ static const int STAR_X_OFFSET = 20;
         [menu alignItemsHorizontallyWithPadding:5];
         [self addChild:menu];
         
-        CCSprite *hiScoresLabel = [CCLabelTTF labelWithString:@"HI SCORES" fontName:@"MarkerFelt-Wide" fontSize:55];
+        CCSprite *hiScoresLabel = [CCLabelTTF labelWithString:@"HIGHSCORES" fontName:@"MarkerFelt-Wide" fontSize:55];
         hiScoresLabel.position = ccp(winSize.width/2,280);
         hiScoresLabel.color = ccc3(255,178,43);
         [self addChild: hiScoresLabel];

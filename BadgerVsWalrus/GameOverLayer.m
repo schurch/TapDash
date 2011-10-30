@@ -87,7 +87,7 @@
 - (void)setHighScore:(float)finalTime {
     if ([[HiScoreDataStore dataStore] isTimeHighScore:finalTime]) {
         CCSprite *newHighScore = [CCSprite spriteWithFile:@"new_high_score.png"];
-        newHighScore.position = ccp(349,135 + ALL_ITEMS_Y_OFFSET);
+        newHighScore.position = ccp(349,136 + ALL_ITEMS_Y_OFFSET);
         [self addChild:newHighScore];   
         
         [[HiScoreDataStore dataStore] saveHighScoreTime:finalTime];
