@@ -62,16 +62,22 @@
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {    
     CGPoint location = [self convertTouchToNodeSpace: touch];
     
-    Animal choosenAnimal;
+    BOOL animalChosen = YES;
+    
+    Animal chosenAnimal;
     if (CGRectContainsPoint(_cowButton.boundingBox, location)) {  
-        choosenAnimal = kCow;
+        chosenAnimal = kCow;
         NSLog(@"Cow chosen.");
     }else if(CGRectContainsPoint(_penguinButton.boundingBox, location)) {
-        choosenAnimal = kPenguin;
+        chosenAnimal = kPenguin;
         NSLog(@"Penguin chosen.");
+    }else{
+        animalChosen = NO;
     }
     
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:choosenAnimal]]];
+    if (animalChosen) {
+        [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:chosenAnimal]]];        
+    }
     
     return NO;
 }
