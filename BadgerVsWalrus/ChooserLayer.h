@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "NetworkManager.h"
 
-@interface ChooserLayer : CCLayer {
+@interface ChooserLayer : CCLayer<NetworkManagerChooserDelegate> {
     CCSprite *_cowButton;
     CCSprite *_penguinButton;
 }

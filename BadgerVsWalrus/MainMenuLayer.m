@@ -73,7 +73,7 @@
 }
 
 - (void)multiplayer:(CCMenuItem  *)menuItem {
-    
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];    
 }
 
 - (void)hiScores:(CCMenuItem  *)menuItem {

@@ -10,6 +10,7 @@
 #import <GameKit/GKPeerPickerController.h>
 #import "Game.h"
 
+
 @interface NetworkManager : NSObject<GKPeerPickerControllerDelegate, GKSessionDelegate> {
     id _chooserDelegate;
     id _gameDelegate;
@@ -29,8 +30,11 @@
 - (void)disconnect;
 @end
 
-@protocol NetworkManagerDelegate <NSObject>
+@protocol NetworkManagerChooserDelegate <NSObject>
 - (void)otherPlayerChoseAnimal:(Animal)animal;
-- (void)otherPlayerMovedAnimal;
+@end
+
+@protocol NetworkManagerGameDelegate <NSObject>
 - (void)otherPlayerStartedGame;
+- (void)otherPlayerMovedAnimal;
 @end

@@ -82,6 +82,10 @@
     return NO;
 }
 
+- (void)otherPlayerChoseAnimal:(Animal)animal {
+    
+}
+
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 }
 
