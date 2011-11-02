@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
-@interface HiScoreDataStore : NSObject {
+@interface Datastore : NSObject {
     sqlite3 *_hiScoresDb;
 }
 
-+ (HiScoreDataStore *)dataStore;
++ (Datastore *)dataStore;
 
 - (BOOL)isTimeHighScore:(double)time;
 - (void)saveHighScoreTime:(double)time;

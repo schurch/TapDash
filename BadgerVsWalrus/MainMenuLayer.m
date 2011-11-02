@@ -8,7 +8,7 @@
 
 #import "MainMenuLayer.h"
 #import "ChooserLayer.h"
-#import "HiScoreLayer.h"
+#import "HighscoreLayer.h"
 #import "OptionsLayer.h"
 
 @implementation MainMenuLayer
@@ -41,6 +41,11 @@
                                                                    target:self
                                                                  selector:@selector(play:)];
         
+        CCMenuItemImage *multiplayerMenuItem = [CCMenuItemImage itemFromNormalImage:@"multiplayer_button.png"
+                                                               selectedImage: @"multiplayer_button.png"
+                                                                      target:self
+                                                                    selector:@selector(multiplayer:)];
+        
         CCMenuItemImage *hiScoresMenuItem = [CCMenuItemImage itemFromNormalImage:@"hi_scores_button.png"
                                                                selectedImage: @"hi_scores_button.png"
                                                                       target:self
@@ -51,8 +56,8 @@
                                                                           target:self
                                                                         selector:@selector(options:)];
         
-        CCMenu *menu = [CCMenu menuWithItems:playMenuItem, hiScoresMenuItem, optionsMenuItem, nil];
-        menu.position = ccp(winSize.width/2,150);
+        CCMenu *menu = [CCMenu menuWithItems:playMenuItem, multiplayerMenuItem, hiScoresMenuItem, optionsMenuItem, nil];
+        menu.position = ccp(winSize.width/2,130);
         [menu alignItemsVerticallyWithPadding:5];
         
         [self addChild:menu];
@@ -67,8 +72,12 @@
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];
 }
 
+- (void)multiplayer:(CCMenuItem  *)menuItem {
+    
+}
+
 - (void)hiScores:(CCMenuItem  *)menuItem {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HiScoreLayer scene]]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[HighscoreLayer scene]]];
 }
 
 - (void)options:(CCMenuItem  *)menuItem {

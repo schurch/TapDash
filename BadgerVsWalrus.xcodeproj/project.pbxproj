@@ -12,6 +12,7 @@
 		FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD065EB5145CAAC90034A3AE /* OptionsLayer.m */; };
 		FD065EB8145CB5B30034A3AE /* slider_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EB7145CB5B30034A3AE /* slider_marker.png */; };
 		FD065EBA145CB72D0034A3AE /* penguin_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EB9145CB72D0034A3AE /* penguin_small.png */; };
+		FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD104BF31460CC0200BB9597 /* NetworkManager.m */; };
 		FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D114590EB400F51698 /* game_backdrop.png */; };
 		FD11E9D714590EB400F51698 /* boost_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D214590EB400F51698 /* boost_button.png */; };
 		FD11E9D814590EB400F51698 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D314590EB400F51698 /* cow.png */; };
@@ -28,12 +29,13 @@
 		FD11E9F014590ED700F51698 /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9EB14590ED700F51698 /* play_button.png */; };
 		FD11E9F214590F8D00F51698 /* main_menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9F114590F8D00F51698 /* main_menu_button.png */; };
 		FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F41459155A00F51698 /* MainMenuLayer.m */; };
-		FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HiScoreLayer.m */; };
+		FD11E9F81459156D00F51698 /* HighscoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HighscoreLayer.m */; };
 		FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */; };
 		FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE8145DE8D100BA5126 /* choose_button.png */; };
 		FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */; };
+		FD5A0BC314609B44000B9C24 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5A0BC214609B44000B9C24 /* GameKit.framework */; };
 		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
-		FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* HiScoreDataStore.m */; };
+		FD696788145B882C002BB501 /* Datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* Datastore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
 		FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FD8E6009145CCC090078AA47 /* Shrimp.mp3 */; };
 		FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */; };
@@ -161,6 +163,8 @@
 		FD065EB5145CAAC90034A3AE /* OptionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsLayer.m; sourceTree = "<group>"; };
 		FD065EB7145CB5B30034A3AE /* slider_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider_marker.png; path = Resources/Options/slider_marker.png; sourceTree = "<group>"; };
 		FD065EB9145CB72D0034A3AE /* penguin_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penguin_small.png; path = Resources/Options/penguin_small.png; sourceTree = "<group>"; };
+		FD104BF21460CC0200BB9597 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		FD104BF31460CC0200BB9597 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		FD11E9D114590EB400F51698 /* game_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_backdrop.png; path = Resources/Game/game_backdrop.png; sourceTree = "<group>"; };
 		FD11E9D214590EB400F51698 /* boost_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boost_button.png; path = Resources/Game/boost_button.png; sourceTree = "<group>"; };
 		FD11E9D314590EB400F51698 /* cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cow.png; path = Resources/Game/cow.png; sourceTree = "<group>"; };
@@ -178,17 +182,18 @@
 		FD11E9F114590F8D00F51698 /* main_menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_menu_button.png; path = Resources/main_menu_button.png; sourceTree = "<group>"; };
 		FD11E9F31459155900F51698 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		FD11E9F41459155A00F51698 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
-		FD11E9F61459156C00F51698 /* HiScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreLayer.h; sourceTree = "<group>"; };
-		FD11E9F71459156C00F51698 /* HiScoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreLayer.m; sourceTree = "<group>"; };
+		FD11E9F61459156C00F51698 /* HighscoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighscoreLayer.h; sourceTree = "<group>"; };
+		FD11E9F71459156C00F51698 /* HighscoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighscoreLayer.m; sourceTree = "<group>"; };
 		FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_backdrop.png; path = Resources/Chooser/choose_backdrop.png; sourceTree = "<group>"; };
 		FD3ACAE8145DE8D100BA5126 /* choose_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_button.png; path = Resources/Chooser/choose_button.png; sourceTree = "<group>"; };
 		FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserLayer.h; sourceTree = "<group>"; };
 		FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooserLayer.m; sourceTree = "<group>"; };
+		FD5A0BC214609B44000B9C24 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FD61F25D14549D8200516F4D /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		FD61F25E14549D8200516F4D /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		FD696786145B882C002BB501 /* HiScoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiScoreDataStore.h; sourceTree = "<group>"; };
-		FD696787145B882C002BB501 /* HiScoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiScoreDataStore.m; sourceTree = "<group>"; };
+		FD696786145B882C002BB501 /* Datastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datastore.h; sourceTree = "<group>"; };
+		FD696787145B882C002BB501 /* Datastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datastore.m; sourceTree = "<group>"; };
 		FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FD8E6009145CCC090078AA47 /* Shrimp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shrimp.mp3; path = Resources/Shrimp.mp3; sourceTree = "<group>"; };
 		FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear_hi_scores_button.png; path = Resources/Options/clear_hi_scores_button.png; sourceTree = "<group>"; };
@@ -435,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */,
+				FD5A0BC314609B44000B9C24 /* GameKit.framework in Frameworks */,
 				FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */,
 				FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */,
 				FDDCACFF14532A1800F1F6DE /* OpenAL.framework in Frameworks */,
@@ -531,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */,
+				FD5A0BC214609B44000B9C24 /* GameKit.framework */,
 				FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */,
 				FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */,
 				FDDCACFE14532A1800F1F6DE /* OpenAL.framework */,
@@ -551,10 +558,10 @@
 				FD11E9F31459155900F51698 /* MainMenuLayer.h */,
 				FD11E9F41459155A00F51698 /* MainMenuLayer.m */,
 				FD61F2681454E75F00516F4D /* Game.h */,
-				FD696786145B882C002BB501 /* HiScoreDataStore.h */,
-				FD696787145B882C002BB501 /* HiScoreDataStore.m */,
-				FD11E9F61459156C00F51698 /* HiScoreLayer.h */,
-				FD11E9F71459156C00F51698 /* HiScoreLayer.m */,
+				FD696786145B882C002BB501 /* Datastore.h */,
+				FD696787145B882C002BB501 /* Datastore.m */,
+				FD11E9F61459156C00F51698 /* HighscoreLayer.h */,
+				FD11E9F71459156C00F51698 /* HighscoreLayer.m */,
 				FD61F25D14549D8200516F4D /* GameOverLayer.h */,
 				FD61F25E14549D8200516F4D /* GameOverLayer.m */,
 				FDDCAE5C14532A1D00F1F6DE /* AppDelegate.h */,
@@ -566,6 +573,8 @@
 				FDDCAE6514532A1D00F1F6DE /* GameConfig.h */,
 				FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */,
 				FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */,
+				FD104BF21460CC0200BB9597 /* NetworkManager.h */,
+				FD104BF31460CC0200BB9597 /* NetworkManager.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -1103,10 +1112,11 @@
 				FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */,
 				FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */,
 				FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */,
-				FD11E9F81459156D00F51698 /* HiScoreLayer.m in Sources */,
-				FD696788145B882C002BB501 /* HiScoreDataStore.m in Sources */,
+				FD11E9F81459156D00F51698 /* HighscoreLayer.m in Sources */,
+				FD696788145B882C002BB501 /* Datastore.m in Sources */,
 				FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */,
 				FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */,
+				FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import "GameOverLayer.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
-#import "HiScoreDataStore.h"
+#import "Datastore.h"
 #import "ChooserLayer.h"
 
 #define ALL_ITEMS_Y_OFFSET 65
@@ -85,12 +85,12 @@
 }
 
 - (void)setHighScore:(float)finalTime {
-    if ([[HiScoreDataStore dataStore] isTimeHighScore:finalTime]) {
+    if ([[Datastore dataStore] isTimeHighScore:finalTime]) {
         CCSprite *newHighScore = [CCSprite spriteWithFile:@"new_high_score.png"];
         newHighScore.position = ccp(349,136 + ALL_ITEMS_Y_OFFSET);
         [self addChild:newHighScore];   
         
-        [[HiScoreDataStore dataStore] saveHighScoreTime:finalTime];
+        [[Datastore dataStore] saveHighScoreTime:finalTime];
     }
 }
 
@@ -102,7 +102,7 @@
     timeLabel.color = ccc3(0,0,0);
     [self addChild: timeLabel];
     
-    NSArray *highScores = [[HiScoreDataStore dataStore] getHighScores];
+    NSArray *highScores = [[Datastore dataStore] getHighScores];
     
     if ([highScores count] > 0) {
         double topScore = [[highScores objectAtIndex:0] doubleValue];

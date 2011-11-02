@@ -6,17 +6,17 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "HiScoreDataStore.h"
+#import "Datastore.h"
 
 static const int MAX_HI_SCORE_COUNT = 4;
 
-@implementation HiScoreDataStore
+@implementation Datastore
 
-+ (HiScoreDataStore *)dataStore {
-    static HiScoreDataStore *hiScoreDataStore;
++ (Datastore *)dataStore {
+    static Datastore *hiScoreDataStore;
     
     if (!hiScoreDataStore) {
-        hiScoreDataStore = [[HiScoreDataStore alloc] init]; 
+        hiScoreDataStore = [[Datastore alloc] init]; 
     }
     
     return hiScoreDataStore;

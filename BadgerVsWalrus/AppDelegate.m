@@ -15,8 +15,6 @@
 #import "GameLayer.h"
 #import "SimpleAudioEngine.h"
 
-#import "HiScoreDataStore.h"
-
 @implementation AppDelegate
 
 @synthesize window;
@@ -113,7 +111,7 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
-    [CDAudioManager sharedManager].backgroundMusic.volume = 0.5f;
+    [CDAudioManager sharedManager].backgroundMusic.volume = 0.0f;
     [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Shrimp.mp3"];
     
 	// Run the intro Scene

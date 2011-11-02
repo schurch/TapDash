@@ -12,8 +12,8 @@
 
 @interface GameLayer : CCLayer
 {
-    CCSprite *_cow;
-    CCSprite *_penguin;
+    CCSprite *_player1;
+    CCSprite *_player2;
     CCSprite *_tapButton;
     GameState _gameState;
     CCLabelTTF *_timeLabel;

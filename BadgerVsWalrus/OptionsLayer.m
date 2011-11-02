@@ -9,7 +9,7 @@
 #import "OptionsLayer.h"
 #import "MainMenuLayer.h"
 #import "SimpleAudioEngine.h"
-#import "HiScoreDataStore.h"
+#import "Datastore.h"
 
 @implementation OptionsLayer
 
@@ -131,7 +131,7 @@ int musicMaxX;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	if (buttonIndex == 0) {
 		NSLog(@"Clear highscores.");
-        [[HiScoreDataStore dataStore] deleteHiScores];
+        [[Datastore dataStore] deleteHiScores];
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Highscores cleared." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         [alertView release];

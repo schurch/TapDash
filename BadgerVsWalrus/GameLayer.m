@@ -35,8 +35,8 @@ float _gameTime;
     _gameState = kGameStateStart;
     _gameTime = 0;
     _timeLabel.string = @INITIAL_TIME_LABEL;
-    _cow.position = ccp( _startX, _player1StartY );
-    _penguin.position = ccp( _startX, _player2StartY );
+    _player1.position = ccp( _startX, _player1StartY );
+    _player2.position = ccp( _startX, _player2StartY );
 }
 
 - (void)pause {
@@ -50,11 +50,11 @@ float _gameTime;
 }
 
 - (CCSprite *)humanPlayer {
-    return _choosenAnimal == kCow ? _cow : _penguin;    
+    return _choosenAnimal == kCow ? _player1 : _player2;    
 }
 
 - (CCSprite *)computerPlayer {
-    return _choosenAnimal == kCow ? _penguin : _cow;
+    return _choosenAnimal == kCow ? _player2 : _player1;
 }
 
 -(id) init
@@ -70,13 +70,13 @@ float _gameTime;
         _tapButton.position = ccp( 440, 40 );  
         [self addChild:_tapButton];
         
-        _cow = [CCSprite spriteWithFile: @"cow.png"];
-        _cow.position = ccp( _startX, _player1StartY );
-        [self addChild:_cow];
+        _player1 = [CCSprite spriteWithFile: @"cow.png"];
+        _player1.position = ccp( _startX, _player1StartY );
+        [self addChild:_player1];
         
-        _penguin = [CCSprite spriteWithFile: @"penguin.png"];
-        _penguin.position = ccp( _startX, _player2StartY );
-        [self addChild:_penguin];
+        _player2 = [CCSprite spriteWithFile: @"penguin.png"];
+        _player2.position = ccp( _startX, _player2StartY );
+        [self addChild:_player2];
         
         _timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
         _timeLabel.position = ccp(278,40);
@@ -131,9 +131,9 @@ float _gameTime;
     [self pause];
     
     BOOL didWin = NO;
-    if (outcome == kGameOutcomeCowWon && self.humanPlayer == _cow) {
+    if (outcome == kGameOutcomeCowWon && self.humanPlayer == _player1) {
         didWin = YES;
-    }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _penguin) {
+    }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _player2) {
         didWin = YES;
     }
     
@@ -148,11 +148,11 @@ float _gameTime;
     
     self.computerPlayer.position = ccp( self.computerPlayer.position.x + 30 * dt, self.computerPlayer.position.y );
 
-    if(_cow.position.x >= _endX && _penguin.position.x >= _endX){
+    if(_player1.position.x >= _endX && _player2.position.x >= _endX){
         [self gameOverWithOutcome:kGameOutcomeDraw];
-    }else if(_cow.position.x >= _endX){
+    }else if(_player1.position.x >= _endX){
         [self gameOverWithOutcome:kGameOutcomeCowWon];
-    }else if(_penguin.position.x >= _endX){
+    }else if(_player2.position.x >= _endX){
         [self gameOverWithOutcome:kGameOutcomePenguinWon];
     }
 }
@@ -163,8 +163,8 @@ float _gameTime;
 
 - (void) dealloc
 {
-    [_cow release];
-    [_penguin release];
+    [_player1 release];
+    [_player2 release];
     [_tapButton release];
     [_timeLabel release];
 }

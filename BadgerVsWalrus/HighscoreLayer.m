@@ -6,20 +6,20 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "HiScoreLayer.h"
+#import "HighscoreLayer.h"
 #import "MainMenuLayer.h"
-#import "HiScoreDataStore.h"
+#import "Datastore.h"
 
 static const int INITIAL_SCORE_LABEL_Y_POS = 225;
 static const int Y_SCORE_LABEL_INCREMENT = -40;
 static const int STAR_X_OFFSET = 20;
 
-@implementation HiScoreLayer
+@implementation HighscoreLayer
 
 + (CCScene *)scene
 {
 	CCScene *scene = [CCScene node];
-    HiScoreLayer *layer = [HiScoreLayer node];
+    HighscoreLayer *layer = [HighscoreLayer node];
     [scene addChild: layer];
     
 	return scene;
@@ -49,7 +49,7 @@ static const int STAR_X_OFFSET = 20;
         [self addChild: hiScoresLabel];
         
         
-        NSArray *hiScores = [[HiScoreDataStore dataStore] getHighScores];
+        NSArray *hiScores = [[Datastore dataStore] getHighScores];
         
         int yPostion = INITIAL_SCORE_LABEL_Y_POS;
         for (int i = 0; i < hiScores.count; i++) {
