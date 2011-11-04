@@ -27,14 +27,21 @@
 - (void)chooseAnimal:(Animal)animal;
 - (void)startGame;
 - (void)moveAnimal;
+- (void)won;
 - (void)disconnect;
 @end
 
-@protocol NetworkManagerChooserDelegate <NSObject>
+@protocol NetworkManagerDelegate <NSObject>
+- (void)connectionLost;
+- (void)pickerCanceled;
+@end
+
+@protocol NetworkManagerChooserDelegate <NetworkManagerDelegate>
 - (void)otherPlayerChoseAnimal:(Animal)animal;
 @end
 
-@protocol NetworkManagerGameDelegate <NSObject>
+@protocol NetworkManagerGameDelegate <NetworkManagerDelegate>
 - (void)otherPlayerStartedGame;
 - (void)otherPlayerMovedAnimal;
+- (void)otherPlayerWon;
 @end

@@ -13,8 +13,12 @@
 @interface ChooserLayer : CCLayer<NetworkManagerChooserDelegate> {
     CCSprite *_cowButton;
     CCSprite *_penguinButton;
+    NetworkManager *_networkManager;
 }
 
-+(CCScene *) scene;
+@property (nonatomic, retain) NetworkManager *networkManager;
+
++ (CCScene *) scene;
++ (CCScene *)sceneWithNetwork:(BOOL)networkGame;
 
 @end

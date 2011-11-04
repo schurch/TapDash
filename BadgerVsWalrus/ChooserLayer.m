@@ -8,13 +8,23 @@
 
 #import "ChooserLayer.h"
 #import "GameLayer.h"
+#import "MainMenuLayer.h"
 
 @implementation ChooserLayer
 
-+ (CCScene *)scene
+@synthesize networkManager = _networkManager;
+
++ (CCScene *)scene {
+    return [ChooserLayer sceneWithNetwork:NO];
+}
+
++ (CCScene *)sceneWithNetwork:(BOOL)networkGame
 {
     CCScene *scene = [CCScene node];
     ChooserLayer *layer = [ChooserLayer node];
+    if (networkGame) {
+        layer.networkManager = [NetworkManager manger];
+    }
     [scene addChild: layer];
     
 	return scene;
@@ -54,6 +64,17 @@
     return self;
 }
 
+- (void)setNetworkManager:(NetworkManager *)networkManger {
+    [networkManger retain];
+    [_networkManager release];
+    _networkManager = networkManger;
+    networkManger.chooserDelegate = self;
+}
+
+//- (NetworkManager *)networkManager {
+//    return [_networkManager autorelease];
+//}
+
 - (void)registerWithTouchDispatcher
 {
 	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
@@ -76,23 +97,35 @@
     }
     
     if (animalChosen) {
-        [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:chosenAnimal]]];        
+        if (self.networkManager) {
+            [self.networkManager chooseAnimal:chosenAnimal];
+            NSLog(@"Chose animal on network.");
+        } else {
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:chosenAnimal]]];        
+        }
     }
     
     return NO;
 }
 
 - (void)otherPlayerChoseAnimal:(Animal)animal {
-    
+    NSLog(@"Other player chose animal: %@.", animal == kCow ? @"Cow" : @"Penguin");
 }
 
-- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)connectionLost {
+    NSLog(@"Lost network connection.");
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Network Problem." message:@"There was an error with the network and the connection has been lost." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+	[alertView show];
+	[alertView release];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];  
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {    
+- (void)pickerCanceled {
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];      
 }
 
 - (void)dealloc {
+    [_networkManager release];
     [_cowButton release];
     [_penguinButton release];
 }

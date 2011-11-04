@@ -11,7 +11,8 @@
 typedef enum {
     kPacketTypeChooseAnimal,
     kPacketTypeStartGame,
-    kPacketTypeMoveAnimal
+    kPacketTypeMoveAnimal,
+    kPacketTypeWon
 } PacketType; 
 
 @implementation NetworkManager
@@ -30,11 +31,64 @@ typedef enum {
     return manager;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(willTerminate:)
+                                                     name:UIApplicationWillTerminateNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(willTerminate:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(willResume:)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
+- (void)willTerminate:(NSNotification *)notification
+{
+    [self disconnect];
+}
+
+- (void)willResume:(NSNotification *)notification
+{
+    NSLog(@"Network game terminated. Application resumed.");
+//    [self disconnect];
+}
+
 - (void)initNetworkGame {
     GKPeerPickerController *picker = [[GKPeerPickerController alloc] init];
     picker.delegate = self;
     picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
     [picker show];
+}
+
+- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session {
+    self.gameSession = session;
+    self.gameSession.delegate = self;
+    [self.gameSession setDataReceiveHandler:self withContext:nil];
+    
+    picker.delegate = nil;
+    [picker dismiss];
+    [picker autorelease];
+}
+
+- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {   
+    picker.delegate = nil;
+    [picker autorelease];
+    
+    if([[self chooserDelegate] respondsToSelector:@selector(pickerCanceled)]) {
+        [[self chooserDelegate] pickerCanceled];
+    }
+    
+    if([[self gameDelegate] respondsToSelector:@selector(pickerCanceled)]) {
+        [[self gameDelegate] pickerCanceled];
+    }
 }
 
 - (void)sendDataToPeers:(NSData *)data ofType:(PacketType)type {
@@ -44,11 +98,9 @@ typedef enum {
     [newPacket appendData:data];
 
     NSError *error;
-    if (![self.gameSession sendDataToAllPeers:newPacket withDataMode:GKSendDataUnreliable error: nil]) {
+    if (![self.gameSession sendDataToAllPeers:newPacket withDataMode:GKSendDataUnreliable error:&error]) {
         NSLog(@"%@",[error localizedDescription]);
     }
-    
-    
 }
 
 - (void)chooseAnimal:(Animal)animal {
@@ -65,23 +117,25 @@ typedef enum {
     [self sendDataToPeers:nil ofType:kPacketTypeMoveAnimal];    
 }
 
+- (void)won {
+    [self sendDataToPeers:nil ofType:kPacketTypeWon];
+}
+
 - (void)disconnect {
     [self.gameSession disconnectFromAllPeers];
-}
-
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession: (GKSession *) session {
-    self.gameSession = session;
-    session.delegate = self;
-    [session setDataReceiveHandler:self withContext:nil];
     
-    picker.delegate = nil;
-    [picker dismiss];
-    [picker autorelease];
-}
-
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {   
-    picker.delegate = nil;
-    [picker autorelease];
+    if([[self chooserDelegate] respondsToSelector:@selector(connectionLost)]) {
+        [[self chooserDelegate] connectionLost];
+    }
+    
+    if([[self gameDelegate] respondsToSelector:@selector(connectionLost)]) {
+        [[self gameDelegate] connectionLost];
+    }
+    
+    self.chooserDelegate = nil;
+    self.gameDelegate = nil;
+    [self.gameSession setDataReceiveHandler:nil withContext:nil];
+    self.gameSession.available = NO;
 }
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
@@ -92,7 +146,7 @@ typedef enum {
         case GKPeerStateConnected:
             break;
         case GKPeerStateDisconnected:
-            //
+            [self disconnect];
             break;
         case GKPeerStateAvailable:
             break;
@@ -130,6 +184,8 @@ typedef enum {
                     [[self gameDelegate] otherPlayerMovedAnimal];
                 }
                 break;
+            case kPacketTypeWon:
+                break;
             default:
                 NSLog(@"Unrecognized packet type.");
                 break;
@@ -138,6 +194,13 @@ typedef enum {
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (self.gameSession) {
+        [self disconnect];
+    }
+    
+    [_gameSession release];
     _chooserDelegate = nil;
     _gameDelegate = nil;
     

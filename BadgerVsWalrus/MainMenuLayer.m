@@ -73,7 +73,8 @@
 }
 
 - (void)multiplayer:(CCMenuItem  *)menuItem {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];    
+    [[NetworkManager manger] initNetworkGame];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer sceneWithNetwork:YES]]];    
 }
 
 - (void)hiScores:(CCMenuItem  *)menuItem {
