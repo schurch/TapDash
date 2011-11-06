@@ -38,6 +38,7 @@
 		FD696788145B882C002BB501 /* Datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* Datastore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
 		FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FD8E6009145CCC090078AA47 /* Shrimp.mp3 */; };
+		FDA3A083146487EB0093FDE5 /* CountDownLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA3A082146487EB0093FDE5 /* CountDownLayer.m */; };
 		FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
 		FDDCACFD14532A1800F1F6DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFC14532A1800F1F6DE /* OpenGLES.framework */; };
@@ -154,6 +155,8 @@
 		FDDCAE5E14532A1D00F1F6DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */; };
 		FDDCAE6114532A1D00F1F6DE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6014532A1D00F1F6DE /* RootViewController.m */; };
 		FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6314532A1D00F1F6DE /* GameLayer.m */; };
+		FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF07A651465C68F00BF02C9 /* NetworkLayer.m */; };
+		FDF636AE1466445B0093A616 /* selected_button_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = FDF636AD1466445B0093A616 /* selected_button_overlay.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -196,6 +199,8 @@
 		FD696787145B882C002BB501 /* Datastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datastore.m; sourceTree = "<group>"; };
 		FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FD8E6009145CCC090078AA47 /* Shrimp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shrimp.mp3; path = Resources/Shrimp.mp3; sourceTree = "<group>"; };
+		FDA3A081146487EB0093FDE5 /* CountDownLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownLayer.h; sourceTree = "<group>"; };
+		FDA3A082146487EB0093FDE5 /* CountDownLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownLayer.m; sourceTree = "<group>"; };
 		FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear_hi_scores_button.png; path = Resources/Options/clear_hi_scores_button.png; sourceTree = "<group>"; };
 		FDDCACF614532A1800F1F6DE /* BadgerVsWalrus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BadgerVsWalrus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -432,6 +437,9 @@
 		FDDCAE6214532A1D00F1F6DE /* GameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		FDDCAE6314532A1D00F1F6DE /* GameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		FDDCAE6514532A1D00F1F6DE /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		FDF07A641465C68F00BF02C9 /* NetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
+		FDF07A651465C68F00BF02C9 /* NetworkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkLayer.m; sourceTree = "<group>"; };
+		FDF636AD1466445B0093A616 /* selected_button_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selected_button_overlay.png; path = Resources/Chooser/selected_button_overlay.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +518,7 @@
 		FD3ACAE5145DE8B600BA5126 /* Chooser */ = {
 			isa = PBXGroup;
 			children = (
+				FDF636AD1466445B0093A616 /* selected_button_overlay.png */,
 				FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */,
 				FD3ACAE8145DE8D100BA5126 /* choose_button.png */,
 			);
@@ -553,6 +562,8 @@
 		FDDCAD0A14532A1800F1F6DE /* BadgerVsWalrus */ = {
 			isa = PBXGroup;
 			children = (
+				FDA3A081146487EB0093FDE5 /* CountDownLayer.h */,
+				FDA3A082146487EB0093FDE5 /* CountDownLayer.m */,
 				FD065EB4145CAAC90034A3AE /* OptionsLayer.h */,
 				FD065EB5145CAAC90034A3AE /* OptionsLayer.m */,
 				FD11E9F31459155900F51698 /* MainMenuLayer.h */,
@@ -575,6 +586,8 @@
 				FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */,
 				FD104BF21460CC0200BB9597 /* NetworkManager.h */,
 				FD104BF31460CC0200BB9597 /* NetworkManager.m */,
+				FDF07A641465C68F00BF02C9 /* NetworkLayer.h */,
+				FDF07A651465C68F00BF02C9 /* NetworkLayer.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -1002,6 +1015,7 @@
 				FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */,
 				FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */,
 				FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */,
+				FDF636AE1466445B0093A616 /* selected_button_overlay.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,6 +1131,8 @@
 				FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */,
 				FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */,
 				FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */,
+				FDA3A083146487EB0093FDE5 /* CountDownLayer.m in Sources */,
+				FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

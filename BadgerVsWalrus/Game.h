@@ -13,8 +13,9 @@ typedef enum {
 } GameOutcome;
 
 typedef enum {
-    kCow = 0,
-    kPenguin = 1
+    kAnimalNone = 0,
+    kAnimalCow = 1,
+    kAnimalPenguin = 2
 } Animal;
 
 typedef enum {

@@ -9,25 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BadgerVsWalrus/NetworkManager.m"
-         timestampString = "341960542.233419"
+         timestampString = "342254230.309635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-initNetworkGame"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BadgerVsWalrus/NetworkManager.m"
-         timestampString = "342120896.958807"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "137"
-         endingLineNumber = "137"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "-session:peer:didChangeState:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -36,41 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BadgerVsWalrus/ChooserLayer.m"
-         timestampString = "341962262.972782"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
-         landmarkName = "-ccTouchBegan:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BadgerVsWalrus/ChooserLayer.m"
-         timestampString = "341962262.972782"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
-         landmarkName = "-otherPlayerChoseAnimal:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "BadgerVsWalrus/NetworkManager.m"
-         timestampString = "342120896.958807"
+         timestampString = "342254231.929488"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-disconnect"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
+         landmarkName = "-session:peer:didChangeState:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

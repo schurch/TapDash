@@ -10,9 +10,9 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 
-@implementation ChooserLayer
+const int buttonHeight = 130;
 
-@synthesize networkManager = _networkManager;
+@implementation ChooserLayer
 
 + (CCScene *)scene {
     return [ChooserLayer sceneWithNetwork:NO];
@@ -24,6 +24,7 @@
     ChooserLayer *layer = [ChooserLayer node];
     if (networkGame) {
         layer.networkManager = [NetworkManager manger];
+        layer.networkManager.chooserDelegate = layer;
     }
     [scene addChild: layer];
     
@@ -38,25 +39,39 @@
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild:backdrop];
         
-        CCSprite *optionsLabel = [CCLabelTTF labelWithString:@"Choose:" fontName:@"MarkerFelt-Wide" fontSize:55];
-        optionsLabel.position = ccp(winSize.width/2,210);
+        CCSprite *optionsLabel = [CCLabelTTF labelWithString:@"OR" fontName:@"MarkerFelt-Wide" fontSize:55];
+        optionsLabel.position = ccp(winSize.width/2, buttonHeight);
         [self addChild: optionsLabel];
         
         _cowButton = [CCSprite spriteWithFile:@"choose_button.png"];
-        _cowButton.position = ccp(winSize.width/2 - 80,100);
+        _cowButton.position = ccp(winSize.width/2 - 120, buttonHeight);
         [self addChild: _cowButton];
         
         CCSprite *cow = [CCSprite spriteWithFile:@"cow.png"];
-        cow.position = ccp(winSize.width/2 - 80,103);
+        cow.position = ccp(winSize.width/2 - 120, buttonHeight + 3);
         [self addChild: cow];
         
+        _cowButtonSelectedOverlay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
+        _cowButtonSelectedOverlay.position = ccp(winSize.width/2 - 122, buttonHeight + 3);
+        _cowButtonSelectedOverlay.visible = NO;
+        [self addChild: _cowButtonSelectedOverlay];
+        
         _penguinButton = [CCSprite spriteWithFile:@"choose_button.png"];
-        _penguinButton.position = ccp(winSize.width/2 + 80,100);
+        _penguinButton.position = ccp(winSize.width/2 + 120, buttonHeight);
         [self addChild: _penguinButton];
         
         CCSprite *penguin = [CCSprite spriteWithFile:@"penguin.png"];
-        penguin.position = ccp(winSize.width/2 + 80,105);
+        penguin.position = ccp(winSize.width/2 + 120, buttonHeight + 5);
         [self addChild: penguin];
+        
+        _penguinButtonSelectedOverLay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
+        _penguinButtonSelectedOverLay.position = ccp(winSize.width/2 + 118, buttonHeight + 3);
+        _penguinButtonSelectedOverLay.visible = NO;
+        [self addChild: _penguinButtonSelectedOverLay];
+        
+        _cowChosen = NO;
+        _penguinChosen = NO;
+        _chosenAnimal = kAnimalNone;
         
         self.isTouchEnabled = YES;
     }
@@ -64,44 +79,43 @@
     return self;
 }
 
-- (void)setNetworkManager:(NetworkManager *)networkManger {
-    [networkManger retain];
-    [_networkManager release];
-    _networkManager = networkManger;
-    networkManger.chooserDelegate = self;
-}
-
-//- (NetworkManager *)networkManager {
-//    return [_networkManager autorelease];
-//}
-
 - (void)registerWithTouchDispatcher
 {
 	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {    
-    CGPoint location = [self convertTouchToNodeSpace: touch];
-    
+- (void)attemptNetworkGameStart {
+    if (self.networkManager && _cowChosen && _penguinChosen) {
+        [self.networkManager startGame];
+        [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:_chosenAnimal isNetworkGame:YES]]];    
+    }
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {       
+    CGPoint location = [self convertTouchToNodeSpace: touch];    
     BOOL animalChosen = YES;
     
-    Animal chosenAnimal;
-    if (CGRectContainsPoint(_cowButton.boundingBox, location)) {  
-        chosenAnimal = kCow;
+    if (CGRectContainsPoint(_cowButton.boundingBox, location) && !_cowChosen && _chosenAnimal == kAnimalNone) {  
+        _chosenAnimal = kAnimalCow;
+        _cowChosen = YES;
+        _cowButtonSelectedOverlay.visible = YES;
         NSLog(@"Cow chosen.");
-    }else if(CGRectContainsPoint(_penguinButton.boundingBox, location)) {
-        chosenAnimal = kPenguin;
+    } else if(CGRectContainsPoint(_penguinButton.boundingBox, location) && !_penguinChosen && _chosenAnimal == kAnimalNone) {
+        _chosenAnimal = kAnimalPenguin;
+        _penguinChosen = YES;
+        _penguinButtonSelectedOverLay.visible = YES;
         NSLog(@"Penguin chosen.");
-    }else{
+    } else {
         animalChosen = NO;
     }
     
     if (animalChosen) {
         if (self.networkManager) {
-            [self.networkManager chooseAnimal:chosenAnimal];
+            [self.networkManager chooseAnimal:_chosenAnimal];
             NSLog(@"Chose animal on network.");
+            [self attemptNetworkGameStart];
         } else {
-            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:chosenAnimal]]];        
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:_chosenAnimal]]];        
         }
     }
     
@@ -109,15 +123,20 @@
 }
 
 - (void)otherPlayerChoseAnimal:(Animal)animal {
-    NSLog(@"Other player chose animal: %@.", animal == kCow ? @"Cow" : @"Penguin");
+    NSLog(@"Other player chose animal: %@.", animal == kAnimalCow ? @"Cow" : @"Penguin");
+
+    if (animal == kAnimalCow) {
+        _cowChosen = YES;
+        _cowButtonSelectedOverlay.visible = YES;
+        
+    } else {
+        _penguinChosen = YES;  
+        _penguinButtonSelectedOverLay.visible = YES;
+    }
 }
 
-- (void)connectionLost {
-    NSLog(@"Lost network connection.");
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Network Problem." message:@"There was an error with the network and the connection has been lost." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-	[alertView show];
-	[alertView release];
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];  
+- (void)otherPlayerStartedGame {
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:_chosenAnimal isNetworkGame:YES]]];
 }
 
 - (void)pickerCanceled {

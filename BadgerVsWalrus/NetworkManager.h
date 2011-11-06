@@ -10,6 +10,24 @@
 #import <GameKit/GKPeerPickerController.h>
 #import "Game.h"
 
+@protocol NetworkManagerDelegate <NSObject>
+- (void)connectionLost;
+@end
+
+@protocol NetworkManagerChooserDelegate <NetworkManagerDelegate>
+- (void)otherPlayerChoseAnimal:(Animal)animal;
+- (void)pickerCanceled;
+- (void)otherPlayerStartedGame;
+@end
+
+@protocol NetworkManagerGameDelegate <NetworkManagerDelegate>
+- (void)heartbeatWithOtherPlayerXPosition:(int)xPostion;
+- (void)otherPlayerWon;
+@end
+
+@protocol NetworkManagerGameOverDelegate <NetworkManagerDelegate>
+- (void)otherPlayerPlayedAgain;
+@end
 
 @interface NetworkManager : NSObject<GKPeerPickerControllerDelegate, GKSessionDelegate> {
     id _chooserDelegate;
@@ -17,8 +35,9 @@
     GKSession *_gameSession;
 }
 
-@property (assign, nonatomic) id chooserDelegate;
-@property (assign, nonatomic) id gameDelegate;
+@property (nonatomic, assign) id<NetworkManagerChooserDelegate> chooserDelegate;
+@property (nonatomic, assign) id<NetworkManagerGameDelegate> gameDelegate;
+@property (nonatomic, assign) id<NetworkManagerGameOverDelegate> gameOverDelegate;
 @property (nonatomic, retain) GKSession *gameSession;
 
 + (NetworkManager *)manger;
@@ -26,22 +45,8 @@
 - (void)initNetworkGame;
 - (void)chooseAnimal:(Animal)animal;
 - (void)startGame;
-- (void)moveAnimal;
+- (void)heartbeatWithXPostion:(int)postion;
 - (void)won;
-- (void)disconnect;
-@end
-
-@protocol NetworkManagerDelegate <NSObject>
-- (void)connectionLost;
-- (void)pickerCanceled;
-@end
-
-@protocol NetworkManagerChooserDelegate <NetworkManagerDelegate>
-- (void)otherPlayerChoseAnimal:(Animal)animal;
-@end
-
-@protocol NetworkManagerGameDelegate <NetworkManagerDelegate>
-- (void)otherPlayerStartedGame;
-- (void)otherPlayerMovedAnimal;
-- (void)otherPlayerWon;
+- (void)playAgain;
+- (void)invalidateSession;
 @end

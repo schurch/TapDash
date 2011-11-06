@@ -9,8 +9,11 @@
 #import "cocos2d.h"
 #import "GameOverLayer.h"
 #import "Game.h"
+#import "NetworkManager.h"
+#import "CountDownLayer.h"
+#import "NetworkLayer.h"
 
-@interface GameLayer : CCLayer
+@interface GameLayer : NetworkLayer<NetworkManagerGameDelegate, CountdownDelegate>
 {
     CCSprite *_player1;
     CCSprite *_player2;
@@ -21,9 +24,10 @@
 }
 
 @property (assign, nonatomic) Animal choosenAnimal;
-@property (readonly) CCSprite *humanPlayer;
-@property (readonly) CCSprite *computerPlayer;
+@property (readonly, nonatomic) CCSprite *humanPlayer;
+@property (readonly, nonatomic) CCSprite *otherPlayer;
 
 +(CCScene *) sceneWithChosenAnimal:(Animal)animal;
++(CCScene *) sceneWithChosenAnimal:(Animal)animal isNetworkGame:(BOOL)isNetworkGame;
 
 @end

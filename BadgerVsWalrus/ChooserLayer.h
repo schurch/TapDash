@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "NetworkManager.h"
+#import "NetworkLayer.h"
 
-@interface ChooserLayer : CCLayer<NetworkManagerChooserDelegate> {
+@interface ChooserLayer : NetworkLayer<NetworkManagerChooserDelegate> {
     CCSprite *_cowButton;
     CCSprite *_penguinButton;
-    NetworkManager *_networkManager;
+    CCSprite *_cowButtonSelectedOverlay;
+    CCSprite *_penguinButtonSelectedOverLay;
+    BOOL _cowChosen;
+    BOOL _penguinChosen;
+    Animal _chosenAnimal;
 }
-
-@property (nonatomic, retain) NetworkManager *networkManager;
 
 + (CCScene *) scene;
 + (CCScene *)sceneWithNetwork:(BOOL)networkGame;

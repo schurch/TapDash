@@ -21,6 +21,10 @@
 @synthesize winningSpriteFile = _winningSpriteFile;
 
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time {
+    return [GameOverLayer sceneWithGameOutcome:gameOutcome didPlayerWin:didPlayerWin time:time isNetworkGame:NO];
+}
+
++ (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time isNetworkGame:(BOOL)isNetworkGame {
     CCScene *scene = [CCScene node];
     GameOverLayer *layer = [GameOverLayer node];
     
@@ -28,11 +32,15 @@
         [layer setHighScore:time];
     }
     
+    if (isNetworkGame) {
+        layer.networkManager = [NetworkManager manger];
+        layer.networkManager.gameOverDelegate = layer;
+    }
+    
     layer.gameOutcome = gameOutcome;
     layer.finalTime = time;
     
     NSString *winningSpriteFile = nil;
-    
     switch (gameOutcome) {
         case kGameOutcomeCowWon:
             winningSpriteFile = @"cow.png";
@@ -109,7 +117,7 @@
         NSString *topScoreString = [NSString stringWithFormat: @"Top Score: %.2f", topScore];
         CCSprite *topScoreLabel = [CCLabelTTF labelWithString:topScoreString fontName:@"MarkerFelt-Wide" fontSize:25];
         
-        //right align with time lable
+        //right align with time label
         int xPostion = (timeLabel.boundingBox.origin.x + timeLabel.boundingBox.size.width) - (topScoreLabel.boundingBox.size.width/2);
         
         topScoreLabel.position = ccp(xPostion,60 + ALL_ITEMS_Y_OFFSET);
@@ -128,12 +136,24 @@
     [self addChild:winningSprite];
 }
 
-- (void)playAgain:(CCMenuItem  *)menuItem {
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer scene]]];
+- (void)playAgain:(CCMenuItem  *)menuItem {    
+    if (self.networkManager) {
+        [self.networkManager playAgain];
+    }
+    
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer sceneWithNetwork:self.networkManager ? YES : NO]]];
 }
 
 - (void)showMainMenu:(CCMenuItem  *)menuItem {
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
+    
+    if (self.networkManager) {
+        [self.networkManager invalidateSession];
+    }
+}
+
+- (void)otherPlayerPlayedAgain {
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[ChooserLayer sceneWithNetwork:YES]]];    
 }
 
 - (void)dealloc {

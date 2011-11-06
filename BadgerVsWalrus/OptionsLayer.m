@@ -114,10 +114,6 @@ int musicMaxX;
     [CDAudioManager sharedManager].backgroundMusic.volume = musicVolume;
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
-{
-}
-
 - (void)showMainMenu:(CCMenuItem *)menuItem {
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
 }
