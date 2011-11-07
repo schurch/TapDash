@@ -8,15 +8,23 @@
 
 #import "NetworkManager.h"
 
+union intToFloat
+{
+    uint32_t i;
+    float fp;
+};
+
 typedef enum {
     kPacketTypeChooseAnimal,
     kPacketTypeStartGame,
-    kPacketTypeMoveAnimal,
     kPacketTypeWon,
     kPacketTypePlayAgain,
     kPacketTypeGameHeartbeat,
-    kPacketTypeNetworkHeartbeat
+    kPacketTypeNetworkPing,
+    kPacketTypeCoinToss
 } PacketType; 
+
+const float kPingTimeMaxDelay = 5.0f;
 
 @implementation NetworkManager
 
@@ -26,6 +34,9 @@ typedef enum {
 @synthesize gameDelegate = _gameDelegate;
 @synthesize gameSession = _gameSession;
 @synthesize gameOverDelegate = _gameOverDelegate;
+@synthesize peerType = _peerType;
+@synthesize lastPing = _lastPing;
+@synthesize pingTimer = _pingTimer;
 
 
 #pragma mark -
@@ -46,6 +57,9 @@ typedef enum {
 
 - (id)init {
     if (self = [super init]) {
+        _coinTossRoll = [[[UIDevice currentDevice] uniqueIdentifier] hash];
+        self.lastPing = nil;
+        _multiplayerGameState = malloc(sizeof(MultiPlayerGameState));
     }
     
     return self;
@@ -58,42 +72,49 @@ typedef enum {
     [picker show];
 }
 
-#pragma mark -
-#pragma mark GKPeerPickerControllerDelegate
-
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session {
-    self.gameSession = session;
-    self.gameSession.delegate = self;
-    [self.gameSession setDataReceiveHandler:self withContext:nil];
-    
-    picker.delegate = nil;
-    [picker dismiss];
-    [picker autorelease];
+- (NSData *)convertIntToNetworkData:(int)intValue {
+    uint32_t networkInt = CFSwapInt32HostToBig((uint32_t)intValue);
+    NSData *data = [NSData dataWithBytes:&networkInt length:sizeof(uint32_t)];
+    return data;
 }
 
-- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type {
-    GKSession* session = [[GKSession alloc] initWithSessionID:@"BadgerVsWalrus" displayName:nil sessionMode:GKSessionModePeer];
-    return [session autorelease];
+- (int)convertNetworkDataToInt:(NSData *)dataValue {
+    int intValue;
+    [dataValue getBytes:&intValue length:sizeof(uint32_t)];
+    return CFSwapInt32BigToHost(intValue);
 }
 
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {   
-    picker.delegate = nil;
-    [picker autorelease];
-    
-    if([[self chooserDelegate] respondsToSelector:@selector(pickerCanceled)]) {
-        [[self chooserDelegate] pickerCanceled];
-    }
+- (NSData *)convertFloatToNetworkData:(float)floatValue {
+    NSData *data = [NSData dataWithBytes:&floatValue length:sizeof(float)];
+    return data;
+}
+
+- (float)convertNetworkDataToFloat:(NSData *)dataValue {
+    float floatValue;
+    [dataValue getBytes:&floatValue length:sizeof(float)];
+    return floatValue;
+}
+
+- (void)resetGameState {
+    _multiplayerGameState -> clientTime = 0.0f;
+    _multiplayerGameState -> serverTime = 0.0f;
+    _multiplayerGameState -> clientXPosition = 0;
+    _multiplayerGameState -> serverXPosition = 0;
+    _multiplayerGameState -> clientAnimal = kAnimalNone;
+    _multiplayerGameState -> serverAnimal = kAnimalNone;
+    _multiplayerGameState -> clientWon = NO;
+    _multiplayerGameState -> serverWon = NO;
 }
 
 #pragma mark -
 #pragma mark GKSessionDelegate
 
 - (void)sendDataToPeers:(NSData *)data ofType:(PacketType)type {
-    NSMutableData * newPacket = [NSMutableData dataWithCapacity:([data length]+sizeof(uint32_t))];
+    NSMutableData *newPacket = [NSMutableData dataWithCapacity:([data length]+sizeof(uint32_t))];
     uint32_t swappedType = CFSwapInt32HostToBig((uint32_t)type);
     [newPacket appendBytes:&swappedType length:sizeof(uint32_t)];
     [newPacket appendData:data];
- 
+    
     NSError *error;
     if (![self.gameSession sendDataToAllPeers:newPacket withDataMode:GKSendDataUnreliable error:&error]) {
         NSLog(@"%@",[error localizedDescription]);
@@ -109,15 +130,24 @@ typedef enum {
         NSRange payloadRange = {sizeof(uint32_t), [data length]-sizeof(uint32_t)};
         NSData* payload = [data subdataWithRange:payloadRange];
         
-        uint32_t swappedAnimal;
-        uint32_t otherPlayerXPostion;
+        Animal animal;
+        int xPosition;
+        float time;
+        int otherPlayerCoinTossRoll;
         
         switch (header) {
             case kPacketTypeChooseAnimal:
-                [payload getBytes:&swappedAnimal length:sizeof(uint32_t)];
-                Animal animal = (Animal)CFSwapInt32BigToHost(swappedAnimal);
-                if([self.chooserDelegate respondsToSelector:@selector(otherPlayerChoseAnimal:)]) {
-                    [self.chooserDelegate otherPlayerChoseAnimal:animal];
+                animal = (Animal)[self convertNetworkDataToInt:payload];
+                if (self.peerType == kServer) {
+                    if (_multiplayerGameState -> serverAnimal == animal) {
+                        //reject
+                    } else {
+                        _multiplayerGameState -> clientAnimal = animal;
+                    }
+                } else {
+                    if([self.chooserDelegate respondsToSelector:@selector(otherPlayerChoseAnimal:)]) {
+                        [self.chooserDelegate otherPlayerChoseAnimal:animal];
+                    }
                 }
                 break;
             case kPacketTypeStartGame:
@@ -126,8 +156,16 @@ typedef enum {
                 }
                 break;
             case kPacketTypeWon:
-                if([self.gameDelegate respondsToSelector:@selector(otherPlayerWon)]) {
-                    [self.gameDelegate otherPlayerWon];
+                if (self.peerType == kServer) {
+                    if (_multiplayerGameState -> serverWon) {
+                        //reject
+                    } else {
+                        _multiplayerGameState -> clientWon = YES;
+                    }
+                } else {
+                    if([self.gameDelegate respondsToSelector:@selector(otherPlayerWon)]) {
+                        [self.gameDelegate otherPlayerWon];
+                    }
                 }
                 break;
             case kPacketTypePlayAgain:
@@ -136,11 +174,18 @@ typedef enum {
                 }
                 break;
             case kPacketTypeGameHeartbeat:
-                [payload getBytes:&otherPlayerXPostion length:sizeof(uint32_t)];
-                int xPostion = CFSwapInt32BigToHost(otherPlayerXPostion);
-                if([self.gameDelegate respondsToSelector:@selector(heartbeatWithOtherPlayerXPosition:)]) {
-                    [self.gameDelegate heartbeatWithOtherPlayerXPosition:xPostion];
+                xPosition = [self convertNetworkDataToInt:payload];
+                time = [self convertNetworkDataToFloat:payload];
+                if([self.gameDelegate respondsToSelector:@selector(heartbeatWithOtherPlayerXPosition: time:)]) {
+                    [self.gameDelegate heartbeatWithOtherPlayerXPosition:xPosition time:time];
                 }
+                break;
+            case kPacketTypeCoinToss:
+                otherPlayerCoinTossRoll = [self convertNetworkDataToInt:payload];
+                self.peerType = _coinTossRoll > otherPlayerCoinTossRoll ? kServer : kClient; //server is god
+                break;
+            case kPacketTypeNetworkPing:
+                self.lastPing = [NSDate date];
                 break;
             default:
                 NSLog(@"Unrecognized packet type.");
@@ -171,30 +216,86 @@ typedef enum {
 }
 
 #pragma mark -
+#pragma mark GKPeerPickerControllerDelegate
+
+- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session {
+    self.gameSession = session;
+    self.gameSession.delegate = self;
+    [self.gameSession setDataReceiveHandler:self withContext:nil];
+
+    picker.delegate = nil;
+    [picker dismiss];
+    [picker autorelease];
+    
+    [self sendDataToPeers:[self convertIntToNetworkData:_coinTossRoll] ofType:kPacketTypeCoinToss];
+    
+    self.lastPing = [NSDate date];
+    self.pingTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(sendPing) userInfo:nil repeats:YES];
+}
+
+- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type {
+    GKSession *session = [[GKSession alloc] initWithSessionID:@"BadgerVsWalrus" displayName:nil sessionMode:GKSessionModePeer];
+    return [session autorelease];
+}
+
+- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {   
+    picker.delegate = nil;
+    [picker autorelease];
+    
+    if([self.chooserDelegate respondsToSelector:@selector(pickerCanceled)]) {
+        [self.chooserDelegate pickerCanceled];
+    }
+}
+
+#pragma mark -
 #pragma mark methods
 
+- (void)ping {
+    if ([self.lastPing timeIntervalSinceNow] > kPingTimeMaxDelay) {
+        [self invalidateSession];
+    } else {
+        [self sendDataToPeers:nil ofType:kPacketTypeNetworkPing];
+    }
+}
+
 - (void)chooseAnimal:(Animal)animal {
-    uint32_t animalType = CFSwapInt32HostToBig((uint32_t)animal);
-    NSData *data = [NSData dataWithBytes:&animalType length:sizeof(uint32_t)];
-    [self sendDataToPeers:data ofType:kPacketTypeChooseAnimal];
+    if (self.peerType == kServer) {
+        _multiplayerGameState -> serverAnimal = animal;
+    }
+    [self sendDataToPeers:[self convertIntToNetworkData:animal] ofType:kPacketTypeChooseAnimal];
 }
 
 - (void)startGame {
     [self sendDataToPeers:nil ofType:kPacketTypeStartGame];
 }
 
-- (void)heartbeatWithXPostion:(int)postion {
-    uint32_t xPosition = CFSwapInt32HostToBig((uint32_t)postion);
-    NSData *postionData = [NSData dataWithBytes:&xPosition length:sizeof(uint32_t)];
-    [self sendDataToPeers:postionData ofType:kPacketTypeGameHeartbeat];
+- (void)heartbeatWithXPostion:(int)postion time:(float)time {
+    NSData *postionData = [self convertIntToNetworkData:postion];
+    NSData *timeData = [self convertFloatToNetworkData:time];
+    
+    NSMutableData *dataToSend = [NSMutableData dataWithCapacity:([postionData length] + [timeData length])];
+    [dataToSend appendData:postionData];
+    [dataToSend appendData:timeData];
+    
+    if (self.peerType == kServer) {
+        _multiplayerGameState -> serverXPosition = postion;
+        _multiplayerGameState -> serverTime = time;
+    }
+    
+    [self sendDataToPeers:dataToSend ofType:kPacketTypeGameHeartbeat];
 }
 
-- (void)won {
+- (void)wonWithXPosition:(int)postion time:(float)time {
+    if (self.peerType == kServer) {
+        _multiplayerGameState -> serverWon = YES;
+        _multiplayerGameState -> serverXPosition = postion;
+        _multiplayerGameState -> serverTime = time;
+    }
+    
     [self sendDataToPeers:nil ofType:kPacketTypeWon];
 }
 
 - (void)invalidateSession {
-    
     NSLog(@"Lost network connection.");
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Network Problem." message:@"There was an error with the network and the connection has been lost." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 	[alertView show];
@@ -213,11 +314,14 @@ typedef enum {
     }
     
     [self.gameSession disconnectFromAllPeers];    
-    self.chooserDelegate = nil;
-    self.gameDelegate = nil;
-    self.gameOverDelegate = nil;
     [self.gameSession setDataReceiveHandler:nil withContext:nil];
     self.gameSession.available = NO;
+    
+    [self resetGameState];
+    
+    self.chooserDelegate = nil;
+    self.gameDelegate = nil;
+    self.gameOverDelegate = nil;    
 }
 
 - (void)playAgain {
@@ -237,6 +341,8 @@ typedef enum {
     [_gameSession release];
     _chooserDelegate = nil;
     _gameDelegate = nil;
+    
+    free(_multiplayerGameState);    
     
     [super dealloc];
 }
