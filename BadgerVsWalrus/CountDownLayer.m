@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 04/11/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Stefan Church. All rights reserved.
 //
 
 #import "CountdownLayer.h"
@@ -55,9 +55,7 @@
     _countDownLabel.string = currentCountdownString;
     
     if (_countdownValue == 0) {
-        if([self.delegate respondsToSelector:@selector(startGame)]) {
-            [self.delegate performSelector:@selector(startGame) withObject:nil afterDelay:0.5];
-        }
+        [self.delegate performSelector:@selector(startGame) withObject:nil afterDelay:0.5];
     }
 }
 

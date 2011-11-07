@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 02/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Stefan Church. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -32,15 +32,14 @@ typedef struct {
 
 @protocol NetworkManagerChooserDelegate <NetworkManagerDelegate>
 - (void)otherPlayerChoseAnimal:(Animal)animal;
-- (void)choiceRejected;
+- (void)choiceRejectedOrAccepted:(BOOL)accepted;
 - (void)pickerCanceled;
 - (void)otherPlayerStartedGame;
 @end
 
 @protocol NetworkManagerGameDelegate <NetworkManagerDelegate>
-- (void)heartbeatWithOtherPlayerXPosition:(int)xPostion time:(float)time;
-- (void)winRejected;
-- (void)otherPlayerWonWithXPostion:(int)postion time:(float)time;
+- (void)heartbeatWithOtherPlayerXPosition:(int)xPostion;
+- (void)winningDetails:(Animal)animal time:(float)time;
 @end
 
 @protocol NetworkManagerGameOverDelegate <NetworkManagerDelegate>
@@ -55,7 +54,8 @@ typedef struct {
     int _coinTossRoll;
     NSDate *_lastPing;
     NSTimer *_pingTimer;
-    MultiPlayerGameState *_multiplayerGameState; //server keep track of state
+    MultiPlayerGameState *_multiplayerGameState; //one peer is chosen as server to keep track of game state
+    BOOL _sessionInvalidated;
 }
 
 @property (nonatomic, assign) id<NetworkManagerChooserDelegate> chooserDelegate;

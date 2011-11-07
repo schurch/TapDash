@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 24/10/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Stefan Church. All rights reserved.
 //
 
 typedef enum {

@@ -3,16 +3,10 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 02/11/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Stefan Church. All rights reserved.
 //
 
 #import "NetworkManager.h"
-
-union intToFloat
-{
-    uint32_t i;
-    float fp;
-};
 
 typedef enum {
     kPacketTypeChooseAnimal,
@@ -21,7 +15,9 @@ typedef enum {
     kPacketTypePlayAgain,
     kPacketTypeGameHeartbeat,
     kPacketTypeNetworkPing,
-    kPacketTypeCoinToss
+    kPacketTypeCoinToss,
+    kPacketTypeAnimalChoiceRejectedOrAccepted,
+    kPackTypeWinDetails
 } PacketType; 
 
 const float kPingTimeMaxDelay = 5.0f;
@@ -72,6 +68,23 @@ const float kPingTimeMaxDelay = 5.0f;
     [picker show];
 }
 
+#pragma mark -
+#pragma mark helper methods
+
+- (void)resetGameState {
+    _multiplayerGameState -> clientTime = 0.0f;
+    _multiplayerGameState -> serverTime = 0.0f;
+    _multiplayerGameState -> clientXPosition = 0;
+    _multiplayerGameState -> serverXPosition = 0;
+    _multiplayerGameState -> clientAnimal = kAnimalNone;
+    _multiplayerGameState -> serverAnimal = kAnimalNone;
+    _multiplayerGameState -> clientWon = NO;
+    _multiplayerGameState -> serverWon = NO;
+}
+
+#pragma mark -
+#pragma mark data conversion
+
 - (NSData *)convertIntToNetworkData:(int)intValue {
     uint32_t networkInt = CFSwapInt32HostToBig((uint32_t)intValue);
     NSData *data = [NSData dataWithBytes:&networkInt length:sizeof(uint32_t)];
@@ -95,15 +108,25 @@ const float kPingTimeMaxDelay = 5.0f;
     return floatValue;
 }
 
-- (void)resetGameState {
-    _multiplayerGameState -> clientTime = 0.0f;
-    _multiplayerGameState -> serverTime = 0.0f;
-    _multiplayerGameState -> clientXPosition = 0;
-    _multiplayerGameState -> serverXPosition = 0;
-    _multiplayerGameState -> clientAnimal = kAnimalNone;
-    _multiplayerGameState -> serverAnimal = kAnimalNone;
-    _multiplayerGameState -> clientWon = NO;
-    _multiplayerGameState -> serverWon = NO;
+- (NSData *)convertIntAndFloatToData:(int)intValue floatValue:(float)floatValue {
+    NSData *intData = [self convertIntToNetworkData:intValue];
+    NSData *floatData = [self convertFloatToNetworkData:floatValue];
+    
+    NSMutableData *data = [NSMutableData dataWithCapacity:([intData length] + [floatData length])];
+    [data appendData:intData];
+    [data appendData:floatData];
+    
+    return data;
+}
+
+- (void)convertNetworkDataToIntFloat:(NSData *)data intValue:(int *)intValue floatValue:(float *)floatValue {
+    int networkInt;
+    NSRange intRange = { 0, sizeof(uint32_t) };
+    [data getBytes:&networkInt range:intRange];
+    *intValue = CFSwapInt32BigToHost(networkInt);
+    
+    NSRange floatRange = { sizeof(uint32_t), sizeof(float) };
+    [data getBytes:floatValue range:floatRange];
 }
 
 #pragma mark -
@@ -134,58 +157,98 @@ const float kPingTimeMaxDelay = 5.0f;
         int xPosition;
         float time;
         int otherPlayerCoinTossRoll;
+        BOOL choiceAccepted;
         
         switch (header) {
             case kPacketTypeChooseAnimal:
                 animal = (Animal)[self convertNetworkDataToInt:payload];
                 if (self.peerType == kServer) {
+                    int rejectedOrAccepted;
                     if (_multiplayerGameState -> serverAnimal == animal) {
-                        //reject
+                        rejectedOrAccepted = 0;
                     } else {
                         _multiplayerGameState -> clientAnimal = animal;
+                        rejectedOrAccepted = 1;
                     }
-                } else {
-                    if([self.chooserDelegate respondsToSelector:@selector(otherPlayerChoseAnimal:)]) {
+                    NSData *rejectedOrSelectedData = [self convertIntToNetworkData:rejectedOrAccepted];
+                    [self sendDataToPeers:rejectedOrSelectedData ofType:kPacketTypeAnimalChoiceRejectedOrAccepted];
+                    
+                    //1 = accepted
+                    //server accepted so update chooser delegate
+                    if (rejectedOrAccepted == 1) {
+                        NSLog(@"Server: other player chose animal.");
                         [self.chooserDelegate otherPlayerChoseAnimal:animal];
                     }
+                } else {
+                    //on client, server can choose whatever animal it wants so just accept
+                    NSLog(@"Client: other player chose animal.");
+                    [self.chooserDelegate otherPlayerChoseAnimal:animal];
                 }
                 break;
             case kPacketTypeStartGame:
-                if([self.chooserDelegate respondsToSelector:@selector(otherPlayerStartedGame)]) {
-                    [self.chooserDelegate otherPlayerStartedGame];
-                }
+                [self.chooserDelegate otherPlayerStartedGame];
                 break;
             case kPacketTypeWon:
+                NSLog(@"Received win message from other device.");
                 if (self.peerType == kServer) {
-                    if (_multiplayerGameState -> serverWon) {
-                        //reject
-                    } else {
+                    [self convertNetworkDataToIntFloat:payload intValue:&xPosition floatValue:&time];
+                    
+                    if (!(_multiplayerGameState -> serverWon)) { //if server won already, client is out of luck
                         _multiplayerGameState -> clientWon = YES;
+                        NSLog(@"Win rejected. Server already won.");
                     }
-                } else {
-                    if([self.gameDelegate respondsToSelector:@selector(otherPlayerWon)]) {
-                        [self.gameDelegate otherPlayerWon];
+                    
+                    _multiplayerGameState -> clientXPosition = xPosition;
+                    _multiplayerGameState -> clientTime = time;
+                    
+                    Animal winningAnimal;
+                    float winningTime;
+                    
+                    if (_multiplayerGameState -> serverWon) {
+                        winningTime = _multiplayerGameState -> serverTime;
+                        winningAnimal = _multiplayerGameState -> serverAnimal;
+                    } else {
+                        winningTime = _multiplayerGameState -> clientTime;
+                        winningAnimal = _multiplayerGameState -> clientAnimal;
                     }
+                    
+                    NSData *winDetailsData = [self convertIntAndFloatToData:winningAnimal floatValue:winningTime];
+                    [self sendDataToPeers:winDetailsData ofType:kPackTypeWinDetails];
+                    [self.gameDelegate winningDetails:animal time:winningTime];
                 }
                 break;
             case kPacketTypePlayAgain:
-                if([self.gameOverDelegate respondsToSelector:@selector(otherPlayerPlayedAgain)]) {
-                    [self.gameOverDelegate otherPlayerPlayedAgain];
-                }
+                NSLog(@"Received request to play again.");
+                [self.gameOverDelegate otherPlayerPlayedAgain];
                 break;
             case kPacketTypeGameHeartbeat:
-                xPosition = [self convertNetworkDataToInt:payload];
-                time = [self convertNetworkDataToFloat:payload];
-                if([self.gameDelegate respondsToSelector:@selector(heartbeatWithOtherPlayerXPosition: time:)]) {
-                    [self.gameDelegate heartbeatWithOtherPlayerXPosition:xPosition time:time];
+                [self convertNetworkDataToIntFloat:payload intValue:&xPosition floatValue:&time];
+                if (self.peerType == kServer) {
+                    _multiplayerGameState -> clientXPosition = xPosition;
+                    _multiplayerGameState -> clientTime = time;
                 }
+                [self.gameDelegate heartbeatWithOtherPlayerXPosition:xPosition];
                 break;
             case kPacketTypeCoinToss:
                 otherPlayerCoinTossRoll = [self convertNetworkDataToInt:payload];
-                self.peerType = _coinTossRoll > otherPlayerCoinTossRoll ? kServer : kClient; //server is god
+                self.peerType = _coinTossRoll > otherPlayerCoinTossRoll ? kServer : kClient; //server is god, sorry client
+                NSLog(@"Network cointoss. Device is %@.", self.peerType == kServer ? @"Server" : @"Client");
+                if (self.peerType == kServer) {
+                    [self resetGameState];
+                }
                 break;
             case kPacketTypeNetworkPing:
                 self.lastPing = [NSDate date];
+                break;
+            case kPacketTypeAnimalChoiceRejectedOrAccepted:
+                choiceAccepted = [self convertNetworkDataToInt:payload] == 1 ? YES : NO; 
+                NSLog(@"Animal choice was %@.", choiceAccepted ? @"Accepted" : @"Rejected");
+                [self.chooserDelegate  choiceRejectedOrAccepted:choiceAccepted];
+                break;
+            case kPackTypeWinDetails:
+                //received the winning details from the server
+                [self convertNetworkDataToIntFloat:payload intValue:(int *)&animal floatValue:&time];
+                [self.gameDelegate winningDetails:animal time:time];
                 break;
             default:
                 NSLog(@"Unrecognized packet type.");
@@ -220,6 +283,7 @@ const float kPingTimeMaxDelay = 5.0f;
 
 - (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session {
     self.gameSession = session;
+    _sessionInvalidated = NO;
     self.gameSession.delegate = self;
     [self.gameSession setDataReceiveHandler:self withContext:nil];
 
@@ -230,28 +294,29 @@ const float kPingTimeMaxDelay = 5.0f;
     [self sendDataToPeers:[self convertIntToNetworkData:_coinTossRoll] ofType:kPacketTypeCoinToss];
     
     self.lastPing = [NSDate date];
-    self.pingTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(sendPing) userInfo:nil repeats:YES];
+    self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(ping) userInfo:nil repeats:YES];
 }
 
 - (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type {
-    GKSession *session = [[GKSession alloc] initWithSessionID:@"BadgerVsWalrus" displayName:nil sessionMode:GKSessionModePeer];
+    GKSession *session = [[GKSession alloc] initWithSessionID:@"BadgerVsWalrus" displayName:@"BadgerVsWalrus" sessionMode:GKSessionModePeer];
     return [session autorelease];
 }
 
 - (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker {   
     picker.delegate = nil;
     [picker autorelease];
-    
-    if([self.chooserDelegate respondsToSelector:@selector(pickerCanceled)]) {
-        [self.chooserDelegate pickerCanceled];
-    }
+    [self.chooserDelegate pickerCanceled];
 }
 
 #pragma mark -
 #pragma mark methods
 
 - (void)ping {
-    if ([self.lastPing timeIntervalSinceNow] > kPingTimeMaxDelay) {
+    float timeSinceLastPing = fabsf([self.lastPing timeIntervalSinceNow]);
+    if (timeSinceLastPing > kPingTimeMaxDelay) {
+        NSLog(@"Ping timer elapsed. Closing connection..");
+        [self.pingTimer invalidate];
+        self.pingTimer = nil;
         [self invalidateSession];
     } else {
         [self sendDataToPeers:nil ofType:kPacketTypeNetworkPing];
@@ -261,7 +326,9 @@ const float kPingTimeMaxDelay = 5.0f;
 - (void)chooseAnimal:(Animal)animal {
     if (self.peerType == kServer) {
         _multiplayerGameState -> serverAnimal = animal;
+        [self.chooserDelegate choiceRejectedOrAccepted:YES];
     }
+    
     [self sendDataToPeers:[self convertIntToNetworkData:animal] ofType:kPacketTypeChooseAnimal];
 }
 
@@ -270,18 +337,12 @@ const float kPingTimeMaxDelay = 5.0f;
 }
 
 - (void)heartbeatWithXPostion:(int)postion time:(float)time {
-    NSData *postionData = [self convertIntToNetworkData:postion];
-    NSData *timeData = [self convertFloatToNetworkData:time];
-    
-    NSMutableData *dataToSend = [NSMutableData dataWithCapacity:([postionData length] + [timeData length])];
-    [dataToSend appendData:postionData];
-    [dataToSend appendData:timeData];
-    
-    if (self.peerType == kServer) {
+   if (self.peerType == kServer) {
         _multiplayerGameState -> serverXPosition = postion;
         _multiplayerGameState -> serverTime = time;
     }
-    
+   
+    NSData *dataToSend = [self convertIntAndFloatToData:postion floatValue:time];
     [self sendDataToPeers:dataToSend ofType:kPacketTypeGameHeartbeat];
 }
 
@@ -290,35 +351,45 @@ const float kPingTimeMaxDelay = 5.0f;
         _multiplayerGameState -> serverWon = YES;
         _multiplayerGameState -> serverXPosition = postion;
         _multiplayerGameState -> serverTime = time;
-    }
-    
-    [self sendDataToPeers:nil ofType:kPacketTypeWon];
+        
+        Animal winningAnimal = _multiplayerGameState -> serverAnimal;
+        float winningTime = _multiplayerGameState -> serverTime;
+        
+        NSData *winDetailsData = [self convertIntAndFloatToData:winningAnimal floatValue:winningTime];
+        [self sendDataToPeers:winDetailsData ofType:kPackTypeWinDetails];
+        [self.gameDelegate winningDetails:winningAnimal time:winningTime];
+     } else {
+        NSData *dataToSend = [self convertIntAndFloatToData:postion floatValue:time];
+        [self sendDataToPeers:dataToSend ofType:kPacketTypeWon];
+     }
 }
 
 - (void)invalidateSession {
+    //don't invalidate more than once
+    if (_sessionInvalidated) {
+        return;
+    } 
+    _sessionInvalidated = YES;
+    
     NSLog(@"Lost network connection.");
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Network Problem." message:@"There was an error with the network and the connection has been lost." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 	[alertView show];
 	[alertView release];
     
-    if([self.chooserDelegate respondsToSelector:@selector(connectionLost)]) {
-        [self.chooserDelegate connectionLost];
-    }
-    
-    if([self.gameDelegate respondsToSelector:@selector(connectionLost)]) {
-        [self.gameDelegate connectionLost];
-    }
-    
-    if([self.gameOverDelegate respondsToSelector:@selector(connectionLost)]) {
-        [self.gameOverDelegate connectionLost];
-    }
-    
+    //let delegates know the conneciton has been lost
+    [self.chooserDelegate connectionLost];
+    [self.gameDelegate connectionLost];
+    [self.gameOverDelegate connectionLost];
+        
+    //cleanup session
     [self.gameSession disconnectFromAllPeers];    
     [self.gameSession setDataReceiveHandler:nil withContext:nil];
     self.gameSession.available = NO;
     
+    //reset server game state tracker
     [self resetGameState];
     
+    //cleanup delegates
     self.chooserDelegate = nil;
     self.gameDelegate = nil;
     self.gameOverDelegate = nil;    

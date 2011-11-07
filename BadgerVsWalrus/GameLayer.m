@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 22/10/2011.
-//  Copyright __MyCompanyName__ 2011. All rights reserved.
+//  Copyright Stefan Church 2011. All rights reserved.
 //
 
 
@@ -145,18 +145,20 @@ float _gameTime;
     return YES;
 }
 
-- (void)gameOverWithOutcome:(GameOutcome)outcome {
+- (void)gameOverWithOutcome:(GameOutcome)outcome withTime:(float)time {
     [self pause];
-    
+
     BOOL didWin = NO;
-    if (outcome == kGameOutcomeCowWon && self.humanPlayer == _player1) {
-        didWin = YES;
-    }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _player2) {
-        didWin = YES;
+    if (!self.networkManager) {
+        if (outcome == kGameOutcomeCowWon && self.humanPlayer == _player1) {
+            didWin = YES;
+        }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _player2) {
+            didWin = YES;
+        }
     }
     
     BOOL isNetworkGame = self.networkManager ? YES : NO;
-    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:_gameTime isNetworkGame:isNetworkGame];
+    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:time isNetworkGame:isNetworkGame];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:gameOverScene]];
 }
 
@@ -169,13 +171,11 @@ float _gameTime;
         static int counter = 1;
         
         if (counter % 8 == 0) { //send network heartbeat once every 8 counts
-            [self.networkManager heartbeatWithXPostion:self.humanPlayer.position.x];
+            [self.networkManager heartbeatWithXPostion:self.humanPlayer.position.x time:_gameTime];
         }
         
         if (self.humanPlayer.position.x >= _endX) {
-            GameOutcome outcome =  _choosenAnimal == kAnimalCow ? kGameOutcomeCowWon : kGameOutcomePenguinWon;
-            [self.networkManager won];
-            [self gameOverWithOutcome:outcome];
+            [self.networkManager wonWithXPosition:self.humanPlayer.position.x time:_gameTime];
         }
         
         counter++;
@@ -183,11 +183,11 @@ float _gameTime;
         self.otherPlayer.position = ccp( self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y );   
         
         if (_player1.position.x >= _endX && _player2.position.x >= _endX) {
-            [self gameOverWithOutcome:kGameOutcomeDraw];
+            [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
         } else if(_player1.position.x >= _endX) {
-            [self gameOverWithOutcome:kGameOutcomeCowWon];
+            [self gameOverWithOutcome:kGameOutcomeCowWon withTime:_gameTime];
         } else if(_player2.position.x >= _endX) {
-            [self gameOverWithOutcome:kGameOutcomePenguinWon];
+            [self gameOverWithOutcome:kGameOutcomePenguinWon withTime:_gameTime];
         }
     }
 }
@@ -201,22 +201,21 @@ float _gameTime;
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]]; 
 }
 
-- (void)otherPlayerWon {
-    NSLog(@"Other player won.");
-    GameOutcome outcome =  _choosenAnimal == kAnimalCow ? kGameOutcomePenguinWon : kGameOutcomeCowWon;
-    [self gameOverWithOutcome:outcome];
+- (void)heartbeatWithOtherPlayerXPosition:(int)xPostion {
+    NSLog(@"Other player is at x postion '%@'. Updating position.", [NSNumber numberWithInt:xPostion] );     
+    id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(xPostion, self.otherPlayer.position.y)];
+    [self.otherPlayer runAction:actionTo];
+}
+
+- (void)winningDetails:(Animal)animal time:(float)time {
+    GameOutcome outcome =  _choosenAnimal == kAnimalCow ? kGameOutcomeCowWon : kGameOutcomePenguinWon;
+    [self gameOverWithOutcome:outcome withTime:time];
 }
 
 - (void)startGame {
     NSLog(@"Start game.");
     [self removeChildByTag:COUNTDOWN_LAYER_TAG cleanup:YES];
     [self play];
-}
-
-- (void)heartbeatWithOtherPlayerXPosition:(int)xPostion {
-    NSLog(@"Other player is at x postion '%@'. Updating position.", [NSNumber numberWithInt:xPostion] );     
-    id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(xPostion, self.otherPlayer.position.y)];
-    [self.otherPlayer runAction:actionTo];
 }
 
 - (void) dealloc {

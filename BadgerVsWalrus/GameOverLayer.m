@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 23/10/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Stefan Church. All rights reserved.
 //
 
 #import "GameOverLayer.h"
@@ -50,10 +50,9 @@
         default:
             break;
     }
+    
     layer.winningSpriteFile = winningSpriteFile;
-    
     [scene addChild: layer];
-    
     return scene;
 }
 
@@ -110,19 +109,21 @@
     timeLabel.color = ccc3(0,0,0);
     [self addChild: timeLabel];
     
-    NSArray *highScores = [[Datastore dataStore] getHighScores];
-    
-    if ([highScores count] > 0) {
-        double topScore = [[highScores objectAtIndex:0] doubleValue];
-        NSString *topScoreString = [NSString stringWithFormat: @"Top Score: %.2f", topScore];
-        CCSprite *topScoreLabel = [CCLabelTTF labelWithString:topScoreString fontName:@"MarkerFelt-Wide" fontSize:25];
+    if (!self.networkManager) {
+        NSArray *highScores = [[Datastore dataStore] getHighScores];
         
-        //right align with time label
-        int xPostion = (timeLabel.boundingBox.origin.x + timeLabel.boundingBox.size.width) - (topScoreLabel.boundingBox.size.width/2);
-        
-        topScoreLabel.position = ccp(xPostion,60 + ALL_ITEMS_Y_OFFSET);
-        topScoreLabel.color = ccc3(0,0,0);
-        [self addChild: topScoreLabel];
+        if ([highScores count] > 0) {
+            double topScore = [[highScores objectAtIndex:0] doubleValue];
+            NSString *topScoreString = [NSString stringWithFormat: @"Top Score: %.2f", topScore];
+            CCSprite *topScoreLabel = [CCLabelTTF labelWithString:topScoreString fontName:@"MarkerFelt-Wide" fontSize:25];
+            
+            //right align with time label
+            int xPostion = (timeLabel.boundingBox.origin.x + timeLabel.boundingBox.size.width) - (topScoreLabel.boundingBox.size.width/2);
+            
+            topScoreLabel.position = ccp(xPostion,60 + ALL_ITEMS_Y_OFFSET);
+            topScoreLabel.color = ccc3(0,0,0);
+            [self addChild: topScoreLabel];
+        }
     }
 }
 

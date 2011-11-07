@@ -3,7 +3,7 @@
 //  BadgerVsWalrus
 //
 //  Created by Stefan Church on 30/10/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Stefan Church. All rights reserved.
 //
 
 #import "ChooserLayer.h"
@@ -98,12 +98,10 @@ const int buttonHeight = 130;
     if (CGRectContainsPoint(_cowButton.boundingBox, location) && !_cowChosen && _chosenAnimal == kAnimalNone) {  
         _chosenAnimal = kAnimalCow;
         _cowChosen = YES;
-        _cowButtonSelectedOverlay.visible = YES;
         NSLog(@"Cow chosen.");
     } else if(CGRectContainsPoint(_penguinButton.boundingBox, location) && !_penguinChosen && _chosenAnimal == kAnimalNone) {
         _chosenAnimal = kAnimalPenguin;
         _penguinChosen = YES;
-        _penguinButtonSelectedOverLay.visible = YES;
         NSLog(@"Penguin chosen.");
     } else {
         animalChosen = NO;
@@ -112,8 +110,7 @@ const int buttonHeight = 130;
     if (animalChosen) {
         if (self.networkManager) {
             [self.networkManager chooseAnimal:_chosenAnimal];
-            NSLog(@"Chose animal on network.");
-            [self attemptNetworkGameStart];
+            NSLog(@"Attempting to choose animal on network.");
         } else {
             [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[GameLayer sceneWithChosenAnimal:_chosenAnimal]]];        
         }
@@ -122,17 +119,30 @@ const int buttonHeight = 130;
     return NO;
 }
 
-- (void)otherPlayerChoseAnimal:(Animal)animal {
-    NSLog(@"Other player chose animal: %@.", animal == kAnimalCow ? @"Cow" : @"Penguin");
-
-    if (animal == kAnimalCow) {
-        _cowChosen = YES;
-        _cowButtonSelectedOverlay.visible = YES;
-        
+- (void)choiceRejectedOrAccepted:(BOOL)accepted {
+    if (accepted) {
+        if (_chosenAnimal == kAnimalCow) {
+            _cowButtonSelectedOverlay.visible = YES;
+            _cowChosen = YES;
+        } else {
+            _penguinButtonSelectedOverLay.visible = YES;
+            _penguinChosen = YES;
+        }
     } else {
-        _penguinChosen = YES;  
-        _penguinButtonSelectedOverLay.visible = YES;
+        _chosenAnimal = kAnimalNone;
     }
+}
+
+- (void)otherPlayerChoseAnimal:(Animal)animal {
+    if (animal == kAnimalCow) {
+        _cowButtonSelectedOverlay.visible = YES;
+        _cowChosen = YES;
+    } else {
+        _penguinButtonSelectedOverLay.visible = YES;
+        _penguinChosen = YES;
+    }
+    
+    [self attemptNetworkGameStart];
 }
 
 - (void)otherPlayerStartedGame {
