@@ -49,6 +49,7 @@ typedef struct {
 @interface NetworkManager : NSObject<GKPeerPickerControllerDelegate, GKSessionDelegate> {
     id _chooserDelegate;
     id _gameDelegate;
+    id _gameOverDelegate;
     GKSession *_gameSession;
     PeerType _peerType;
     int _coinTossRoll;

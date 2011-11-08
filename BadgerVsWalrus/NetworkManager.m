@@ -166,9 +166,11 @@ const float kPingTimeMaxDelay = 5.0f;
                     int rejectedOrAccepted;
                     if (_multiplayerGameState -> serverAnimal == animal) {
                         rejectedOrAccepted = 0;
+                        NSLog(@"Server rejected animal selection.");
                     } else {
                         _multiplayerGameState -> clientAnimal = animal;
                         rejectedOrAccepted = 1;
+                        NSLog(@"Server accepted animal selection.");
                     }
                     NSData *rejectedOrSelectedData = [self convertIntToNetworkData:rejectedOrAccepted];
                     [self sendDataToPeers:rejectedOrSelectedData ofType:kPacketTypeAnimalChoiceRejectedOrAccepted];
@@ -195,7 +197,7 @@ const float kPingTimeMaxDelay = 5.0f;
                     
                     if (!(_multiplayerGameState -> serverWon)) { //if server won already, client is out of luck
                         _multiplayerGameState -> clientWon = YES;
-                        NSLog(@"Win rejected. Server already won.");
+                        NSLog(@"Client won.");
                     }
                     
                     _multiplayerGameState -> clientXPosition = xPosition;
@@ -214,11 +216,14 @@ const float kPingTimeMaxDelay = 5.0f;
                     
                     NSData *winDetailsData = [self convertIntAndFloatToData:winningAnimal floatValue:winningTime];
                     [self sendDataToPeers:winDetailsData ofType:kPackTypeWinDetails];
-                    [self.gameDelegate winningDetails:animal time:winningTime];
+                    [self.gameDelegate winningDetails:winningAnimal time:winningTime];
                 }
                 break;
             case kPacketTypePlayAgain:
                 NSLog(@"Received request to play again.");
+                if (self.peerType == kServer) {
+                    [self resetGameState];
+                }
                 [self.gameOverDelegate otherPlayerPlayedAgain];
                 break;
             case kPacketTypeGameHeartbeat:
@@ -359,6 +364,7 @@ const float kPingTimeMaxDelay = 5.0f;
         [self sendDataToPeers:winDetailsData ofType:kPackTypeWinDetails];
         [self.gameDelegate winningDetails:winningAnimal time:winningTime];
      } else {
+        NSLog(@"Sending won message from client.");
         NSData *dataToSend = [self convertIntAndFloatToData:postion floatValue:time];
         [self sendDataToPeers:dataToSend ofType:kPacketTypeWon];
      }
@@ -380,7 +386,7 @@ const float kPingTimeMaxDelay = 5.0f;
     [self.chooserDelegate connectionLost];
     [self.gameDelegate connectionLost];
     [self.gameOverDelegate connectionLost];
-        
+    
     //cleanup session
     [self.gameSession disconnectFromAllPeers];    
     [self.gameSession setDataReceiveHandler:nil withContext:nil];
@@ -396,6 +402,9 @@ const float kPingTimeMaxDelay = 5.0f;
 }
 
 - (void)playAgain {
+    if (self.peerType == kServer) {
+        [self resetGameState];   
+    }
     [self sendDataToPeers:nil ofType:kPacketTypePlayAgain];
 }
 

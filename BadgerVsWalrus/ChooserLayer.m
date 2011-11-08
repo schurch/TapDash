@@ -154,7 +154,10 @@ const int buttonHeight = 130;
 }
 
 - (void)dealloc {
-    [_networkManager release];
+    if (self.networkManager) {
+        self.networkManager.chooserDelegate = nil;
+    }
+    
     [_cowButton release];
     [_penguinButton release];
 }

@@ -17,4 +17,8 @@
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];  
 }
 
+- (void)dealloc {
+    
+}
+
 @end

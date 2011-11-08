@@ -158,6 +158,10 @@
 }
 
 - (void)dealloc {
+    if (self.networkManager) {
+        self.networkManager.gameOverDelegate = nil;
+    }
+    
     [_winningSpriteFile release];
     _winningSpriteFile = nil;
     

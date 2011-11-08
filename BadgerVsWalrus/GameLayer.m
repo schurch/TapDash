@@ -176,6 +176,7 @@ float _gameTime;
         
         if (self.humanPlayer.position.x >= _endX) {
             [self.networkManager wonWithXPosition:self.humanPlayer.position.x time:_gameTime];
+            [self pause];
         }
         
         counter++;
@@ -184,10 +185,13 @@ float _gameTime;
         
         if (_player1.position.x >= _endX && _player2.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
+            [self pause];
         } else if(_player1.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeCowWon withTime:_gameTime];
+            [self pause];
         } else if(_player2.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomePenguinWon withTime:_gameTime];
+            [self pause];
         }
     }
 }
@@ -208,7 +212,8 @@ float _gameTime;
 }
 
 - (void)winningDetails:(Animal)animal time:(float)time {
-    GameOutcome outcome =  _choosenAnimal == kAnimalCow ? kGameOutcomeCowWon : kGameOutcomePenguinWon;
+    GameOutcome outcome =  animal == kAnimalCow ? kGameOutcomeCowWon : kGameOutcomePenguinWon;
+    NSLog(@"Winning details.");
     [self gameOverWithOutcome:outcome withTime:time];
 }
 
@@ -219,9 +224,14 @@ float _gameTime;
 }
 
 - (void) dealloc {
+    if (self.networkManager) {
+        self.networkManager.gameDelegate = nil;
+    }
+    
     [_player1 release];
     [_player2 release];
     [_tapButton release];
     [_timeLabel release];
+    
 }
 @end
