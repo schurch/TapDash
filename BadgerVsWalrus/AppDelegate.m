@@ -112,7 +112,7 @@
 	[self removeStartupFlicker];
 	
     [CDAudioManager sharedManager].backgroundMusic.volume = 0.0f;
-    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Shrimp.mp3"];
+//    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"Shrimp.mp3"];
     
 	// Run the intro Scene
 	[[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];

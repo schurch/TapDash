@@ -37,7 +37,6 @@
 		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
 		FD696788145B882C002BB501 /* Datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* Datastore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
-		FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FD8E6009145CCC090078AA47 /* Shrimp.mp3 */; };
 		FDA3A083146487EB0093FDE5 /* CountDownLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA3A082146487EB0093FDE5 /* CountDownLayer.m */; };
 		FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */; };
 		FDDCACFB14532A1800F1F6DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCACFA14532A1800F1F6DE /* QuartzCore.framework */; };
@@ -198,7 +197,6 @@
 		FD696786145B882C002BB501 /* Datastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datastore.h; sourceTree = "<group>"; };
 		FD696787145B882C002BB501 /* Datastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Datastore.m; sourceTree = "<group>"; };
 		FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		FD8E6009145CCC090078AA47 /* Shrimp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shrimp.mp3; path = Resources/Shrimp.mp3; sourceTree = "<group>"; };
 		FDA3A081146487EB0093FDE5 /* CountDownLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownLayer.h; sourceTree = "<group>"; };
 		FDA3A082146487EB0093FDE5 /* CountDownLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownLayer.m; sourceTree = "<group>"; };
 		FDCF4DD5145DFF980026AD53 /* clear_hi_scores_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear_hi_scores_button.png; path = Resources/Options/clear_hi_scores_button.png; sourceTree = "<group>"; };
@@ -598,7 +596,6 @@
 		FDDCAD0B14532A1800F1F6DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FD8E6009145CCC090078AA47 /* Shrimp.mp3 */,
 				FD11E9D314590EB400F51698 /* cow.png */,
 				FD11E9D414590EB400F51698 /* penguin.png */,
 				FD11E9F114590F8D00F51698 /* main_menu_button.png */,
@@ -1011,7 +1008,6 @@
 				FD065EB0145CAA960034A3AE /* options_backdrop.png in Resources */,
 				FD065EB8145CB5B30034A3AE /* slider_marker.png in Resources */,
 				FD065EBA145CB72D0034A3AE /* penguin_small.png in Resources */,
-				FD8E600A145CCC090078AA47 /* Shrimp.mp3 in Resources */,
 				FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */,
 				FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */,
 				FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */,
@@ -1186,8 +1182,10 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = BadgerVsWalrus/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1202,12 +1200,50 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = BadgerVsWalrus/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		FDF0DE5014690BDF00373FFF /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefan Church";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25292768-E387-46D6-8027-5C4EE0E1D3BF";
+				SDKROOT = iphoneos;
+			};
+			name = "Ad Hoc";
+		};
+		FDF0DE5114690BDF00373FFF /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BadgerVsWalrus/Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = BadgerVsWalrus/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad Hoc";
 		};
 /* End XCBuildConfiguration section */
 
@@ -1217,6 +1253,7 @@
 			buildConfigurations = (
 				FDDCAE6614532A1D00F1F6DE /* Debug */,
 				FDDCAE6714532A1D00F1F6DE /* Release */,
+				FDF0DE5014690BDF00373FFF /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1226,6 +1263,7 @@
 			buildConfigurations = (
 				FDDCAE6914532A1D00F1F6DE /* Debug */,
 				FDDCAE6A14532A1D00F1F6DE /* Release */,
+				FDF0DE5114690BDF00373FFF /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
