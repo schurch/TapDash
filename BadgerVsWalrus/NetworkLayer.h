@@ -14,6 +14,6 @@
     NetworkManager *_networkManager;
 }
 
-@property (retain, nonatomic) NetworkManager *networkManager;
+@property (nonatomic, retain) NetworkManager *networkManager;
 
 @end

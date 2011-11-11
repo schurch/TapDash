@@ -18,7 +18,9 @@
 }
 
 - (void)dealloc {
+    [_networkManager release];
     
+    [super dealloc];
 }
 
 @end

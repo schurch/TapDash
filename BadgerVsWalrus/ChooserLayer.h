@@ -21,6 +21,11 @@
     Animal _chosenAnimal;
 }
 
+@property (nonatomic, retain) CCSprite *cowButton;
+@property (nonatomic, retain) CCSprite *penguinButton;
+@property (nonatomic, retain) CCSprite *cowButtonSelectedOverlay;
+@property (nonatomic, retain) CCSprite *penguinButtonSelectedOverLay;
+
 + (CCScene *) scene;
 + (CCScene *)sceneWithNetwork:(BOOL)networkGame;
 

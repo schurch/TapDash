@@ -85,4 +85,8 @@
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[OptionsLayer scene]]];    
 }
 
+- (void)dealloc {
+    [super dealloc];
+}
+
 @end

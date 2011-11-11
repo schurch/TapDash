@@ -17,7 +17,8 @@ const static int INITIAL_COUNTDOWN_VALUE = 3;
     id _delegate;
 }
 
-@property (assign, nonatomic) id delegate;
+@property (nonatomic, assign) id delegate;
+@property (nonatomic, retain) CCLabelTTF *countDownLabel;
 
 +(CCScene *) scene;
 

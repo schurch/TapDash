@@ -14,6 +14,11 @@ const int buttonHeight = 130;
 
 @implementation ChooserLayer
 
+@synthesize cowButton = _cowButton;
+@synthesize penguinButton = _penguinButton;
+@synthesize cowButtonSelectedOverlay = _cowButtonSelectedOverlay;
+@synthesize penguinButtonSelectedOverLay = _penguinButtonSelectedOverLay;
+
 + (CCScene *)scene {
     return [ChooserLayer sceneWithNetwork:NO];
 }
@@ -43,31 +48,31 @@ const int buttonHeight = 130;
         optionsLabel.position = ccp(winSize.width/2, buttonHeight);
         [self addChild: optionsLabel];
         
-        _cowButton = [CCSprite spriteWithFile:@"choose_button.png"];
-        _cowButton.position = ccp(winSize.width/2 - 120, buttonHeight);
-        [self addChild: _cowButton];
+        self.cowButton = [CCSprite spriteWithFile:@"choose_button.png"];
+        self.cowButton.position = ccp(winSize.width/2 - 120, buttonHeight);
+        [self addChild: self.cowButton];
         
         CCSprite *cow = [CCSprite spriteWithFile:@"cow.png"];
         cow.position = ccp(winSize.width/2 - 120, buttonHeight + 3);
         [self addChild: cow];
         
-        _cowButtonSelectedOverlay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
-        _cowButtonSelectedOverlay.position = ccp(winSize.width/2 - 122, buttonHeight + 3);
-        _cowButtonSelectedOverlay.visible = NO;
-        [self addChild: _cowButtonSelectedOverlay];
+        self.cowButtonSelectedOverlay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
+        self.cowButtonSelectedOverlay.position = ccp(winSize.width/2 - 122, buttonHeight + 3);
+        self.cowButtonSelectedOverlay.visible = NO;
+        [self addChild: self.cowButtonSelectedOverlay];
         
-        _penguinButton = [CCSprite spriteWithFile:@"choose_button.png"];
-        _penguinButton.position = ccp(winSize.width/2 + 120, buttonHeight);
-        [self addChild: _penguinButton];
+        self.penguinButton = [CCSprite spriteWithFile:@"choose_button.png"];
+        self.penguinButton.position = ccp(winSize.width/2 + 120, buttonHeight);
+        [self addChild: self.penguinButton];
         
         CCSprite *penguin = [CCSprite spriteWithFile:@"penguin.png"];
         penguin.position = ccp(winSize.width/2 + 120, buttonHeight + 5);
         [self addChild: penguin];
         
-        _penguinButtonSelectedOverLay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
-        _penguinButtonSelectedOverLay.position = ccp(winSize.width/2 + 118, buttonHeight + 3);
-        _penguinButtonSelectedOverLay.visible = NO;
-        [self addChild: _penguinButtonSelectedOverLay];
+        self.penguinButtonSelectedOverLay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
+        self.penguinButtonSelectedOverLay.position = ccp(winSize.width/2 + 118, buttonHeight + 3);
+        self.penguinButtonSelectedOverLay.visible = NO;
+        [self addChild: self.penguinButtonSelectedOverLay];
         
         _cowChosen = NO;
         _penguinChosen = NO;
@@ -95,11 +100,11 @@ const int buttonHeight = 130;
     CGPoint location = [self convertTouchToNodeSpace: touch];    
     BOOL animalChosen = YES;
     
-    if (CGRectContainsPoint(_cowButton.boundingBox, location) && !_cowChosen && _chosenAnimal == kAnimalNone) {  
+    if (CGRectContainsPoint(self.cowButton.boundingBox, location) && !_cowChosen && _chosenAnimal == kAnimalNone) {  
         _chosenAnimal = kAnimalCow;
         _cowChosen = YES;
         NSLog(@"Cow chosen.");
-    } else if(CGRectContainsPoint(_penguinButton.boundingBox, location) && !_penguinChosen && _chosenAnimal == kAnimalNone) {
+    } else if(CGRectContainsPoint(self.penguinButton.boundingBox, location) && !_penguinChosen && _chosenAnimal == kAnimalNone) {
         _chosenAnimal = kAnimalPenguin;
         _penguinChosen = YES;
         NSLog(@"Penguin chosen.");
@@ -122,10 +127,10 @@ const int buttonHeight = 130;
 - (void)choiceRejectedOrAccepted:(BOOL)accepted {
     if (accepted) {
         if (_chosenAnimal == kAnimalCow) {
-            _cowButtonSelectedOverlay.visible = YES;
+            self.cowButtonSelectedOverlay.visible = YES;
             _cowChosen = YES;
         } else {
-            _penguinButtonSelectedOverLay.visible = YES;
+            self.penguinButtonSelectedOverLay.visible = YES;
             _penguinChosen = YES;
         }
     } else {
@@ -135,10 +140,10 @@ const int buttonHeight = 130;
 
 - (void)otherPlayerChoseAnimal:(Animal)animal {
     if (animal == kAnimalCow) {
-        _cowButtonSelectedOverlay.visible = YES;
+        self.cowButtonSelectedOverlay.visible = YES;
         _cowChosen = YES;
     } else {
-        _penguinButtonSelectedOverLay.visible = YES;
+        self.penguinButtonSelectedOverLay.visible = YES;
         _penguinChosen = YES;
     }
     
@@ -160,6 +165,10 @@ const int buttonHeight = 130;
     
     [_cowButton release];
     [_penguinButton release];
+    [_cowButtonSelectedOverlay release];
+    [_penguinButtonSelectedOverLay release];
+    
+    [super dealloc];
 }
 
 @end

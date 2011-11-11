@@ -13,8 +13,8 @@
 
 @implementation OptionsLayer
 
-int musicMinX;
-int musicMaxX;
+@synthesize musicSlider = _musicSlider;
+@synthesize musicSliderBackdrop = _musicSlideBackdrop;
 
 + (CCScene *)scene
 {
@@ -64,20 +64,20 @@ int musicMaxX;
         musicVolumeLabel.position = ccp(winSize.width/2 -50,210);
         [self addChild: musicVolumeLabel];
         
-        _musicSliderBackdrop = [CCSprite spriteWithFile:@"slider_marker.png"];
-        _musicSliderBackdrop.position = ccp(winSize.width/2, 170);
-        [self addChild:_musicSliderBackdrop];
+        self.musicSliderBackdrop = [CCSprite spriteWithFile:@"slider_marker.png"];
+        self.musicSliderBackdrop.position = ccp(winSize.width/2, 170);
+        [self addChild:self.musicSliderBackdrop];
 
-        musicMinX = _musicSliderBackdrop.boundingBox.origin.x;
-        musicMaxX = _musicSliderBackdrop.boundingBox.origin.x + _musicSliderBackdrop.boundingBox.size.width;        
+        _musicMinX = self.musicSliderBackdrop.boundingBox.origin.x;
+        _musicMaxX = self.musicSliderBackdrop.boundingBox.origin.x + self.musicSliderBackdrop.boundingBox.size.width;        
 
         float volume = [CDAudioManager sharedManager].backgroundMusic.volume;
-        float xPos = musicMinX + ((float)(musicMaxX - musicMinX) * volume);
+        float xPos = (float)_musicMinX + ((float)(_musicMaxX - _musicMinX) * volume);
         NSLog(@"Slider X Postion: %f", xPos);
         
-        _musicSlider = [CCSprite spriteWithFile:@"penguin_small.png"];
-        _musicSlider.position = ccp((int)xPos, 170);
-        [self addChild:_musicSlider];
+        self.musicSlider = [CCSprite spriteWithFile:@"penguin_small.png"];
+        self.musicSlider.position = ccp((int)xPos, 170);
+        [self addChild:self.musicSlider];
         
         self.isTouchEnabled = YES;
     }
@@ -93,7 +93,7 @@ int musicMaxX;
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
 	CGPoint location = [self convertTouchToNodeSpace: touch];
-	if(CGRectContainsPoint(_musicSlider.boundingBox, location)) {
+	if(CGRectContainsPoint(self.musicSlider.boundingBox, location)) {
 		return YES;
 	}
 	return NO;
@@ -102,14 +102,14 @@ int musicMaxX;
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint location = [self convertTouchToNodeSpace: touch];
-    if((location.x < musicMinX) || (location.x > musicMaxX)) {
+    if((location.x < _musicMinX) || (location.x > _musicMaxX)) {
         return;
     }
     
-	_musicSlider.position=ccp(location.x,170);
+	self.musicSlider.position=ccp(location.x,170);
     
-    float musicVolumeLineLenth = musicMaxX - musicMinX;
-    float distanceAlongLength = location.x - musicMinX;
+    float musicVolumeLineLenth = _musicMaxX - _musicMinX;
+    float distanceAlongLength = location.x - _musicMinX;
     float musicVolume = (distanceAlongLength / musicVolumeLineLenth);
     [CDAudioManager sharedManager].backgroundMusic.volume = musicVolume;
 }
@@ -134,6 +134,13 @@ int musicMaxX;
 	} else {
         NSLog(@"Don't clear highscores.");
 	}
+}
+
+- (void)dealloc {
+    [_musicSlider release];
+    [_musicSliderBackdrop release];
+    
+    [super dealloc];
 }
 
 @end

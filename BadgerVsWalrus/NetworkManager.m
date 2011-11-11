@@ -411,16 +411,14 @@ const float kPingTimeMaxDelay = 5.0f;
 #pragma mark -
 #pragma mark cleanup
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+- (void)dealloc {    
     if (self.gameSession) {
         [self invalidateSession];
     }
     
     [_gameSession release];
-    _chooserDelegate = nil;
-    _gameDelegate = nil;
+    [_lastPing release];
+    [_pingTimer release];
     
     free(_multiplayerGameState);    
     

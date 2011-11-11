@@ -18,14 +18,19 @@
     CCSprite *_player1;
     CCSprite *_player2;
     CCSprite *_tapButton;
-    GameState _gameState;
     CCLabelTTF *_timeLabel;
+    GameState _gameState;
     Animal _choosenAnimal;
+    float _gameTime;
 }
 
-@property (assign, nonatomic) Animal choosenAnimal;
-@property (readonly, nonatomic) CCSprite *humanPlayer;
-@property (readonly, nonatomic) CCSprite *otherPlayer;
+@property (nonatomic, retain) CCSprite *player1;
+@property (nonatomic, retain) CCSprite *player2;
+@property (nonatomic, retain) CCSprite *tapButton;
+@property (nonatomic, retain) CCLabelTTF *timeLabel;
+@property (nonatomic, assign) Animal choosenAnimal;
+@property (nonatomic, readonly) CCSprite *humanPlayer;
+@property (nonatomic, readonly) CCSprite *otherPlayer;
 
 +(CCScene *) sceneWithChosenAnimal:(Animal)animal;
 +(CCScene *) sceneWithChosenAnimal:(Animal)animal isNetworkGame:(BOOL)isNetworkGame;

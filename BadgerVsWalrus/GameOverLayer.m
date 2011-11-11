@@ -163,7 +163,6 @@
     }
     
     [_winningSpriteFile release];
-    _winningSpriteFile = nil;
     
     [super dealloc];
 }

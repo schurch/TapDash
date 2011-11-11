@@ -73,4 +73,8 @@ static const int STAR_X_OFFSET = 20;
         [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
 }
 
+- (void)dealloc {
+    [super dealloc];
+}
+
 @end

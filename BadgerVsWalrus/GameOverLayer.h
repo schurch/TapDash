@@ -12,16 +12,15 @@
 #import "NetworkLayer.h"
 
 @interface GameOverLayer : NetworkLayer<NetworkManagerGameOverDelegate> {
-    CCLabelTTF *_gameOverLabel;
     GameOutcome _gameOutcome;
     float _finalTime;
     NSString *_winningSpriteFile;
     CGSize _winSize;
 }
 
-@property (assign, nonatomic) GameOutcome gameOutcome;
-@property (assign, nonatomic) float finalTime;
-@property (retain, nonatomic) NSString* winningSpriteFile;
+@property (nonatomic, assign) GameOutcome gameOutcome;
+@property (nonatomic, assign) float finalTime;
+@property (nonatomic, retain) NSString* winningSpriteFile;
 
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time isNetworkGame:(BOOL)isNetworkGame;
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time;

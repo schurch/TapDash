@@ -13,14 +13,17 @@
 #define INITIAL_TIME_LABEL "0:00"
 #define COUNTDOWN_LAYER_TAG 1000
 
-float _player1StartY = 210;
-float _player2StartY = 130;
-float _startX = 66;
-float _endX = 359;
-float _gameTime;
+static const float _player1StartY = 210;
+static const float _player2StartY = 130;
+static const float _startX = 66;
+static const float _endX = 359;
 
 @implementation GameLayer
 
+@synthesize player1 = _player1;
+@synthesize player2 = _player2;
+@synthesize tapButton = _tapButton;
+@synthesize timeLabel = _timeLabel;
 @synthesize choosenAnimal = _choosenAnimal;
 
 + (CCScene *)sceneWithChosenAnimal:(Animal)animal {
@@ -50,9 +53,9 @@ float _gameTime;
     NSLog(@"Set start positions.");
     _gameState = kGameStateStart;
     _gameTime = 0;
-    _timeLabel.string = @INITIAL_TIME_LABEL;
-    _player1.position = ccp( _startX, _player1StartY );
-    _player2.position = ccp( _startX, _player2StartY );
+    self.timeLabel.string = @INITIAL_TIME_LABEL;
+    self.player1.position = ccp( _startX, _player1StartY );
+    self.player2.position = ccp( _startX, _player2StartY );
 }
 
 - (void)startCountDown {
@@ -90,21 +93,21 @@ float _gameTime;
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild:backdrop];
         
-        _tapButton = [CCSprite spriteWithFile: @"tap_button.png"];
-        _tapButton.position = ccp( 440, 40 );  
-        [self addChild:_tapButton];
+        self.tapButton = [CCSprite spriteWithFile: @"tap_button.png"];
+        self.tapButton.position = ccp( 440, 40 );  
+        [self addChild:self.tapButton];
         
-        _player1 = [CCSprite spriteWithFile: @"cow.png"];
-        _player1.position = ccp( _startX, _player1StartY );
-        [self addChild:_player1];
+        self.player1 = [CCSprite spriteWithFile: @"cow.png"];
+        self.player1.position = ccp( _startX, _player1StartY );
+        [self addChild:self.player1];
         
-        _player2 = [CCSprite spriteWithFile: @"penguin.png"];
-        _player2.position = ccp( _startX, _player2StartY );
-        [self addChild:_player2];
+        self.player2 = [CCSprite spriteWithFile: @"penguin.png"];
+        self.player2.position = ccp( _startX, _player2StartY );
+        [self addChild:self.player2];
         
-        _timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
-        _timeLabel.position = ccp(278,40);
-        [self addChild: _timeLabel];
+        self.timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
+        self.timeLabel.position = ccp(278,40);
+        [self addChild: self.timeLabel];
         
         [self scheduleUpdate];
         [self schedule:@selector(timerUpdate:) interval:0.01];
@@ -127,7 +130,7 @@ float _gameTime;
     }
     
     _gameTime += dt;
-    _timeLabel.string = [NSString stringWithFormat:@"%.2f", _gameTime];
+    self.timeLabel.string = [NSString stringWithFormat:@"%.2f", _gameTime];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -137,7 +140,7 @@ float _gameTime;
     
     CGPoint location = [self convertTouchToNodeSpace: touch];
     
-    if (CGRectContainsPoint(_tapButton.boundingBox, location)) {                
+    if (CGRectContainsPoint(self.tapButton.boundingBox, location)) {                
         id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(self.humanPlayer.position.x + 5, self.humanPlayer.position.y)];
         [self.humanPlayer runAction:actionTo];
     }
@@ -183,13 +186,13 @@ float _gameTime;
     } else {
         self.otherPlayer.position = ccp( self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y );   
         
-        if (_player1.position.x >= _endX && _player2.position.x >= _endX) {
+        if (self.player1.position.x >= _endX && self.player2.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
             [self pause];
-        } else if(_player1.position.x >= _endX) {
+        } else if(self.player1.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeCowWon withTime:_gameTime];
             [self pause];
-        } else if(_player2.position.x >= _endX) {
+        } else if(self.player2.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomePenguinWon withTime:_gameTime];
             [self pause];
         }
@@ -233,5 +236,6 @@ float _gameTime;
     [_tapButton release];
     [_timeLabel release];
     
+    [super dealloc];
 }
 @end

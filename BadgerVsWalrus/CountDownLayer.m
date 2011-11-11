@@ -12,6 +12,7 @@
 @implementation CountdownLayer
 
 @synthesize delegate = _delegate;
+@synthesize countDownLabel = _countdownLabel;
 
 + (CCScene *)scene
 {
@@ -30,11 +31,11 @@
         _countdownValue = INITIAL_COUNTDOWN_VALUE;
         
         NSString *initalCountdownString = [NSString stringWithFormat:@"%i", _countdownValue];
-        _countDownLabel = [CCLabelTTF labelWithString:initalCountdownString fontName:@"MarkerFelt-Wide" fontSize:70];
-        _countDownLabel.position = ccp(winSize.width/2, winSize.height/2 + 20);
-        _countDownLabel.color = ccc3(0, 0, 0);
+        self.countDownLabel = [CCLabelTTF labelWithString:initalCountdownString fontName:@"MarkerFelt-Wide" fontSize:70];
+        self.countDownLabel.position = ccp(winSize.width/2, winSize.height/2 + 20);
+        self.countDownLabel.color = ccc3(0, 0, 0);
         
-        [self addChild: _countDownLabel];
+        [self addChild: self.countDownLabel];
         [self schedule:@selector(countDownUpdate:) interval:1];
         
         self.isTouchEnabled = NO;
@@ -52,7 +53,7 @@
     } else {
         currentCountdownString = [NSString stringWithFormat:@"%i", _countdownValue];
     }
-    _countDownLabel.string = currentCountdownString;
+    self.countDownLabel.string = currentCountdownString;
     
     if (_countdownValue == 0) {
         [self.delegate performSelector:@selector(startGame) withObject:nil afterDelay:0.5];
@@ -60,9 +61,9 @@
 }
 
 - (void)dealloc {
-    _delegate = nil;
     [_countDownLabel release];
-    _countDownLabel = nil;
+    
+    [super dealloc];
 }
 
 @end

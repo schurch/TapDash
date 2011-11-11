@@ -151,7 +151,8 @@ static const int MAX_HI_SCORE_COUNT = 4;
 
 - (void)dealloc {
     sqlite3_close(_hiScoresDb);
-    _hiScoresDb = NULL;
+    
+    [super dealloc];
 }
 
 @end
