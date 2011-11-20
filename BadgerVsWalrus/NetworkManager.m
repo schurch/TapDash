@@ -172,8 +172,8 @@ const float kPingTimeMaxDelay = 5.0f;
                         rejectedOrAccepted = 1;
                         NSLog(@"Server accepted animal selection.");
                     }
-                    NSData *rejectedOrSelectedData = [self convertIntToNetworkData:rejectedOrAccepted];
-                    [self sendDataToPeers:rejectedOrSelectedData ofType:kPacketTypeAnimalChoiceRejectedOrAccepted];
+                    NSData *rejectedOrAcceptedData = [self convertIntToNetworkData:rejectedOrAccepted];
+                    [self sendDataToPeers:rejectedOrAcceptedData ofType:kPacketTypeAnimalChoiceRejectedOrAccepted];
                     
                     //1 = accepted
                     //server accepted so update chooser delegate

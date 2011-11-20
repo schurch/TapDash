@@ -53,7 +53,7 @@ const int buttonHeight = 130;
         [self addChild: self.cowButton];
         
         CCSprite *cow = [CCSprite spriteWithFile:@"cow.png"];
-        cow.position = ccp(winSize.width/2 - 120, buttonHeight + 3);
+        cow.position = ccp(winSize.width/2 - 122, buttonHeight + 5);
         [self addChild: cow];
         
         self.cowButtonSelectedOverlay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];
@@ -66,7 +66,7 @@ const int buttonHeight = 130;
         [self addChild: self.penguinButton];
         
         CCSprite *penguin = [CCSprite spriteWithFile:@"penguin.png"];
-        penguin.position = ccp(winSize.width/2 + 120, buttonHeight + 5);
+        penguin.position = ccp(winSize.width/2 + 118, buttonHeight + 5);
         [self addChild: penguin];
         
         self.penguinButtonSelectedOverLay = [CCSprite spriteWithFile:@"selected_button_overlay.png"];

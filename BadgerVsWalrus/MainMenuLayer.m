@@ -31,8 +31,9 @@
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild:backdrop];
         
-        CCSprite *versionLabel = [CCLabelTTF labelWithString:@"v0.1" fontName:@"Marker Felt" fontSize:15];
-        versionLabel.position = ccp(18,310);
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        CCSprite *versionLabel = [CCLabelTTF labelWithString:version fontName:@"Marker Felt" fontSize:15];
+        versionLabel.position = ccp(13,310);
         versionLabel.color = ccc3(0,0,0);
         [self addChild: versionLabel];
         

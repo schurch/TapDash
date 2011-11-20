@@ -9,16 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-const static int INITIAL_COUNTDOWN_VALUE = 3;
-
 @interface CountdownLayer : CCLayer {
-    CCLabelTTF *_countDownLabel;
+    CCSprite *_countDownImage;
     int _countdownValue;
     id _delegate;
 }
 
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) CCLabelTTF *countDownLabel;
+@property (nonatomic, retain) CCSprite *countDownImage;
 
 +(CCScene *) scene;
 

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0301BA1474479300023B1A /* tap_button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301B91474479300023B1A /* tap_button_pressed.png */; };
+		FD0301BF14744F5800023B1A /* cow_glow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301BD14744F5800023B1A /* cow_glow.png */; };
+		FD0301C014744F5800023B1A /* penguin_glow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301BE14744F5800023B1A /* penguin_glow.png */; };
+		FD0301C61474578A00023B1A /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301C11474578A00023B1A /* 1.png */; };
+		FD0301C71474578A00023B1A /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301C21474578A00023B1A /* 2.png */; };
+		FD0301C81474578A00023B1A /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301C31474578A00023B1A /* 3.png */; };
+		FD0301C91474578A00023B1A /* go.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301C41474578A00023B1A /* go.png */; };
+		FD0301CA1474578A00023B1A /* mega_tap_bonus.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0301C51474578A00023B1A /* mega_tap_bonus.png */; };
 		FD065EAC145C624D0034A3AE /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EAB145C624D0034A3AE /* star.png */; };
 		FD065EB0145CAA960034A3AE /* options_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EAF145CAA960034A3AE /* options_backdrop.png */; };
 		FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD065EB5145CAAC90034A3AE /* OptionsLayer.m */; };
@@ -14,7 +22,6 @@
 		FD065EBA145CB72D0034A3AE /* penguin_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EB9145CB72D0034A3AE /* penguin_small.png */; };
 		FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD104BF31460CC0200BB9597 /* NetworkManager.m */; };
 		FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D114590EB400F51698 /* game_backdrop.png */; };
-		FD11E9D714590EB400F51698 /* boost_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D214590EB400F51698 /* boost_button.png */; };
 		FD11E9D814590EB400F51698 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D314590EB400F51698 /* cow.png */; };
 		FD11E9D914590EB400F51698 /* penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D414590EB400F51698 /* penguin.png */; };
 		FD11E9DA14590EB400F51698 /* tap_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D514590EB400F51698 /* tap_button.png */; };
@@ -154,11 +161,20 @@
 		FDDCAE5E14532A1D00F1F6DE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE5D14532A1D00F1F6DE /* AppDelegate.m */; };
 		FDDCAE6114532A1D00F1F6DE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6014532A1D00F1F6DE /* RootViewController.m */; };
 		FDDCAE6414532A1D00F1F6DE /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCAE6314532A1D00F1F6DE /* GameLayer.m */; };
+		FDEE29381474AB8F00B89169 /* TapInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = FDEE29371474AB8F00B89169 /* TapInterpreter.m */; };
 		FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF07A651465C68F00BF02C9 /* NetworkLayer.m */; };
 		FDF636AE1466445B0093A616 /* selected_button_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = FDF636AD1466445B0093A616 /* selected_button_overlay.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD0301B91474479300023B1A /* tap_button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tap_button_pressed.png; path = Resources/Game/tap_button_pressed.png; sourceTree = "<group>"; };
+		FD0301BD14744F5800023B1A /* cow_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cow_glow.png; path = Resources/Game/cow_glow.png; sourceTree = "<group>"; };
+		FD0301BE14744F5800023B1A /* penguin_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penguin_glow.png; path = Resources/Game/penguin_glow.png; sourceTree = "<group>"; };
+		FD0301C11474578A00023B1A /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = Resources/Game/1.png; sourceTree = "<group>"; };
+		FD0301C21474578A00023B1A /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2.png; path = Resources/Game/2.png; sourceTree = "<group>"; };
+		FD0301C31474578A00023B1A /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = Resources/Game/3.png; sourceTree = "<group>"; };
+		FD0301C41474578A00023B1A /* go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = go.png; path = Resources/Game/go.png; sourceTree = "<group>"; };
+		FD0301C51474578A00023B1A /* mega_tap_bonus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mega_tap_bonus.png; path = Resources/Game/mega_tap_bonus.png; sourceTree = "<group>"; };
 		FD065EAB145C624D0034A3AE /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = Resources/HiScore/star.png; sourceTree = "<group>"; };
 		FD065EAF145CAA960034A3AE /* options_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = options_backdrop.png; path = Resources/Options/options_backdrop.png; sourceTree = "<group>"; };
 		FD065EB4145CAAC90034A3AE /* OptionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsLayer.h; sourceTree = "<group>"; };
@@ -168,7 +184,6 @@
 		FD104BF21460CC0200BB9597 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		FD104BF31460CC0200BB9597 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		FD11E9D114590EB400F51698 /* game_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_backdrop.png; path = Resources/Game/game_backdrop.png; sourceTree = "<group>"; };
-		FD11E9D214590EB400F51698 /* boost_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boost_button.png; path = Resources/Game/boost_button.png; sourceTree = "<group>"; };
 		FD11E9D314590EB400F51698 /* cow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cow.png; path = Resources/Game/cow.png; sourceTree = "<group>"; };
 		FD11E9D414590EB400F51698 /* penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penguin.png; path = Resources/Game/penguin.png; sourceTree = "<group>"; };
 		FD11E9D514590EB400F51698 /* tap_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tap_button.png; path = Resources/Game/tap_button.png; sourceTree = "<group>"; };
@@ -435,6 +450,8 @@
 		FDDCAE6214532A1D00F1F6DE /* GameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		FDDCAE6314532A1D00F1F6DE /* GameLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		FDDCAE6514532A1D00F1F6DE /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		FDEE29361474AB8F00B89169 /* TapInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapInterpreter.h; sourceTree = "<group>"; };
+		FDEE29371474AB8F00B89169 /* TapInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapInterpreter.m; sourceTree = "<group>"; };
 		FDF07A641465C68F00BF02C9 /* NetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
 		FDF07A651465C68F00BF02C9 /* NetworkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkLayer.m; sourceTree = "<group>"; };
 		FDF636AD1466445B0093A616 /* selected_button_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selected_button_overlay.png; path = Resources/Chooser/selected_button_overlay.png; sourceTree = "<group>"; };
@@ -475,8 +492,15 @@
 		FD11E9C91459043F00F51698 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FD0301C11474578A00023B1A /* 1.png */,
+				FD0301C21474578A00023B1A /* 2.png */,
+				FD0301C31474578A00023B1A /* 3.png */,
+				FD0301C41474578A00023B1A /* go.png */,
+				FD0301C51474578A00023B1A /* mega_tap_bonus.png */,
+				FD0301BD14744F5800023B1A /* cow_glow.png */,
+				FD0301BE14744F5800023B1A /* penguin_glow.png */,
+				FD0301B91474479300023B1A /* tap_button_pressed.png */,
 				FD11E9D114590EB400F51698 /* game_backdrop.png */,
-				FD11E9D214590EB400F51698 /* boost_button.png */,
 				FD11E9D514590EB400F51698 /* tap_button.png */,
 			);
 			name = Game;
@@ -586,6 +610,8 @@
 				FD104BF31460CC0200BB9597 /* NetworkManager.m */,
 				FDF07A641465C68F00BF02C9 /* NetworkLayer.h */,
 				FDF07A651465C68F00BF02C9 /* NetworkLayer.m */,
+				FDEE29361474AB8F00B89169 /* TapInterpreter.h */,
+				FDEE29371474AB8F00B89169 /* TapInterpreter.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -990,7 +1016,6 @@
 				FDDCAD1B14532A1800F1F6DE /* Icon@2x.png in Resources */,
 				FDDCAD1E14532A1800F1F6DE /* iTunesArtwork in Resources */,
 				FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */,
-				FD11E9D714590EB400F51698 /* boost_button.png in Resources */,
 				FD11E9D814590EB400F51698 /* cow.png in Resources */,
 				FD11E9D914590EB400F51698 /* penguin.png in Resources */,
 				FD11E9DA14590EB400F51698 /* tap_button.png in Resources */,
@@ -1012,6 +1037,14 @@
 				FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */,
 				FDCF4DD6145DFF980026AD53 /* clear_hi_scores_button.png in Resources */,
 				FDF636AE1466445B0093A616 /* selected_button_overlay.png in Resources */,
+				FD0301BA1474479300023B1A /* tap_button_pressed.png in Resources */,
+				FD0301BF14744F5800023B1A /* cow_glow.png in Resources */,
+				FD0301C014744F5800023B1A /* penguin_glow.png in Resources */,
+				FD0301C61474578A00023B1A /* 1.png in Resources */,
+				FD0301C71474578A00023B1A /* 2.png in Resources */,
+				FD0301C81474578A00023B1A /* 3.png in Resources */,
+				FD0301C91474578A00023B1A /* go.png in Resources */,
+				FD0301CA1474578A00023B1A /* mega_tap_bonus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1129,6 +1162,7 @@
 				FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */,
 				FDA3A083146487EB0093FDE5 /* CountDownLayer.m in Sources */,
 				FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */,
+				FDEE29381474AB8F00B89169 /* TapInterpreter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

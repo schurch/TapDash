@@ -14,7 +14,7 @@
 #define COUNTDOWN_LAYER_TAG 1000
 
 static const float _player1StartY = 210;
-static const float _player2StartY = 130;
+static const float _player2StartY = 135;
 static const float _startX = 66;
 static const float _endX = 359;
 
@@ -22,9 +22,13 @@ static const float _endX = 359;
 
 @synthesize player1 = _player1;
 @synthesize player2 = _player2;
+@synthesize player1Selected = _player1Selected;
+@synthesize player2Selected = _player2Selected;
+@synthesize beatIndicator = _beatIndicator;
 @synthesize tapButton = _tapButton;
 @synthesize timeLabel = _timeLabel;
 @synthesize choosenAnimal = _choosenAnimal;
+@synthesize tapInterpreter = _tapInterpreter;
 
 + (CCScene *)sceneWithChosenAnimal:(Animal)animal {
     CCScene *scene = [self sceneWithChosenAnimal:animal isNetworkGame:NO];
@@ -47,6 +51,18 @@ static const float _endX = 359;
     [scene addChild: layer];
     
     return scene;
+}
+
+- (void)setChoosenAnimal:(Animal)choosenAnimal {
+    _choosenAnimal = choosenAnimal;
+    
+    if (_choosenAnimal == kAnimalCow) {
+        self.player1Selected.visible = YES;
+        self.player2Selected.visible = NO;
+    } else {
+        self.player2Selected.visible = YES;
+        self.player1Selected.visible = NO;
+    }
 }
 
 - (void)setStart {
@@ -93,20 +109,39 @@ static const float _endX = 359;
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
         [self addChild:backdrop];
         
-        self.tapButton = [CCSprite spriteWithFile: @"tap_button.png"];
-        self.tapButton.position = ccp( 440, 40 );  
+        [[CCTextureCache sharedTextureCache] addImage:@"tap_button.png"];
+        [[CCTextureCache sharedTextureCache] addImage:@"tap_button_pressed.png"];
+        
+        self.tapButton = [CCSprite spriteWithTexture:[[CCTextureCache sharedTextureCache] textureForKey:@"tap_button.png"]];
+        self.tapButton.position = ccp(430, 48);  
         [self addChild:self.tapButton];
         
         self.player1 = [CCSprite spriteWithFile: @"cow.png"];
-        self.player1.position = ccp( _startX, _player1StartY );
+        self.player1.position = ccp(_startX, _player1StartY);
         [self addChild:self.player1];
         
         self.player2 = [CCSprite spriteWithFile: @"penguin.png"];
-        self.player2.position = ccp( _startX, _player2StartY );
+        self.player2.position = ccp(_startX, _player2StartY);
         [self addChild:self.player2];
         
-        self.timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:35];
-        self.timeLabel.position = ccp(278,40);
+        CGPoint selectedPlayerLocation = ccp(57, 46);
+
+        self.player1Selected = [CCSprite spriteWithFile: @"cow_glow.png"];
+        self.player1Selected.position = selectedPlayerLocation;
+        self.player1Selected.visible = NO;
+        [self addChild:self.player1Selected];
+        
+        self.player2Selected = [CCSprite spriteWithFile: @"penguin_glow.png"];
+        self.player2Selected.position = selectedPlayerLocation;
+        self.player2Selected.visible = NO;
+        [self addChild:self.player2Selected];
+        
+        self.timeLabel = [CCLabelTTF labelWithString:@"Time:" fontName:@"Marker Felt" fontSize:40];
+        self.timeLabel.position = ccp(winSize.width/2 - 43, 27);
+        [self addChild: self.timeLabel];
+        
+        self.timeLabel = [CCLabelTTF labelWithString:@INITIAL_TIME_LABEL fontName:@"Marker Felt" fontSize:40];
+        self.timeLabel.position = ccp(winSize.width/2 + 60, 27);
         [self addChild: self.timeLabel];
         
         [self scheduleUpdate];
@@ -140,12 +175,39 @@ static const float _endX = 359;
     
     CGPoint location = [self convertTouchToNodeSpace: touch];
     
-    if (CGRectContainsPoint(self.tapButton.boundingBox, location)) {                
+    if (CGRectContainsPoint(self.tapButton.boundingBox, location)) {     
+        //Change button texture
+        self.tapButton.texture = [[CCTextureCache sharedTextureCache] textureForKey:@"tap_button_pressed.png"];
+        _tapStartTime = [NSDate timeIntervalSinceReferenceDate];
         id actionTo = [CCMoveTo actionWithDuration:0.1 position:ccp(self.humanPlayer.position.x + 5, self.humanPlayer.position.y)];
         [self.humanPlayer runAction:actionTo];
     }
     
     return YES;
+}
+
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    if(_gameState == kGameStatePaused || _gameState == kGameStateStart) {
+        return;
+    }
+
+    CGPoint location = [self convertTouchToNodeSpace: touch];
+    if (CGRectContainsPoint(self.tapButton.boundingBox, location)) {
+        self.tapButton.texture = [[CCTextureCache sharedTextureCache] textureForKey:@"tap_button.png"];
+        
+        float tapLength = fabsf(_tapStartTime - [NSDate timeIntervalSinceReferenceDate]);
+        TapBonus tapBonus = [self.tapInterpreter registerTapWithLength:tapLength];
+        
+        if (tapBonus != kTapBonusNone) {
+            switch (tapBonus) {
+                case kTapBonusUltimate:
+                    break;
+                default:
+                    NSLog(@"Unrecognized tap bonus.");
+                    break;
+            };
+        }
+    }
 }
 
 - (void)gameOverWithOutcome:(GameOutcome)outcome withTime:(float)time {
@@ -184,7 +246,7 @@ static const float _endX = 359;
         
         counter++;
     } else {
-        self.otherPlayer.position = ccp( self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y );   
+        self.otherPlayer.position = ccp(self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y);   
         
         if (self.player1.position.x >= _endX && self.player2.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
@@ -233,6 +295,9 @@ static const float _endX = 359;
     
     [_player1 release];
     [_player2 release];
+    [_player1Selected release];
+    [_player2Selected release];
+    [_beatIndicator release];
     [_tapButton release];
     [_timeLabel release];
     

@@ -12,7 +12,7 @@
 @implementation CountdownLayer
 
 @synthesize delegate = _delegate;
-@synthesize countDownLabel = _countdownLabel;
+@synthesize countDownImage = _countDownImage;
 
 + (CCScene *)scene
 {
@@ -27,17 +27,21 @@
 {
 	if ((self=[super init])) {      
         CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+        [[CCTextureCache sharedTextureCache] addImage:@"3.png"];
+        [[CCTextureCache sharedTextureCache] addImage:@"2.png"];
+        [[CCTextureCache sharedTextureCache] addImage:@"1.png"];
+        [[CCTextureCache sharedTextureCache] addImage:@"go.png"];
         
-        _countdownValue = INITIAL_COUNTDOWN_VALUE;
+        CCTexture2D *threeTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"3.png"];
         
-        NSString *initalCountdownString = [NSString stringWithFormat:@"%i", _countdownValue];
-        self.countDownLabel = [CCLabelTTF labelWithString:initalCountdownString fontName:@"MarkerFelt-Wide" fontSize:70];
-        self.countDownLabel.position = ccp(winSize.width/2, winSize.height/2 + 20);
-        self.countDownLabel.color = ccc3(0, 0, 0);
+        self.countDownImage = [CCSprite spriteWithTexture:threeTexture];
+        self.countDownImage.position = ccp(winSize.width/2, winSize.height/2 + 20);
+        [self addChild: self.countDownImage];
         
-        [self addChild: self.countDownLabel];
+        _countdownValue = 3;
+        
         [self schedule:@selector(countDownUpdate:) interval:1];
-        
         self.isTouchEnabled = NO;
 	}
     
@@ -47,13 +51,23 @@
 - (void)countDownUpdate:(ccTime)dt {
     _countdownValue -= 1;
     
-    NSString *currentCountdownString;
-    if (_countdownValue == 0) {
-        currentCountdownString = [NSString stringWithString:@"GO!"];
-    } else {
-        currentCountdownString = [NSString stringWithFormat:@"%i", _countdownValue];
+    CCTexture2D *countdownTexture;
+    switch (_countdownValue) {
+        case 2:
+            countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"2.png"];
+            break;
+        case 1:
+            countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"1.png"];
+            break;
+        case 0:
+            countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"go.png"];
+            break;
+        default:
+            break;
     }
-    self.countDownLabel.string = currentCountdownString;
+
+    self.countDownImage.texture = countdownTexture;
+    [self.countDownImage setTextureRect:CGRectMake(0.0f, 0.0f, countdownTexture.contentSize.width, countdownTexture.contentSize.height)];
     
     if (_countdownValue == 0) {
         [self.delegate performSelector:@selector(startGame) withObject:nil afterDelay:0.5];
@@ -61,7 +75,8 @@
 }
 
 - (void)dealloc {
-    [_countDownLabel release];
+    [_countDownImage release];
+    _countDownImage = nil;
     
     [super dealloc];
 }
