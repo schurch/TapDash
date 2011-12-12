@@ -13,10 +13,18 @@
 #define INITIAL_TIME_LABEL "0:00"
 #define COUNTDOWN_LAYER_TAG 1000
 
+typedef enum {
+    kDot = 0,
+    kDash = 1
+} DashOrDot;
+
 static const float _player1StartY = 210;
 static const float _player2StartY = 135;
 static const float _startX = 66;
 static const float _endX = 359;
+static const float _tickerXStartpoint = 140;
+static const float _tickerXEndpoint = 27;
+static BOOL _flashed;
 
 @implementation GameLayer
 
@@ -29,6 +37,10 @@ static const float _endX = 359;
 @synthesize timeLabel = _timeLabel;
 @synthesize choosenAnimal = _choosenAnimal;
 @synthesize tapInterpreter = _tapInterpreter;
+@synthesize tickers = _tickers;
+@synthesize tickerViewport = _tickerViewport;
+@synthesize flashSprite = _flashSprite;
+@synthesize flashAnimation = _flashAnimation;
 
 + (CCScene *)sceneWithChosenAnimal:(Animal)animal {
     CCScene *scene = [self sceneWithChosenAnimal:animal isNetworkGame:NO];
@@ -104,6 +116,8 @@ static const float _endX = 359;
 - (id)init {
 	if( (self=[super init])) {         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
+        
+        self.tickers = [[NSMutableArray alloc] init];
 
         CCSprite *backdrop = [CCSprite spriteWithFile:@"game_backdrop.png"];
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
@@ -126,15 +140,27 @@ static const float _endX = 359;
         
         CGPoint selectedPlayerLocation = ccp(57, 46);
 
-        self.player1Selected = [CCSprite spriteWithFile: @"cow_glow.png"];
+        self.player1Selected = [CCSprite spriteWithFile:@"cow_glow.png"];
         self.player1Selected.position = selectedPlayerLocation;
         self.player1Selected.visible = NO;
         [self addChild:self.player1Selected];
         
-        self.player2Selected = [CCSprite spriteWithFile: @"penguin_glow.png"];
+        self.player2Selected = [CCSprite spriteWithFile:@"penguin_glow.png"];
         self.player2Selected.position = selectedPlayerLocation;
         self.player2Selected.visible = NO;
         [self addChild:self.player2Selected];
+        
+        CCSprite *tickerBackdrop = [CCSprite spriteWithFile:@"ticker_backdrop.png"];
+        tickerBackdrop.position = ccp(72, 296);
+        [self addChild:tickerBackdrop];
+        
+        CCSprite *tickerEndpoint = [CCSprite spriteWithFile:@"ticker_endpoint.png"];
+        tickerEndpoint.position = ccp(_tickerXEndpoint, 296);
+        [self addChild:tickerEndpoint];
+        
+        CGRect viewportRect = CGRectMake(0, 0, 129, 320);
+        self.tickerViewport = [Viewport viewportWithRect:viewportRect];
+        [self addChild:self.tickerViewport];
         
         self.timeLabel = [CCLabelTTF labelWithString:@"Time:" fontName:@"Marker Felt" fontSize:40];
         self.timeLabel.position = ccp(winSize.width/2 - 43, 27);
@@ -144,6 +170,27 @@ static const float _endX = 359;
         self.timeLabel.position = ccp(winSize.width/2 + 60, 27);
         [self addChild: self.timeLabel];
         
+        //Setup ticker flash animation
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"flash.plist"];
+        
+        CCSpriteBatchNode *batchNode = [CCSpriteBatchNode batchNodeWithFile:@"flash.png"];
+        [self addChild:batchNode];
+        
+        NSMutableArray *animFrames = [NSMutableArray array];
+        for(int i = 0; i < 19; i++) {
+            NSString *frameName = [NSString stringWithFormat:@"flash%04d.png",i];
+            CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameName];
+            [animFrames addObject:frame];
+        }
+        
+        _flashSprite = [CCSprite spriteWithSpriteFrameName:@"flash0000.png"];
+        _flashSprite.position = ccp(45, 280);
+        [batchNode addChild:_flashSprite];
+        
+        self.flashAnimation = [CCAnimation animationWithFrames:animFrames];
+        _flashed = NO;
+        
+        //Setup schedulers
         [self scheduleUpdate];
         [self schedule:@selector(timerUpdate:) interval:0.01];
         [self setStart];
@@ -151,6 +198,7 @@ static const float _endX = 359;
         
         self.isTouchEnabled = YES;
 	}
+    
 	return self;
 }
 
@@ -159,13 +207,8 @@ static const float _endX = 359;
 	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
-- (void)timerUpdate:(ccTime)dt {
-    if(_gameState == kGameStatePaused || _gameState == kGameStateStart){
-        return;
-    }
-    
-    _gameTime += dt;
-    self.timeLabel.string = [NSString stringWithFormat:@"%.2f", _gameTime];
+- (void)playTickerFlash {
+    [self.flashSprite runAction:[CCAnimate actionWithDuration:0.5f animation:self.flashAnimation restoreOriginalFrame:NO]];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -222,15 +265,64 @@ static const float _endX = 359;
         }
     }
     
-    BOOL isNetworkGame = self.networkManager ? YES : NO;
-    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:time isNetworkGame:isNetworkGame];
+    BOOL networkGame = self.networkManager ? YES : NO;
+    CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:time isNetworkGame:networkGame];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:gameOverScene]];
+}
+
+
+#pragma mark animation
+
+- (void)animateTickersWithTimeDelta:(ccTime)dt {
+    //animate dots/slashes
+    for (CCSprite *tickerObject in self.tickers) {
+        tickerObject.position = ccp(tickerObject.position.x - 70 * dt, tickerObject.position.y);
+    }
+    
+    //if enough since last dot/slash, add another to array
+    BOOL shouldAddTickerItem = NO;
+    
+    if (self.tickers.count == 0) {
+        shouldAddTickerItem = YES;
+    } else {
+        CCSprite *lastTickerItem = [self.tickers objectAtIndex:(self.tickers.count - 1)];
+        int tickerX = lastTickerItem.boundingBoxInPixels.origin.x;
+        int tickerWidth = lastTickerItem.boundingBoxInPixels.size.width;
+        
+        if ((tickerX + tickerWidth + 30) < _tickerXStartpoint) {
+            shouldAddTickerItem = YES;
+        }
+    }
+
+    if (shouldAddTickerItem) {
+        DashOrDot dashOrDot = (DashOrDot)(arc4random() % 2);
+        NSString *tickerItemPng = dashOrDot == kDot ? @"dot.png" : @"dash.png";    
+        CCSprite *tickerItem = [CCSprite spriteWithFile:tickerItemPng];
+        tickerItem.position = ccp(_tickerXStartpoint, 296);
+        [self.tickers addObject:tickerItem];
+        [self.tickerViewport addChild:tickerItem];
+    }
+    
+    //if longest dot/slash reached end, then remove
+    CCSprite *longestRunningTicker = [self.tickers objectAtIndex:0];
+    if (longestRunningTicker) {
+        if (longestRunningTicker.position.x < (_tickerXEndpoint + 10) && !_flashed) {
+            [self playTickerFlash];   //Play flash just before ticker item disappears
+            _flashed = YES;
+        } else if (longestRunningTicker.position.x < _tickerXEndpoint && _flashed) {
+            [self.tickerViewport removeChild:longestRunningTicker cleanup:YES];
+            [self.tickers removeObjectAtIndex:0];
+            _flashed = NO;
+        }
+    }
 }
 
 - (void)update:(ccTime)dt {
     if(_gameState == kGameStatePaused || _gameState == kGameStateStart){
         return;
     }
+    
+    [self animateTickersWithTimeDelta:dt];
     
     if (self.networkManager) {
         static int counter = 1;
@@ -260,6 +352,17 @@ static const float _endX = 359;
         }
     }
 }
+
+- (void)timerUpdate:(ccTime)dt {
+    if(_gameState == kGameStatePaused || _gameState == kGameStateStart){
+        return;
+    }
+    
+    _gameTime += dt;
+    self.timeLabel.string = [NSString stringWithFormat:@"%.2f", _gameTime];
+}
+
+#pragma mark -
 
 - (void)playAgain {
     [self setStart];
@@ -293,6 +396,8 @@ static const float _endX = 359;
         self.networkManager.gameDelegate = nil;
     }
     
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+    
     [_player1 release];
     [_player2 release];
     [_player1Selected release];
@@ -300,6 +405,8 @@ static const float _endX = 359;
     [_beatIndicator release];
     [_tapButton release];
     [_timeLabel release];
+    [_tickers release];
+    [_tickerViewport release];
     
     [super dealloc];
 }

@@ -26,6 +26,7 @@ typedef enum {
 - (TapBonus)registerTapWithLength:(float)tapLengthTime {
     TapLength tapLength = tapLength > 0.2 ? kLongTap : kShortTap;
     
+    return kTapBonusNone;
 }
 
 @end

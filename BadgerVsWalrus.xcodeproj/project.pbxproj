@@ -37,10 +37,14 @@
 		FD11E9F214590F8D00F51698 /* main_menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9F114590F8D00F51698 /* main_menu_button.png */; };
 		FD11E9F51459155A00F51698 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F41459155A00F51698 /* MainMenuLayer.m */; };
 		FD11E9F81459156D00F51698 /* HighscoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HighscoreLayer.m */; };
+		FD138E6A14906B150076142A /* cocos2d+clipVisit.m in Sources */ = {isa = PBXBuildFile; fileRef = FD138E6914906B150076142A /* cocos2d+clipVisit.m */; };
+		FD138E6E14906D030076142A /* Viewport.m in Sources */ = {isa = PBXBuildFile; fileRef = FD138E6D14906D030076142A /* Viewport.m */; };
 		FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */; };
 		FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE8145DE8D100BA5126 /* choose_button.png */; };
 		FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */; };
 		FD5A0BC314609B44000B9C24 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5A0BC214609B44000B9C24 /* GameKit.framework */; };
+		FD5EC6FF14959B050062C3A0 /* flash.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD5EC6FD14959B050062C3A0 /* flash.plist */; };
+		FD5EC70014959B050062C3A0 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = FD5EC6FE14959B050062C3A0 /* flash.png */; };
 		FD61F25F14549D8300516F4D /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61F25E14549D8200516F4D /* GameOverLayer.m */; };
 		FD696788145B882C002BB501 /* Datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = FD696787145B882C002BB501 /* Datastore.m */; };
 		FD69678B145B8A29002BB501 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD69678A145B8A29002BB501 /* libsqlite3.0.dylib */; };
@@ -164,6 +168,10 @@
 		FDEE29381474AB8F00B89169 /* TapInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = FDEE29371474AB8F00B89169 /* TapInterpreter.m */; };
 		FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF07A651465C68F00BF02C9 /* NetworkLayer.m */; };
 		FDF636AE1466445B0093A616 /* selected_button_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = FDF636AD1466445B0093A616 /* selected_button_overlay.png */; };
+		FDFDEB5F147A0D320069D3A4 /* dash.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFDEB5A147A0D320069D3A4 /* dash.png */; };
+		FDFDEB60147A0D320069D3A4 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFDEB5B147A0D320069D3A4 /* dot.png */; };
+		FDFDEB61147A0D320069D3A4 /* ticker_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFDEB5C147A0D320069D3A4 /* ticker_backdrop.png */; };
+		FDFDEB62147A0D320069D3A4 /* ticker_endpoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFDEB5D147A0D320069D3A4 /* ticker_endpoint.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,11 +209,17 @@
 		FD11E9F41459155A00F51698 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		FD11E9F61459156C00F51698 /* HighscoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighscoreLayer.h; sourceTree = "<group>"; };
 		FD11E9F71459156C00F51698 /* HighscoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighscoreLayer.m; sourceTree = "<group>"; };
+		FD138E6814906B150076142A /* cocos2d+clipVisit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2d+clipVisit.h"; sourceTree = "<group>"; };
+		FD138E6914906B150076142A /* cocos2d+clipVisit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "cocos2d+clipVisit.m"; sourceTree = "<group>"; };
+		FD138E6C14906D030076142A /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viewport.h; sourceTree = "<group>"; };
+		FD138E6D14906D030076142A /* Viewport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Viewport.m; sourceTree = "<group>"; };
 		FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_backdrop.png; path = Resources/Chooser/choose_backdrop.png; sourceTree = "<group>"; };
 		FD3ACAE8145DE8D100BA5126 /* choose_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_button.png; path = Resources/Chooser/choose_button.png; sourceTree = "<group>"; };
 		FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserLayer.h; sourceTree = "<group>"; };
 		FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooserLayer.m; sourceTree = "<group>"; };
 		FD5A0BC214609B44000B9C24 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		FD5EC6FD14959B050062C3A0 /* flash.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = flash.plist; path = Resources/Game/FlashAnimation/flash.plist; sourceTree = "<group>"; };
+		FD5EC6FE14959B050062C3A0 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flash.png; path = Resources/Game/FlashAnimation/flash.png; sourceTree = "<group>"; };
 		FD61F25D14549D8200516F4D /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		FD61F25E14549D8200516F4D /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
 		FD61F2681454E75F00516F4D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -455,6 +469,10 @@
 		FDF07A641465C68F00BF02C9 /* NetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
 		FDF07A651465C68F00BF02C9 /* NetworkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkLayer.m; sourceTree = "<group>"; };
 		FDF636AD1466445B0093A616 /* selected_button_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selected_button_overlay.png; path = Resources/Chooser/selected_button_overlay.png; sourceTree = "<group>"; };
+		FDFDEB5A147A0D320069D3A4 /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash.png; path = Resources/Game/dash.png; sourceTree = "<group>"; };
+		FDFDEB5B147A0D320069D3A4 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = Resources/Game/dot.png; sourceTree = "<group>"; };
+		FDFDEB5C147A0D320069D3A4 /* ticker_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticker_backdrop.png; path = Resources/Game/ticker_backdrop.png; sourceTree = "<group>"; };
+		FDFDEB5D147A0D320069D3A4 /* ticker_endpoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ticker_endpoint.png; path = Resources/Game/ticker_endpoint.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +510,11 @@
 		FD11E9C91459043F00F51698 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FD4FBE1A14957B4300519922 /* FlashAnimation */,
+				FDFDEB5A147A0D320069D3A4 /* dash.png */,
+				FDFDEB5B147A0D320069D3A4 /* dot.png */,
+				FDFDEB5C147A0D320069D3A4 /* ticker_backdrop.png */,
+				FDFDEB5D147A0D320069D3A4 /* ticker_endpoint.png */,
 				FD0301C11474578A00023B1A /* 1.png */,
 				FD0301C21474578A00023B1A /* 2.png */,
 				FD0301C31474578A00023B1A /* 3.png */,
@@ -545,6 +568,15 @@
 				FD3ACAE8145DE8D100BA5126 /* choose_button.png */,
 			);
 			name = Chooser;
+			sourceTree = "<group>";
+		};
+		FD4FBE1A14957B4300519922 /* FlashAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				FD5EC6FD14959B050062C3A0 /* flash.plist */,
+				FD5EC6FE14959B050062C3A0 /* flash.png */,
+			);
+			name = FlashAnimation;
 			sourceTree = "<group>";
 		};
 		FDDCACEB14532A1700F1F6DE = {
@@ -612,6 +644,10 @@
 				FDF07A651465C68F00BF02C9 /* NetworkLayer.m */,
 				FDEE29361474AB8F00B89169 /* TapInterpreter.h */,
 				FDEE29371474AB8F00B89169 /* TapInterpreter.m */,
+				FD138E6814906B150076142A /* cocos2d+clipVisit.h */,
+				FD138E6914906B150076142A /* cocos2d+clipVisit.m */,
+				FD138E6C14906D030076142A /* Viewport.h */,
+				FD138E6D14906D030076142A /* Viewport.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -1045,6 +1081,12 @@
 				FD0301C81474578A00023B1A /* 3.png in Resources */,
 				FD0301C91474578A00023B1A /* go.png in Resources */,
 				FD0301CA1474578A00023B1A /* mega_tap_bonus.png in Resources */,
+				FDFDEB5F147A0D320069D3A4 /* dash.png in Resources */,
+				FDFDEB60147A0D320069D3A4 /* dot.png in Resources */,
+				FDFDEB61147A0D320069D3A4 /* ticker_backdrop.png in Resources */,
+				FDFDEB62147A0D320069D3A4 /* ticker_endpoint.png in Resources */,
+				FD5EC6FF14959B050062C3A0 /* flash.plist in Resources */,
+				FD5EC70014959B050062C3A0 /* flash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1205,8 @@
 				FDA3A083146487EB0093FDE5 /* CountDownLayer.m in Sources */,
 				FDF07A661465C68F00BF02C9 /* NetworkLayer.m in Sources */,
 				FDEE29381474AB8F00B89169 /* TapInterpreter.m in Sources */,
+				FD138E6A14906B150076142A /* cocos2d+clipVisit.m in Sources */,
+				FD138E6E14906D030076142A /* Viewport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

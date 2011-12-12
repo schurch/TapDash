@@ -22,13 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BadgerVsWalrus/GameLayer.m"
-         timestampString = "343452926.094482"
+         filePath = "BadgerVsWalrus/cocos2d+clipVisit.m"
+         timestampString = "345093697.964421"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
-         landmarkName = "-ccTouchBegan:withEvent:"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
+         landmarkName = "-preVisitWithClippingRect:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
