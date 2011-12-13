@@ -13,11 +13,6 @@
 #define INITIAL_TIME_LABEL "0:00"
 #define COUNTDOWN_LAYER_TAG 1000
 
-typedef enum {
-    kDot = 0,
-    kDash = 1
-} DashOrDot;
-
 static const float _player1StartY = 210;
 static const float _player2StartY = 135;
 static const float _startX = 66;
@@ -118,6 +113,10 @@ static BOOL _flashed;
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         self.tickers = [[NSMutableArray alloc] init];
+        
+        TapInterpreter *interpreter = [[TapInterpreter alloc] init];
+        self.tapInterpreter = interpreter;
+        [interpreter release];
 
         CCSprite *backdrop = [CCSprite spriteWithFile:@"game_backdrop.png"];
         backdrop.position = ccp(winSize.width/2, winSize.height/2);
@@ -158,6 +157,7 @@ static BOOL _flashed;
         tickerEndpoint.position = ccp(_tickerXEndpoint, 296);
         [self addChild:tickerEndpoint];
         
+        //Viewport used to clip sprites so they only appear in the ticker backdrop
         CGRect viewportRect = CGRectMake(0, 0, 129, 320);
         self.tickerViewport = [Viewport viewportWithRect:viewportRect];
         [self addChild:self.tickerViewport];
@@ -237,20 +237,14 @@ static BOOL _flashed;
     CGPoint location = [self convertTouchToNodeSpace: touch];
     if (CGRectContainsPoint(self.tapButton.boundingBox, location)) {
         self.tapButton.texture = [[CCTextureCache sharedTextureCache] textureForKey:@"tap_button.png"];
-        
+    
         float tapLength = fabsf(_tapStartTime - [NSDate timeIntervalSinceReferenceDate]);
-        TapBonus tapBonus = [self.tapInterpreter registerTapWithLength:tapLength];
-        
-        if (tapBonus != kTapBonusNone) {
-            switch (tapBonus) {
-                case kTapBonusUltimate:
-                    break;
-                default:
-                    NSLog(@"Unrecognized tap bonus.");
-                    break;
-            };
-        }
+        [self.tapInterpreter registerTapWithLength:tapLength];
     }
+}
+
+- (void)tapWasSuccess:(BOOL)wasSuccess withBonus:(TapBonus)bonus {
+    
 }
 
 - (void)gameOverWithOutcome:(GameOutcome)outcome withTime:(float)time {
@@ -274,12 +268,12 @@ static BOOL _flashed;
 #pragma mark animation
 
 - (void)animateTickersWithTimeDelta:(ccTime)dt {
-    //animate dots/slashes
+    //animate
     for (CCSprite *tickerObject in self.tickers) {
         tickerObject.position = ccp(tickerObject.position.x - 70 * dt, tickerObject.position.y);
     }
     
-    //if enough since last dot/slash, add another to array
+    //add
     BOOL shouldAddTickerItem = NO;
     
     if (self.tickers.count == 0) {
@@ -295,23 +289,37 @@ static BOOL _flashed;
     }
 
     if (shouldAddTickerItem) {
-        DashOrDot dashOrDot = (DashOrDot)(arc4random() % 2);
-        NSString *tickerItemPng = dashOrDot == kDot ? @"dot.png" : @"dash.png";    
+        TickerElementType tickerType = (TickerElementType)(arc4random() % 2);
+        
+        NSString *tickerItemPng = tickerType == kDot ? @"dot.png" : @"dash.png";    
         CCSprite *tickerItem = [CCSprite spriteWithFile:tickerItemPng];
         tickerItem.position = ccp(_tickerXStartpoint, 296);
+        
+        TickerElementType *tickerElementType = malloc(sizeof(TickerElementType));
+        *tickerElementType = tickerType;
+        tickerItem.userData = tickerElementType;
+        
         [self.tickers addObject:tickerItem];
         [self.tickerViewport addChild:tickerItem];
     }
     
-    //if longest dot/slash reached end, then remove
+    //remove
     CCSprite *longestRunningTicker = [self.tickers objectAtIndex:0];
     if (longestRunningTicker) {
         if (longestRunningTicker.position.x < (_tickerXEndpoint + 10) && !_flashed) {
             [self playTickerFlash];   //Play flash just before ticker item disappears
+            
+            TickerElementType *tickerElementType = longestRunningTicker.userData;
+            TapType tapType = (*tickerElementType) == kDot ? kShortTap : kLongTap;
+            free(tickerElementType);
+            
+            [self.tapInterpreter startTapThresholdForTapType:tapType];
+            
             _flashed = YES;
         } else if (longestRunningTicker.position.x < _tickerXEndpoint && _flashed) {
             [self.tickerViewport removeChild:longestRunningTicker cleanup:YES];
             [self.tickers removeObjectAtIndex:0];
+            [self.tapInterpreter stopTapThreshold];
             _flashed = NO;
         }
     }
@@ -338,17 +346,17 @@ static BOOL _flashed;
         
         counter++;
     } else {
-        self.otherPlayer.position = ccp(self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y);   
+        self.otherPlayer.position = ccp(self.otherPlayer.position.x + 10 * dt, self.otherPlayer.position.y);   
         
         if (self.player1.position.x >= _endX && self.player2.position.x >= _endX) {
+            [self pause];
             [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
-            [self pause];
         } else if(self.player1.position.x >= _endX) {
+            [self pause];            
             [self gameOverWithOutcome:kGameOutcomeCowWon withTime:_gameTime];
-            [self pause];
         } else if(self.player2.position.x >= _endX) {
+            [self pause];            
             [self gameOverWithOutcome:kGameOutcomePenguinWon withTime:_gameTime];
-            [self pause];
         }
     }
 }
@@ -407,6 +415,7 @@ static BOOL _flashed;
     [_timeLabel release];
     [_tickers release];
     [_tickerViewport release];
+    [_tapInterpreter release];
     
     [super dealloc];
 }

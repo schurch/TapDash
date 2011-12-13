@@ -15,7 +15,12 @@
 #import "TapInterpreter.h"
 #import "Viewport.h"
 
-@interface GameLayer : NetworkLayer<NetworkManagerGameDelegate, CountdownDelegate>
+typedef enum {
+    kDot = 0,
+    kDash = 1
+} TickerElementType;
+
+@interface GameLayer : NetworkLayer<NetworkManagerGameDelegate, CountdownDelegate, TapInterpreterDelegte>
 {
     CCSprite *_player1;
     CCSprite *_player2;

@@ -10,11 +10,34 @@
 
 typedef enum {
     kTapBonusNone,
-    kTapBonusUltimate
+    kTapBonusDouble,
+    kTapBounsMulti,
+    kTapBonusMega,
+    kTapBonusUltra,
+    kTapBonusLudacris,
+    kTapBonusMonster
 } TapBonus;
 
-@interface TapInterpreter : NSObject
+typedef enum {
+    kShortTap,
+    kLongTap
+} TapType;
 
-- (TapBonus)registerTapWithLength:(float)tapLengthTime;
+@protocol TapInterpreterDelegte <NSObject>
+- (void)tapWasSuccess:(BOOL)wasSuccess withBonus:(TapBonus)bonus;
+@end
+
+@interface TapInterpreter : NSObject {
+    id _delegate;
+    BOOL _inTapThreshold;
+    TapType _tapType;
+    int _consecutiveTaps;
+}
+
+@property (nonatomic, assign) id<TapInterpreterDelegte> delegate;
+
+- (void)startTapThresholdForTapType:(TapType)tapType;
+- (void)stopTapThreshold;
+- (void)registerTapWithLength:(float)tapLengthTime;
 
 @end
