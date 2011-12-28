@@ -8,6 +8,8 @@
 
 #import "TapInterpreter.h"
 
+BOOL didTapOccur = NO;
+
 @implementation TapInterpreter
 
 @synthesize delegate = _delegate;
@@ -21,33 +23,26 @@
     return self;
 }
 
-- (void)startTapThresholdForTapType:(TapType)tapType {
-    NSLog(@"Start threshold for tap type %@.", tapType == kShortTap ? @"ShortTap" : @"LongTap");
-    _tapType = tapType;
+- (void)startTapThresholdForTap {
+//    NSLog(@"Start threshold for tap.");
     _inTapThreshold = YES;
 }
 
 - (void)stopTapThreshold {
-    NSLog(@"End threshold.");
+//    NSLog(@"End threshold.");
     _inTapThreshold = NO;
 }
 
 - (void)registerTapWithLength:(float)tapLengthTime {
-    TapType tapLength = tapLength > 0.2 ? kLongTap : kShortTap;
     
     BOOL tapSuccess;
-    if (tapLength == kLongTap && _inTapThreshold && _tapType == kLongTap) {
+    if (_inTapThreshold) {
         tapSuccess = YES;
-        NSLog(@"Long tap success.");
-    } else if (tapLength == kShortTap && _inTapThreshold && _tapType == kShortTap) {
-        tapSuccess = YES;
-        NSLog(@"Short tap success.");
+        _consecutiveTaps = _consecutiveTaps + 1;
     } else {
         tapSuccess = NO;
-        NSLog(@"Tap fail.");
+        _consecutiveTaps = 0;
     }
-    
-    _consecutiveTaps = tapSuccess ? _consecutiveTaps++ : 0;
     
     TapBonus bonus = kTapBonusNone;
     switch (_consecutiveTaps) {
@@ -64,13 +59,10 @@
             bonus = kTapBonusUltra;
             break;
         case 6:
-            bonus = kTapBonusLudacris;
-            break;
-        case 7:
             bonus = kTapBonusMonster;
             break;
         default:
-            NSLog(@"Unrecognized tap bonus.");
+//            NSLog(@"No tap bonus.");
             break;
     }
     

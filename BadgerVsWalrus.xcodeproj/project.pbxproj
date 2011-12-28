@@ -20,6 +20,11 @@
 		FD065EB6145CAACA0034A3AE /* OptionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD065EB5145CAAC90034A3AE /* OptionsLayer.m */; };
 		FD065EB8145CB5B30034A3AE /* slider_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EB7145CB5B30034A3AE /* slider_marker.png */; };
 		FD065EBA145CB72D0034A3AE /* penguin_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FD065EB9145CB72D0034A3AE /* penguin_small.png */; };
+		FD08D1781499ED81009F9992 /* double_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = FD08D1771499ED80009F9992 /* double_tap.png */; };
+		FD08D17E1499F50A009F9992 /* mega_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = FD08D17A1499F50A009F9992 /* mega_tap.png */; };
+		FD08D17F1499F50A009F9992 /* monster_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = FD08D17B1499F50A009F9992 /* monster_tap.png */; };
+		FD08D1801499F50A009F9992 /* multi_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = FD08D17C1499F50A009F9992 /* multi_tap.png */; };
+		FD08D1811499F50A009F9992 /* ultra_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = FD08D17D1499F50A009F9992 /* ultra_tap.png */; };
 		FD104BF41460CC0200BB9597 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD104BF31460CC0200BB9597 /* NetworkManager.m */; };
 		FD11E9D614590EB400F51698 /* game_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D114590EB400F51698 /* game_backdrop.png */; };
 		FD11E9D814590EB400F51698 /* cow.png in Resources */ = {isa = PBXBuildFile; fileRef = FD11E9D314590EB400F51698 /* cow.png */; };
@@ -39,6 +44,7 @@
 		FD11E9F81459156D00F51698 /* HighscoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E9F71459156C00F51698 /* HighscoreLayer.m */; };
 		FD138E6A14906B150076142A /* cocos2d+clipVisit.m in Sources */ = {isa = PBXBuildFile; fileRef = FD138E6914906B150076142A /* cocos2d+clipVisit.m */; };
 		FD138E6E14906D030076142A /* Viewport.m in Sources */ = {isa = PBXBuildFile; fileRef = FD138E6D14906D030076142A /* Viewport.m */; };
+		FD33D53314A2B69A00433A31 /* BonusCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = FD33D53214A2B69A00433A31 /* BonusCalculator.m */; };
 		FD3ACAE9145DE8D100BA5126 /* choose_backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */; };
 		FD3ACAEA145DE8D100BA5126 /* choose_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3ACAE8145DE8D100BA5126 /* choose_button.png */; };
 		FD3ACAED145DEDDD00BA5126 /* ChooserLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3ACAEC145DEDDD00BA5126 /* ChooserLayer.m */; };
@@ -189,6 +195,11 @@
 		FD065EB5145CAAC90034A3AE /* OptionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsLayer.m; sourceTree = "<group>"; };
 		FD065EB7145CB5B30034A3AE /* slider_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider_marker.png; path = Resources/Options/slider_marker.png; sourceTree = "<group>"; };
 		FD065EB9145CB72D0034A3AE /* penguin_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penguin_small.png; path = Resources/Options/penguin_small.png; sourceTree = "<group>"; };
+		FD08D1771499ED80009F9992 /* double_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = double_tap.png; path = Resources/Game/double_tap.png; sourceTree = "<group>"; };
+		FD08D17A1499F50A009F9992 /* mega_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mega_tap.png; path = Resources/Game/mega_tap.png; sourceTree = "<group>"; };
+		FD08D17B1499F50A009F9992 /* monster_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster_tap.png; path = Resources/Game/monster_tap.png; sourceTree = "<group>"; };
+		FD08D17C1499F50A009F9992 /* multi_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = multi_tap.png; path = Resources/Game/multi_tap.png; sourceTree = "<group>"; };
+		FD08D17D1499F50A009F9992 /* ultra_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ultra_tap.png; path = Resources/Game/ultra_tap.png; sourceTree = "<group>"; };
 		FD104BF21460CC0200BB9597 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		FD104BF31460CC0200BB9597 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		FD11E9D114590EB400F51698 /* game_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game_backdrop.png; path = Resources/Game/game_backdrop.png; sourceTree = "<group>"; };
@@ -213,6 +224,8 @@
 		FD138E6914906B150076142A /* cocos2d+clipVisit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "cocos2d+clipVisit.m"; sourceTree = "<group>"; };
 		FD138E6C14906D030076142A /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viewport.h; sourceTree = "<group>"; };
 		FD138E6D14906D030076142A /* Viewport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Viewport.m; sourceTree = "<group>"; };
+		FD33D53214A2B69A00433A31 /* BonusCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusCalculator.m; sourceTree = "<group>"; };
+		FD33D53514A2B7A600433A31 /* BonusCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; path = BonusCalculator.h; sourceTree = "<group>"; };
 		FD3ACAE7145DE8D100BA5126 /* choose_backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_backdrop.png; path = Resources/Chooser/choose_backdrop.png; sourceTree = "<group>"; };
 		FD3ACAE8145DE8D100BA5126 /* choose_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = choose_button.png; path = Resources/Chooser/choose_button.png; sourceTree = "<group>"; };
 		FD3ACAEB145DEDDD00BA5126 /* ChooserLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserLayer.h; sourceTree = "<group>"; };
@@ -510,6 +523,11 @@
 		FD11E9C91459043F00F51698 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FD08D17A1499F50A009F9992 /* mega_tap.png */,
+				FD08D17B1499F50A009F9992 /* monster_tap.png */,
+				FD08D17C1499F50A009F9992 /* multi_tap.png */,
+				FD08D17D1499F50A009F9992 /* ultra_tap.png */,
+				FD08D1771499ED80009F9992 /* double_tap.png */,
 				FD4FBE1A14957B4300519922 /* FlashAnimation */,
 				FDFDEB5A147A0D320069D3A4 /* dash.png */,
 				FDFDEB5B147A0D320069D3A4 /* dot.png */,
@@ -532,7 +550,6 @@
 		FD11E9CA1459044300F51698 /* HiScore */ = {
 			isa = PBXGroup;
 			children = (
-				FD065EAB145C624D0034A3AE /* star.png */,
 				FD11E9DB14590EBF00F51698 /* hi_score_backdrop.png */,
 			);
 			name = HiScore;
@@ -648,6 +665,8 @@
 				FD138E6914906B150076142A /* cocos2d+clipVisit.m */,
 				FD138E6C14906D030076142A /* Viewport.h */,
 				FD138E6D14906D030076142A /* Viewport.m */,
+				FD33D53514A2B7A600433A31 /* BonusCalculator.h */,
+				FD33D53214A2B69A00433A31 /* BonusCalculator.m */,
 				FDDCAD0B14532A1800F1F6DE /* Resources */,
 				FDDCAD1F14532A1800F1F6DE /* libs */,
 				FDDCAE5814532A1D00F1F6DE /* Supporting Files */,
@@ -658,6 +677,7 @@
 		FDDCAD0B14532A1800F1F6DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FD065EAB145C624D0034A3AE /* star.png */,
 				FD11E9D314590EB400F51698 /* cow.png */,
 				FD11E9D414590EB400F51698 /* penguin.png */,
 				FD11E9F114590F8D00F51698 /* main_menu_button.png */,
@@ -1087,6 +1107,11 @@
 				FDFDEB62147A0D320069D3A4 /* ticker_endpoint.png in Resources */,
 				FD5EC6FF14959B050062C3A0 /* flash.plist in Resources */,
 				FD5EC70014959B050062C3A0 /* flash.png in Resources */,
+				FD08D1781499ED81009F9992 /* double_tap.png in Resources */,
+				FD08D17E1499F50A009F9992 /* mega_tap.png in Resources */,
+				FD08D17F1499F50A009F9992 /* monster_tap.png in Resources */,
+				FD08D1801499F50A009F9992 /* multi_tap.png in Resources */,
+				FD08D1811499F50A009F9992 /* ultra_tap.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1207,6 +1232,7 @@
 				FDEE29381474AB8F00B89169 /* TapInterpreter.m in Sources */,
 				FD138E6A14906B150076142A /* cocos2d+clipVisit.m in Sources */,
 				FD138E6E14906D030076142A /* Viewport.m in Sources */,
+				FD33D53314A2B69A00433A31 /* BonusCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,7 +1325,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25292768-E387-46D6-8027-5C4EE0E1D3BF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "801FAC25-FC85-41D7-9D71-CD99FCDC2736";
 				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
