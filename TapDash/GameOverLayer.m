@@ -81,7 +81,7 @@
         
         NSString *didWinText = didWin ? @"YOU WON!" : @"YOU LOST!";
         CCSprite *winsLabel = [CCLabelTTF labelWithString:didWinText fontName:@"MarkerFelt-Wide" fontSize:55];
-        winsLabel.position = ccp((_winSize.width/2) + 10,190 + ALL_ITEMS_Y_OFFSET);
+        winsLabel.position = ccp((_winSize.width/2),190 + ALL_ITEMS_Y_OFFSET);
         winsLabel.color = ccc3(153,51,51);
         [self addChild: winsLabel];
         

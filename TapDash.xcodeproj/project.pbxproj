@@ -18,9 +18,7 @@
 		FDDCAD0714532A1800F1F6DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCAD0614532A1800F1F6DE /* Foundation.framework */; };
 		FDDCAD0914532A1800F1F6DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDDCAD0814532A1800F1F6DE /* CoreGraphics.framework */; };
 		FDFF9D1114B561FF00BE7243 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BD814B561FF00BE7243 /* AppDelegate.m */; };
-		FDFF9D1214B561FF00BE7243 /* BonusCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BDA14B561FF00BE7243 /* BonusCalculator.m */; };
 		FDFF9D1314B561FF00BE7243 /* ChooserLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BDC14B561FF00BE7243 /* ChooserLayer.m */; };
-		FDFF9D1414B561FF00BE7243 /* cocos2d+clipVisit.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BDE14B561FF00BE7243 /* cocos2d+clipVisit.m */; };
 		FDFF9D1514B561FF00BE7243 /* CountDownLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BE014B561FF00BE7243 /* CountDownLayer.m */; };
 		FDFF9D1614B561FF00BE7243 /* Datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BE214B561FF00BE7243 /* Datastore.m */; };
 		FDFF9D1714B561FF00BE7243 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9BE614B561FF00BE7243 /* GameLayer.m */; };
@@ -175,8 +173,6 @@
 		FDFF9DB214B561FF00BE7243 /* penguin_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFF9D0914B561FF00BE7243 /* penguin_small.png */; };
 		FDFF9DB314B561FF00BE7243 /* slider_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFF9D0A14B561FF00BE7243 /* slider_marker.png */; };
 		FDFF9DB414B561FF00BE7243 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9D0C14B561FF00BE7243 /* RootViewController.m */; };
-		FDFF9DB514B561FF00BE7243 /* TapInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9D0E14B561FF00BE7243 /* TapInterpreter.m */; };
-		FDFF9DB614B561FF00BE7243 /* Viewport.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFF9D1014B561FF00BE7243 /* Viewport.m */; };
 		FDFF9DB814B5B35200BE7243 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFF9DB714B5B35200BE7243 /* iTunesArtwork.png */; };
 		FDFF9DBA14B5B81600BE7243 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFF9DB914B5B81600BE7243 /* Default@2x.png */; };
 /* End PBXBuildFile section */
@@ -195,12 +191,8 @@
 		FDDCAD0814532A1800F1F6DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FDFF9BD714B561FF00BE7243 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDFF9BD814B561FF00BE7243 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FDFF9BD914B561FF00BE7243 /* BonusCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusCalculator.h; sourceTree = "<group>"; };
-		FDFF9BDA14B561FF00BE7243 /* BonusCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusCalculator.m; sourceTree = "<group>"; };
 		FDFF9BDB14B561FF00BE7243 /* ChooserLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooserLayer.h; sourceTree = "<group>"; };
 		FDFF9BDC14B561FF00BE7243 /* ChooserLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooserLayer.m; sourceTree = "<group>"; };
-		FDFF9BDD14B561FF00BE7243 /* cocos2d+clipVisit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2d+clipVisit.h"; sourceTree = "<group>"; };
-		FDFF9BDE14B561FF00BE7243 /* cocos2d+clipVisit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "cocos2d+clipVisit.m"; sourceTree = "<group>"; };
 		FDFF9BDF14B561FF00BE7243 /* CountDownLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownLayer.h; sourceTree = "<group>"; };
 		FDFF9BE014B561FF00BE7243 /* CountDownLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownLayer.m; sourceTree = "<group>"; };
 		FDFF9BE114B561FF00BE7243 /* Datastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Datastore.h; sourceTree = "<group>"; };
@@ -478,10 +470,6 @@
 		FDFF9D0A14B561FF00BE7243 /* slider_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_marker.png; sourceTree = "<group>"; };
 		FDFF9D0B14B561FF00BE7243 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		FDFF9D0C14B561FF00BE7243 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		FDFF9D0D14B561FF00BE7243 /* TapInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapInterpreter.h; sourceTree = "<group>"; };
-		FDFF9D0E14B561FF00BE7243 /* TapInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapInterpreter.m; sourceTree = "<group>"; };
-		FDFF9D0F14B561FF00BE7243 /* Viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viewport.h; sourceTree = "<group>"; };
-		FDFF9D1014B561FF00BE7243 /* Viewport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Viewport.m; sourceTree = "<group>"; };
 		FDFF9DB714B5B35200BE7243 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		FDFF9DB914B5B81600BE7243 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -546,12 +534,8 @@
 			children = (
 				FDFF9BD714B561FF00BE7243 /* AppDelegate.h */,
 				FDFF9BD814B561FF00BE7243 /* AppDelegate.m */,
-				FDFF9BD914B561FF00BE7243 /* BonusCalculator.h */,
-				FDFF9BDA14B561FF00BE7243 /* BonusCalculator.m */,
 				FDFF9BDB14B561FF00BE7243 /* ChooserLayer.h */,
 				FDFF9BDC14B561FF00BE7243 /* ChooserLayer.m */,
-				FDFF9BDD14B561FF00BE7243 /* cocos2d+clipVisit.h */,
-				FDFF9BDE14B561FF00BE7243 /* cocos2d+clipVisit.m */,
 				FDFF9BDF14B561FF00BE7243 /* CountDownLayer.h */,
 				FDFF9BE014B561FF00BE7243 /* CountDownLayer.m */,
 				FDFF9BE114B561FF00BE7243 /* Datastore.h */,
@@ -576,10 +560,6 @@
 				FDFF9CCF14B561FF00BE7243 /* Prefix.pch */,
 				FDFF9D0B14B561FF00BE7243 /* RootViewController.h */,
 				FDFF9D0C14B561FF00BE7243 /* RootViewController.m */,
-				FDFF9D0D14B561FF00BE7243 /* TapInterpreter.h */,
-				FDFF9D0E14B561FF00BE7243 /* TapInterpreter.m */,
-				FDFF9D0F14B561FF00BE7243 /* Viewport.h */,
-				FDFF9D1014B561FF00BE7243 /* Viewport.m */,
 				FDFF9CD014B561FF00BE7243 /* Resources */,
 				FDFF9BEB14B561FF00BE7243 /* libs */,
 			);
@@ -1111,9 +1091,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDFF9D1114B561FF00BE7243 /* AppDelegate.m in Sources */,
-				FDFF9D1214B561FF00BE7243 /* BonusCalculator.m in Sources */,
 				FDFF9D1314B561FF00BE7243 /* ChooserLayer.m in Sources */,
-				FDFF9D1414B561FF00BE7243 /* cocos2d+clipVisit.m in Sources */,
 				FDFF9D1514B561FF00BE7243 /* CountDownLayer.m in Sources */,
 				FDFF9D1614B561FF00BE7243 /* Datastore.m in Sources */,
 				FDFF9D1714B561FF00BE7243 /* GameLayer.m in Sources */,
@@ -1219,8 +1197,6 @@
 				FDFF9D7F14B561FF00BE7243 /* NetworkManager.m in Sources */,
 				FDFF9D8014B561FF00BE7243 /* OptionsLayer.m in Sources */,
 				FDFF9DB414B561FF00BE7243 /* RootViewController.m in Sources */,
-				FDFF9DB514B561FF00BE7243 /* TapInterpreter.m in Sources */,
-				FDFF9DB614B561FF00BE7243 /* Viewport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
