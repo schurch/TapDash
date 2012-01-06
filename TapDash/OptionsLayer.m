@@ -13,9 +13,6 @@
 
 @implementation OptionsLayer
 
-@synthesize musicSlider = _musicSlider;
-@synthesize musicSliderBackdrop = _musicSlideBackdrop;
-
 + (CCScene *)scene
 {
     CCScene *scene = [CCScene node];
@@ -50,7 +47,7 @@
                                                                         selector:@selector(clearHiScores:)];
         
         CCMenu *clearHiScoresMenu = [CCMenu menuWithItems:clearHiScoresMenuItem, nil];
-        clearHiScoresMenu.position = ccp(winSize.width/2,125);
+        clearHiScoresMenu.position = ccp(winSize.width/2,200);
         [menu alignItemsHorizontallyWithPadding:5];
         [self addChild:clearHiScoresMenu];
         
@@ -60,58 +57,10 @@
         optionsLabel.color = ccc3(255,178,43);
         [self addChild: optionsLabel];
         
-        CCSprite *musicVolumeLabel = [CCLabelTTF labelWithString:@"Music Volume" fontName:@"MarkerFelt-Wide" fontSize:24];
-        musicVolumeLabel.position = ccp(winSize.width/2 -50,210);
-        [self addChild: musicVolumeLabel];
-        
-        self.musicSliderBackdrop = [CCSprite spriteWithFile:@"slider_marker.png"];
-        self.musicSliderBackdrop.position = ccp(winSize.width/2, 170);
-        [self addChild:self.musicSliderBackdrop];
-
-        _musicMinX = self.musicSliderBackdrop.boundingBox.origin.x;
-        _musicMaxX = self.musicSliderBackdrop.boundingBox.origin.x + self.musicSliderBackdrop.boundingBox.size.width;        
-
-        float volume = [CDAudioManager sharedManager].backgroundMusic.volume;
-        float xPos = (float)_musicMinX + ((float)(_musicMaxX - _musicMinX) * volume);
-        NSLog(@"Slider X Postion: %f", xPos);
-        
-        self.musicSlider = [CCSprite spriteWithFile:@"penguin_small.png"];
-        self.musicSlider.position = ccp((int)xPos, 170);
-        [self addChild:self.musicSlider];
-        
         self.isTouchEnabled = YES;
     }
     
     return self;
-}
-
-- (void)registerWithTouchDispatcher
-{
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-	if(CGRectContainsPoint(self.musicSlider.boundingBox, location)) {
-		return YES;
-	}
-	return NO;
-}
-
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    CGPoint location = [self convertTouchToNodeSpace: touch];
-    if((location.x < _musicMinX) || (location.x > _musicMaxX)) {
-        return;
-    }
-    
-	self.musicSlider.position=ccp(location.x,170);
-    
-    float musicVolumeLineLenth = _musicMaxX - _musicMinX;
-    float distanceAlongLength = location.x - _musicMinX;
-    float musicVolume = (distanceAlongLength / musicVolumeLineLenth);
-    [CDAudioManager sharedManager].backgroundMusic.volume = musicVolume;
 }
 
 - (void)showMainMenu:(CCMenuItem *)menuItem {
@@ -132,14 +81,11 @@
         [alertView show];
         [alertView release];
 	} else {
-        NSLog(@"Don't clear highscores.");
+        CCLOG(@"Don't clear highscores.");
 	}
 }
 
 - (void)dealloc {
-    [_musicSlider release];
-    [_musicSliderBackdrop release];
-    
     [super dealloc];
 }
 

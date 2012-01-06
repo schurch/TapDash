@@ -219,9 +219,9 @@ static const float _endX = 359;
     }
     
     if (self.networkManager) {
-        static int counter = 1;
-        
-        if (counter % 8 == 0) { //send network heartbeat once every 8 counts
+        static int counter = 0;
+        counter++;
+        if (!(counter&7)) {
             [self.networkManager heartbeatWithXPostion:self.humanPlayer.position.x time:_gameTime];
         }
         
@@ -229,15 +229,10 @@ static const float _endX = 359;
             [self.networkManager wonWithXPosition:self.humanPlayer.position.x time:_gameTime];
             [self pause];
         }
-        
-        counter++;
     } else {
         self.otherPlayer.position = ccp(self.otherPlayer.position.x + 30 * dt, self.otherPlayer.position.y);   
         
-        if (self.player1.position.x >= _endX && self.player2.position.x >= _endX) {
-            [self gameOverWithOutcome:kGameOutcomeDraw withTime:_gameTime];
-            [self pause];
-        } else if(self.player1.position.x >= _endX) {
+        if(self.player1.position.x >= _endX) {
             [self gameOverWithOutcome:kGameOutcomeCowWon withTime:_gameTime];
             [self pause];
         } else if(self.player2.position.x >= _endX) {

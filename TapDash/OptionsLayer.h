@@ -10,14 +10,8 @@
 #import "cocos2d.h"
 
 @interface OptionsLayer : CCLayer<UIAlertViewDelegate> {
-    CCSprite *_musicSlider;
-    CCSprite *_musicSliderBackdrop;
-    int _musicMinX;
-    int _musicMaxX;
+    
 }
-
-@property (nonatomic, retain) CCSprite *musicSlider;
-@property (nonatomic, retain) CCSprite *musicSliderBackdrop;
 
 +(CCScene *) scene;
 

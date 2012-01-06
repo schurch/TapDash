@@ -59,10 +59,8 @@
         case 1:
             countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"1.png"];
             break;
-        case 0:
-            countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"go.png"];
-            break;
         default:
+            countdownTexture = [[CCTextureCache sharedTextureCache] textureForKey:@"go.png"];
             break;
     }
 
