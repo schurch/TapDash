@@ -22,8 +22,7 @@
 	return scene;
 }
 
-- (id)init
-{
+- (id)init {
 	if( (self=[super init])) {     
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
@@ -32,8 +31,9 @@
         [self addChild:backdrop];
         
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-        CCSprite *versionLabel = [CCLabelTTF labelWithString:version fontName:@"Marker Felt" fontSize:15];
-        versionLabel.position = ccp(13,310);
+        NSString *versionText = [NSString stringWithFormat:@"v%@", version];
+        CCSprite *versionLabel = [CCLabelTTF labelWithString:versionText fontName:@"Marker Felt" fontSize:15];
+        versionLabel.position = ccp(18,310);
         versionLabel.color = ccc3(0,0,0);
         [self addChild: versionLabel];
         
@@ -58,7 +58,7 @@
                                                                         selector:@selector(options:)];
         
         CCMenu *menu = [CCMenu menuWithItems:playMenuItem, multiplayerMenuItem, hiScoresMenuItem, optionsMenuItem, nil];
-        menu.position = ccp(winSize.width/2,130);
+        menu.position = ccp(winSize.width/2,110);
         [menu alignItemsVerticallyWithPadding:5];
         
         [self addChild:menu];

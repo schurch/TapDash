@@ -26,7 +26,7 @@
 
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time isNetworkGame:(BOOL)isNetworkGame {
     CCScene *scene = [CCScene node];
-    GameOverLayer *layer = [GameOverLayer node];
+    GameOverLayer *layer = [[[GameOverLayer alloc] initWithDidWin:didPlayerWin] autorelease];
     
     if (didPlayerWin) {
         [layer setHighScore:time];
@@ -40,24 +40,23 @@
     layer.gameOutcome = gameOutcome;
     layer.finalTime = time;
     
-    NSString *winningSpriteFile = nil;
-    switch (gameOutcome) {
-        case kGameOutcomeCowWon:
-            winningSpriteFile = @"cow.png";
-            break;
-        case kGameOutcomePenguinWon:
-            winningSpriteFile = @"penguin.png";
-        default:
-            break;
-    }
+//    NSString *winningSpriteFile = nil;
+//    switch (gameOutcome) {
+//        case kGameOutcomeCowWon:
+//            winningSpriteFile = @"cow.png";
+//            break;
+//        case kGameOutcomePenguinWon:
+//            winningSpriteFile = @"penguin.png";
+//        default:
+//            break;
+//    }
     
-    layer.winningSpriteFile = winningSpriteFile;
-    [scene addChild: layer];
+//    layer.winningSpriteFile = winningSpriteFile;
+    [scene addChild:layer];
     return scene;
 }
 
--(id) init
-{
+- (id)initWithDidWin:(BOOL)didWin {
 	if(self=[super init]) {    
         _winSize = [[CCDirector sharedDirector] winSize];
         
@@ -80,9 +79,10 @@
         [menu alignItemsHorizontallyWithPadding:5];
         [self addChild:menu];
         
-        CCSprite *winsLabel = [CCLabelTTF labelWithString:@"WINS" fontName:@"MarkerFelt-Wide" fontSize:55];
-        winsLabel.position = ccp((_winSize.width/2) + 30,190 + ALL_ITEMS_Y_OFFSET);
-        winsLabel.color = ccc3(64,64,64);
+        NSString *didWinText = didWin ? @"YOU WON!" : @"YOU LOST!";
+        CCSprite *winsLabel = [CCLabelTTF labelWithString:didWinText fontName:@"MarkerFelt-Wide" fontSize:55];
+        winsLabel.position = ccp((_winSize.width/2) + 10,190 + ALL_ITEMS_Y_OFFSET);
+        winsLabel.color = ccc3(153,51,51);
         [self addChild: winsLabel];
         
         self.isTouchEnabled = YES;

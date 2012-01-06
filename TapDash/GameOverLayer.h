@@ -25,6 +25,7 @@
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time isNetworkGame:(BOOL)isNetworkGame;
 + (CCScene *)sceneWithGameOutcome:(GameOutcome)gameOutcome didPlayerWin:(BOOL)didPlayerWin time:(float)time;
 
+- (id)initWithDidWin:(BOOL)didWin;
 - (void)setHighScore:(float)finalTime;
 
 @end
