@@ -1203,6 +1203,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		FD11532B14B6B80500DA3F2C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefan Church";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD565346-5947-40C9-9EFE-F8E6AAC4B574";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		FD11532C14B6B80500DA3F2C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TapDash/Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = TapDash/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = TapDash;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		FDDCAE6614532A1D00F1F6DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1281,8 +1317,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stefan Church";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefan Church";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1290,7 +1326,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "15C97DDA-2766-4A69-84D0-02C413BFC0F1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "15C97DDA-2766-4A69-84D0-02C413BFC0F1";
 				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
@@ -1322,6 +1358,7 @@
 			buildConfigurations = (
 				FDDCAE6614532A1D00F1F6DE /* Debug */,
 				FDDCAE6714532A1D00F1F6DE /* Release */,
+				FD11532B14B6B80500DA3F2C /* Distribution */,
 				FDF0DE5014690BDF00373FFF /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1332,6 +1369,7 @@
 			buildConfigurations = (
 				FDDCAE6914532A1D00F1F6DE /* Debug */,
 				FDDCAE6A14532A1D00F1F6DE /* Release */,
+				FD11532C14B6B80500DA3F2C /* Distribution */,
 				FDF0DE5114690BDF00373FFF /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;

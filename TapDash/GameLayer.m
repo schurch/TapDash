@@ -198,17 +198,16 @@ static const float _endX = 359;
 
 - (void)gameOverWithOutcome:(GameOutcome)outcome withTime:(float)time {
     [self pause];
-    
+     
     BOOL didWin = NO;
-    if (!self.networkManager) {
-        if (outcome == kGameOutcomeCowWon && self.humanPlayer == _player1) {
-            didWin = YES;
-        }else if(outcome == kGameOutcomePenguinWon && self.humanPlayer == _player2) {
-            didWin = YES;
-        }
+    if (outcome == kGameOutcomeCowWon && self.humanPlayer == _player1) {
+        didWin = YES;
+    } else if (outcome == kGameOutcomePenguinWon && self.humanPlayer == _player2) {
+        didWin = YES;
     }
     
     BOOL isNetworkGame = self.networkManager ? YES : NO;
+    
     CCScene *gameOverScene = [GameOverLayer sceneWithGameOutcome:outcome didPlayerWin:didWin time:time isNetworkGame:isNetworkGame];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:gameOverScene]];
 }
