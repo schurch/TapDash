@@ -33,7 +33,7 @@
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
         NSString *versionText = [NSString stringWithFormat:@"v%@", version];
         CCSprite *versionLabel = [CCLabelTTF labelWithString:versionText fontName:@"Marker Felt" fontSize:15];
-        versionLabel.position = ccp(18,310);
+        versionLabel.position = ccp(20,310);
         versionLabel.color = ccc3(0,0,0);
         [self addChild: versionLabel];
         
